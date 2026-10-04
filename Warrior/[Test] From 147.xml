@@ -1,0 +1,163 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[Test] From 147</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<Vendors>
+		<Hotspot Name="Imperial Medical Droid" XYZ="143.9771,44.40549,58.8818" />
+		<Hotspot Name="Engine Oil Keratho" XYZ="61.44556,51.911,358.3479" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="58.6105,51.44746,347.1011" />
+		<Hotspot Name="Danurorus" XYZ="77.5611,48.04441,312.9839" />
+		<Hotspot Name="Phrague" XYZ="71.2648,46.50851,280.9474" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="76.2237,45.20236,63.2247" />
+		<Hotspot Name="Nozabuiba" XYZ="78.9839,51.7154,336.6888" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="73.2542,46.28718,276.0182" />
+		<Hotspot Name="Sergeant Kench" XYZ="67.0483,45.35346,62.8698" />
+		<Hotspot Name="Yuprel" XYZ="9.175598,45.52941,28.4401" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-4.466003,44.6794,32.1252" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-66.7753,43.85284,-57.3646" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="126.3566,43.44089,-4.025803" />
+		<Hotspot Name="Supply Officer Threco" XYZ="160.78,44.74827,-61.066" />
+	</Vendors>
+	<Trainers>
+		<Trainer Class="Warrior" Name="Lord Undaara" X="86.5826" Y="49.79213" Z="314.4844" />
+	</Trainers>
+	<GrindAreas>
+		<GrindArea Name="Demon's Blood">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>51</MaxLevel>
+			<Mobs>
+				<Mob>Sand Demon</Mob>
+				<Mob>Sand Imp</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Sand Demon" XYZ="145.7524,42.40685,99.84714" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Oasis Reflection">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>51</MaxLevel>
+			<Mobs>
+				<Mob>Dark Side Reflection</Mob>
+				<Mob>Light Side Reflection</Mob>
+				<Mob>Reflection</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Reflection" XYZ="-62.01283,44.52904,52.50038" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Guru in the Dunes">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>51</MaxLevel>
+			<Mobs>
+				<Mob>Master Yonlach</Mob>
+				<Mob>Yul-li</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Master Yonlach" XYZ="-129.406,41.98035,-36.7145" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+	<Questing>
+		<If Condition="((HasQuest(0xE0005EB05591FAFD)) and (not IsQuestComplete(0xE0005EB05591FAFD)))">
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and not IsBranchStepComplete(0xE0005EB05591FAFD, 1, 2)">
+				<If Condition="(Me.Position.Z &lt; 70) and (Me.Position.X &lt; 146)">
+					<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" Name="Mesh test" XYZ="147.07758,44.474873,52.67385" />
+				</If>
+				<If Condition="(Me.Position.Z &lt; 70) and (Me.Position.X &lt; 160)">
+					<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="151.72862,43.622498,51.333572" />
+				</If>
+				<If Condition="(Me.Position.Z &lt; 95)">
+					<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" Name="Quest entrance" XYZ="163.56873,42.861378,87.63899" />
+					<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" Name="Inside the cave phase" XYZ="162.65308,42.998802,87.78699" />
+				</If>
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="156.7524,42.32241,107.1846" />
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="151.6136,42.27711,110.2668" />
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="146.3805,42.35143,107.6223" />
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="144.0126,42.41828,104.5062" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and not IsBranchStepComplete(0xE0005EB05591FAFD, 1, 3)">
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="145.4898,42.36856,101.5643" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and not IsBranchStepComplete(0xE0005EB05591FAFD, 1, 4)">
+				<TalkTo QuestId="0xE0005EB05591FAFD" BranchId="1" StepId="4" Name="Sand Demon" WaitTime="5" XYZ="145.7524,42.40685,99.84714" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and IsBranchStepComplete(0xE0005EB05591FAFD, 1, 4) and not IsBranchStepComplete(0xE0005EB05591FAFD, 3, 2)">
+				<Grind GrindRef="Demon's Blood" While="(not IsBranchStepComplete(0xE0005EB05591FAFD, 3, 2))" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and IsBranchStepComplete(0xE0005EB05591FAFD, 3, 2) and not IsBranchStepComplete(0xE0005EB05591FAFD, 3, 3)">
+				<TalkTo QuestId="0xE0005EB05591FAFD" BranchId="3" StepId="3" Name="Sand Demon" WaitTime="5" XYZ="145.7524,42.40685,99.84714" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and IsBranchStepComplete(0xE0005EB05591FAFD, 3, 3) and not IsBranchStepComplete(0xE0005EB05591FAFD, 5, 2)">
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="185.0277,40.71321,30.9355" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and IsBranchStepComplete(0xE0005EB05591FAFD, 5, 2) and not IsBranchStepComplete(0xE0005EB05591FAFD, 5, 3)">
+				<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="184.6373,40.73542,28.92673" />
+			</If>
+			<If Condition="HasQuest(0xE0005EB05591FAFD) and IsBranchStepComplete(0xE0005EB05591FAFD, 5, 3) and not IsBranchStepComplete(0xE0005EB05591FAFD, 5, 4)">
+				<UseObject QuestId="0xE0005EB05591FAFD" ObjectName="Skull" BranchId="5" StepId="4" IgnoreLOS="True" IgnoreQuestRelation="True" WaitTime="5000" XYZ="184.6373,40.73542,28.92673" />
+				<CompleteQuest QuestName="Demon's Blood" QuestId="0xE0005EB05591FAFD" RewardIndex="1" />
+			</If>
+		</If>
+		<If Condition="((HasQuest(0xE000624769E3186C)) and (not IsQuestComplete(0xE000624769E3186C)))">
+			<If Condition="HasQuest(0xE000624769E3186C) and not IsBranchStepComplete(0xE000624769E3186C, 1, 2)">
+				<NoCombatMoveTo QuestId="0xE000624769E3186C" XYZ="-37.05068,45.26577,36.17786" />
+				<NoCombatMoveTo QuestId="0xE000624769E3186C" XYZ="-61.45681,44.71823,53.41117" />
+			</If>
+			<If Condition="HasQuest(0xE000624769E3186C) and not IsBranchStepComplete(0xE000624769E3186C, 1, 3)">
+				<UseObject QuestId="0xE000624769E3186C" ObjectName="Strange Light" BranchId="1" StepId="3" IgnoreLOS="True" IgnoreQuestRelation="True" WaitTime="5000" XYZ="-61.45681,44.71823,53.41117" />
+			</If>
+			<If Condition="HasQuest(0xE000624769E3186C) and IsBranchStepComplete(0xE000624769E3186C, 1, 3) and not IsBranchStepComplete(0xE000624769E3186C, 5, 2)">
+				<Grind GrindRef="Oasis Reflection" While="(not IsBranchStepComplete(0xE000624769E3186C, 5, 2))" />
+			</If>
+			<If Condition="HasQuest(0xE000624769E3186C) and IsBranchStepComplete(0xE000624769E3186C, 5, 2) and not IsBranchStepComplete(0xE000624769E3186C, 5, 3)">
+				<TalkTo QuestId="0xE000624769E3186C" BranchId="5" StepId="3" Name="Reflection" SearchRadius="50" WaitTime="5" XYZ="-62.01283,44.52904,52.50038" />
+				<CompleteQuest QuestName="Oasis" QuestId="0xE000624769E3186C" RewardIndex="3" />
+			</If>
+		</If>
+		<If Condition="((HasQuest(0xE000AE60C7EE2F0C)) and (not IsQuestComplete(0xE000AE60C7EE2F0C)))">
+			<If Condition="HasQuest(0xE000AE60C7EE2F0C) and not IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 2)">
+				<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="-129.5155,41.98126,-37.83605" />
+			</If>
+			<If Condition="HasQuest(0xE000AE60C7EE2F0C) and not IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 3)">
+				<TalkTo QuestId="0xE000AE60C7EE2F0C" BranchId="1" StepId="3" Name="Master Yonlach" WaitTime="5" XYZ="-129.406,41.98035,-36.7145" />
+			</If>
+			<If Condition="HasQuest(0xE000AE60C7EE2F0C) and IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 3) and not IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 4)">
+				<Grind GrindRef="Guru in the Dunes" While="(not IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 4))" />
+			</If>
+			<If Condition="HasQuest(0xE000AE60C7EE2F0C) and not IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 5)">
+				<TalkTo QuestId="0xE000AE60C7EE2F0C" BranchId="1" StepId="5" Name="Master Yonlach" SearchRadius="50" WaitTime="5" XYZ="-129.5383,41.98035,-37.43233" />
+			</If>
+			<If Condition="HasQuest(0xE000AE60C7EE2F0C) and IsBranchStepComplete(0xE000AE60C7EE2F0C, 1, 5) and not IsBranchStepComplete(0xE000AE60C7EE2F0C, 2, 2)">
+				<If Condition="(Me.Position.X &lt; -20)">
+					<UseTransport TransporterName="Mos Anek Speeder" Type="Taxi" Option="Mos Ila Speeder" XYZ="-3.044205,44.6794,32.8439" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 40) and (Me.Position.X &lt; 100) and (Me.Position.Z &gt; 250) and (Me.Position.Y &gt; 46) and (Me.Position.Y &lt; 50)">
+					<ForceVendor VendorType="Train" />
+					<ForceVendor VendorType="Repair" />
+					<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="68.11395,51.501,361.0161" />
+				</If>
+				<If Condition="(Me.Position.Y &gt; 50) and (Me.Position.Z &gt; 300)">
+					<UseTransport Type="Wonkavator" TransporterName="Elevator" Option="Sith Warrior Hangar" XYZ="68.43826,51.48972,360.0107" />
+				</If>
+				<If Condition="(Me.Position.Y &gt; 43) and (Me.Position.Y &lt; 46) and (Me.Position.Z &gt; 300)">
+					<TalkTo QuestId="0xE000AE60C7EE2F0C" BranchId="2" StepId="2" Name="Sharack Breev" WaitTime="5" XYZ="72.045,44.481,347.377" />
+				</If>
+			</If>
+			<If Condition="HasQuest(0xE000AE60C7EE2F0C) and IsBranchStepComplete(0xE000AE60C7EE2F0C, 2, 2) and not IsBranchStepComplete(0xE000AE60C7EE2F0C, 5, 2)">
+				<If Condition="(Me.Position.Y &gt; 43) and (Me.Position.Y &lt; 46) and (Core.Player.AreaId == 0x400000000003FFE4)">
+					<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="71.97671,44.501,343.898" />
+					<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="72.46533,44.70259,343.6209" />
+					<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="72.68459,44.87579,343.4967" />
+					<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="72.99598,45.12168,343.3202" />
+					<NoCombatMoveTo QuestId="0xE000AE60C7EE2F0C" XYZ="73.1944,45.17718,343.1855" />
+					<Interact QuestId="0xE000AE60C7EE2F0C" Name="Fury" WaitTime="3" XYZ="73.1944,45.17718,343.1855" />
+					<WaitTimer QuestId="1" WaitTime="90" />
+				</If>
+				<If Condition="(Core.Player.AreaId == 0x40000007A66F6499)">
+					<Interact QuestId="0xE000AE60C7EE2F0C" Name="Holoterminal" WaitTime="5" XYZ="0.3576343,1.000212,2.572119" />
+					<CompleteQuest QuestName="Guru in the Dunes" QuestId="0xE000AE60C7EE2F0C" RewardIndex="4" />
+				</If>
+			</If>
+		</If>
+		<UserDialog Title="Tatooine done" Message="Warrior Tatooine is finished. Load the Alderaan profile next. This file will not load it for you." />
+	</Questing>
+</Profile>

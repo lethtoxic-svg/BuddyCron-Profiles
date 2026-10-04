@@ -1,0 +1,30 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[E - Dark] Warrior - Hoth</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<Vendors>
+		<Hotspot Name="Zarik" XYZ="-256.9235,-0.2629,83.1931" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Command Center -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="-262.136,10.22445,82.4589" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Command Center -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="-161.2258,5.37494,127.397" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Icefall Plains -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="-226.5551,7.797968,156.0602" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Windchapped Ridge -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="-91.8139,4.080872,87.7779" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Lower Pass -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="-3.536,5.454126,49.8665" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Snow Hills Pass -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="-7.2227,8.11834,-14.0633" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Icefinger Rise -->
+		<Hotspot Name="Imperial Medical Droid" XYZ="102.6389,10.82154,56.5975" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="279.6914,-2.373474,7.7184" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Vendors>
+	<Trainers>
+		<Hotspot Name="Keresha Yald" Class="Warrior" XYZ="-257.7997,-0.2632995,84.402" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Trainers>
+	<GrindAreas></GrindAreas>
+	<Questing>
+		<!-- Insert warrior and BH class quests here -->
+		<UserDialog Title="Hoth done" Message="No recorded Warrior class steps exist for Hoth in the source profiles. Coordinates were not invented. Load the Belsavis profile when you are ready, or stop here." />
+	</Questing>
+</Profile>

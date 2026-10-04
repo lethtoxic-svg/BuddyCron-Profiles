@@ -1,0 +1,12 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[Test] Camp Pad</Name>
+	<Questing>
+		<!-- Same shape as the Nar Shaddaa lifts. Onto the pad, then to the door on the other floor, then back. -->
+		<If Condition="(Me.Position.Y &gt; 18.5) and (Me.Position.X &gt; 46.6)">
+			<MoveTo Name="On the pad" XYZ="46.262703,19.539522,33.76971" />
+		</If>
+		<MoveTo Name="Off the pad" XYZ="48.055412,17.202,33.310696" />
+		<MoveTo Name="On the pad again" XYZ="46.262703,19.539522,33.76971" />
+		<UserDialog Title="Camp pad" Message="On, off, and back on. This test stops here." />
+	</Questing>
+</Profile>

@@ -1,0 +1,218 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[E - Dark] Warrior - Alderaan</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<Vendors>
+		<Vendor Name="Sergeant Zabra" XYZ="20.39966,28.411,-129.981" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Alderaan: Rhu Caenus Spaceport -->
+		<Vendor Name="Imperial Medical Droid" XYZ="-32.0542,28.28497,-111.5969" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- House Cortess -->
+		<Vendor Name="Hendry" XYZ="69.7124,27.9896,-134.1752" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- House Thul -->
+		<Vendor Name="Imperial Medical Droid" XYZ="177.8839,38.68535,-105.8635" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Outpost Bolym -->
+		<Vendor Name="Imperial Medical Droid" XYZ="192.6259,21.66723,79.7412" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Outpost Talarn -->
+		<Vendor Name="Imperial Medical Droid" XYZ="-72.3992,15.27466,10.491" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Outpost Ghrent -->
+		<Vendor Name="Imperial Medical Droid" XYZ="-156.2386,19.85365,9.3428" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Panteer Hideout Thranta -->
+		<Vendor Name="Sergeant Avan" XYZ="70.0606,27.9896,-129.918" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<!-- Rhu Caenus Spaceport -->
+	</Vendors>
+	<Trainers>
+		<Trainer Name="Lord Virena" Class="Warrior" X="74.3714" Y="28.27477" Z="-138.5277" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Trainers>
+	<GrindAreas>
+		<GrindArea Name="Windredd" xmlns="http://tempuri.org/ProfileSchema.xsd">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>51</MaxLevel>
+			<Mobs>
+				<Mob>Windredd</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Windredd" XYZ="197.6846,19.901937,-2.7049372" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+	<Questing>
+		<!-- Shake Down. Jedipedia qst.location.alderaan.class.sith_warrior.shake_down, branch 1:
+		     2 Travel to Alderaan, 3 Use the ship holoterminal, 4 Speak with Duke Kendoh, 5 Speak with Duke Kendoh.
+		     Taxi names are the Jedipedia imperial terminals. The stand positions are the recorded ones for those exact terminals. -->
+		<If Condition="((HasQuest(0xE0002F177BE37E5D)) and (not IsQuestComplete(0xE0002F177BE37E5D)))" xmlns="http://tempuri.org/ProfileSchema.xsd">
+			<If Condition="HasQuest(0xE0002F177BE37E5D) and not IsBranchStepComplete(0xE0002F177BE37E5D, 1, 2)">
+				<If Condition="(Core.Player.AreaId == 0x40000007A66F6499)">
+					<NoCombatMoveTo QuestId="0xE0002F177BE37E5D" XYZ="1.682945,0.9998809,2.809304" />
+					<SpaceTravel Planet="Alderaan" />
+				</If>
+			</If>
+			<If Condition="HasQuest(0xE0002F177BE37E5D) and not IsBranchStepComplete(0xE0002F177BE37E5D, 1, 3)">
+				<If Condition="(Core.Player.AreaId == 0x40000007A66F6499)">
+					<Interact QuestId="0xE0002F177BE37E5D" BranchId="1" StepId="3" Name="Holoterminal" WaitTime="5" XYZ="0.3576343,1.000212,2.572119" />
+				</If>
+			</If>
+			<If Condition="HasQuest(0xE0002F177BE37E5D) and not IsBranchStepComplete(0xE0002F177BE37E5D, 1, 4)">
+				<If Condition="(Core.Player.AreaId == 0x40000007A66F6499)">
+					<Interact QuestId="0xE0002F177BE37E5D" Name="Ship Exit" WaitTime="3" XYZ="0.02740691,0.7981918,4.449235" />
+					<WaitTimer WaitTime="90" QuestId="1" />
+				</If>
+				<If Condition="(Core.Player.AreaId == 0x400000014450FB0A)">
+					<If Condition="(Me.Position.Y &lt; 20)">
+						<UseTransport Type="Wonkavator" TransporterName="Elevator" Option="Rhu Caenus Spaceport" XYZ="26.78128,13.99721,-128.2874" />
+					</If>
+					<If Condition="(Me.Position.Y &gt; 20) and (Me.Position.X &gt; 0) and (Me.Position.X &lt; 50) and (Me.Position.Z &lt; -100)">
+						<UseTransport Type="Taxi" TransporterName="Rhu Caenus Spaceport Taxi" Option="House Cortess Taxi" XYZ="19.8109,28.57548,-140.667" />
+					</If>
+					<If Condition="(Me.Position.X &lt; 0)">
+						<UseTransport Type="Taxi" TransporterName="House Cortess Taxi" Option="Outpost Bolym Thranta" XYZ="-30.6181,28.28497,-111.3201" />
+					</If>
+					<If Condition="(Me.Position.X &gt; 150)">
+						<UseTransport Type="Taxi" TransporterName="Outpost Bolym Thranta" Option="House Thul Taxi" XYZ="175.0771,39.00214,-107.1227" />
+					</If>
+					<If Condition="(Me.Position.X &gt; 56) or (Me.Position.Z &lt; -148)">
+						<NoCombatMoveTo QuestId="0xE0002F177BE37E5D" Name="Outside the Thul phase" XYZ="58.54197,28.278412,-150.88686" />
+						<NoCombatMoveTo QuestId="0xE0002F177BE37E5D" Name="Inside the Thul phase" XYZ="58.085674,28.302006,-150.9222" />
+					</If>
+					<TalkTo QuestId="0xE0002F177BE37E5D" BranchId="1" StepId="4" Name="Duke Kendoh" WaitTime="5" XYZ="53.20735,28.301998,-144.0328" />
+				</If>
+			</If>
+			<If Condition="HasQuest(0xE0002F177BE37E5D) and not IsBranchStepComplete(0xE0002F177BE37E5D, 1, 5)">
+				<TalkTo QuestId="0xE0002F177BE37E5D" BranchId="1" StepId="5" Name="Duke Kendoh" WaitTime="5" XYZ="53.20735,28.301998,-144.0328" />
+			</If>
+		</If>
+		<!-- Knock Knock 0xE00081B93EFFAA6F. Step 2 leaves the Thul phase for the House Thul Taxi, then Outpost Bolym Thranta. -->
+		<If Condition="((HasQuest(0xE00081B93EFFAA6F)) and (not IsQuestComplete(0xE00081B93EFFAA6F)))">
+			<If Condition="HasQuest(0xE00081B93EFFAA6F) and not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 2)">
+				<If Condition="(Me.Position.X &lt; 150)">
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="House Thul Taxi" XYZ="63.042,28.278208,-160.0131" />
+					<UseTransport Type="Taxi" TransporterName="House Thul Taxi" Option="Outpost Bolym Thranta" XYZ="63.042,28.278208,-160.0131" />
+				</If>
+				<If Condition="(Me.Position.Y &gt; 21)">
+					<If Condition="(Me.Position.Z &gt; -9)">
+						<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Outside the estate phase" XYZ="190.57687,23.20496,-8.523394" />
+					</If>
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Inside the estate phase" XYZ="190.63857,23.253546,-9.169922" />
+					<UseTransport Type="Wonkavator" TransporterName="Elevator" Option="Level 2" XYZ="192.27988,23.65797,-12.002728" />
+				</If>
+			</If>
+			<If Condition="HasQuest(0xE00081B93EFFAA6F) and not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 3)">
+				<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Windredd" XYZ="197.6846,19.901937,-2.7049372" />
+				<TalkTo QuestId="0xE00081B93EFFAA6F" BranchId="1" StepId="3" Name="Windredd" WaitTime="5" XYZ="197.6846,19.901937,-2.7049372" />
+			</If>
+			<If Condition="HasQuest(0xE00081B93EFFAA6F) and not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 4)">
+				<Grind GrindRef="Windredd" While="not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 4)" />
+			</If>
+			<If Condition="HasQuest(0xE00081B93EFFAA6F) and not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 5)">
+				<TalkTo QuestId="0xE00081B93EFFAA6F" BranchId="1" StepId="5" Name="Windredd" WaitTime="5" XYZ="197.6846,19.901937,-2.7049372" />
+			</If>
+			<If Condition="HasQuest(0xE00081B93EFFAA6F) and not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 6)">
+				<If Condition="(Me.Position.Y &lt; 21) and (Me.Position.X &gt; 180)">
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Estate elevator" XYZ="192.27988,23.65797,-12.002728" />
+					<UseTransport Type="Wonkavator" TransporterName="Elevator" Option="Level 1" XYZ="192.27988,23.65797,-12.002728" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 180) and (Me.Position.Z &lt; -9) and (Me.Position.Z &gt; -30)">
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Inside the estate phase" XYZ="190.63857,23.253546,-9.169922" />
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Outside the estate phase" XYZ="190.57687,23.20496,-8.523394" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 150)">
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Outpost Bolym Thranta" XYZ="175.0771,39.00214,-107.1227" />
+					<UseTransport Type="Taxi" TransporterName="Outpost Bolym Thranta" Option="House Thul Taxi" XYZ="175.0771,39.00214,-107.1227" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 56) or (Me.Position.Z &lt; -148)">
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Outside the Thul phase" XYZ="58.54197,28.278412,-150.88686" />
+					<NoCombatMoveTo QuestId="0xE00081B93EFFAA6F" Name="Inside the Thul phase" XYZ="58.085674,28.302006,-150.9222" />
+				</If>
+				<TalkTo QuestId="0xE00081B93EFFAA6F" BranchId="1" StepId="6" Name="Duke Kendoh" WaitTime="5" XYZ="53.20735,28.301998,-144.0328" />
+			</If>
+			<If Condition="HasQuest(0xE00081B93EFFAA6F) and not IsBranchStepComplete(0xE00081B93EFFAA6F, 1, 7)">
+				<TalkTo QuestId="0xE00081B93EFFAA6F" BranchId="1" StepId="7" Name="Duke Kendoh" WaitTime="5" XYZ="53.20735,28.301998,-144.0328" />
+			</If>
+		</If>
+		<!-- Front Lines 0xE0002D39B29C22B7. Step 2 taxis to Bolym and enters the generator phase. Step 3 takes the power generator elevator to Upper Level and clicks Planetary Generator. -->
+		<If Condition="((HasQuest(0xE0002D39B29C22B7)) and (not IsQuestComplete(0xE0002D39B29C22B7)))">
+			<If Condition="HasQuest(0xE0002D39B29C22B7) and not IsBranchStepComplete(0xE0002D39B29C22B7, 1, 2)">
+				<If Condition="(Me.Position.X &lt; 150) and (Me.Position.Z &lt; 0)">
+					<If Condition="(Me.Position.X &lt; 56) and (Me.Position.Z &gt; -148)">
+						<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Inside the Thul phase" XYZ="58.085674,28.302006,-150.9222" />
+						<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Outside the Thul phase" XYZ="58.54197,28.278412,-150.88686" />
+					</If>
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="House Thul Taxi" XYZ="63.042,28.278208,-160.0131" />
+					<UseTransport Type="Taxi" TransporterName="House Thul Taxi" Option="Outpost Bolym Thranta" XYZ="63.042,28.278208,-160.0131" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 150) or (Me.Position.Z &gt; 40)">
+					<If Condition="(Me.Position.X &gt; 61)">
+						<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Outside the generator phase" XYZ="61.273396,24.366531,54.228146" />
+					</If>
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Inside the generator phase" XYZ="60.3481,24.435307,54.33913" />
+				</If>
+			</If>
+			<If Condition="HasQuest(0xE0002D39B29C22B7) and not IsBranchStepComplete(0xE0002D39B29C22B7, 1, 3)">
+				<If Condition="(Me.Position.X &lt; 150) and (Me.Position.Z &lt; 0)">
+					<If Condition="(Me.Position.X &lt; 56) and (Me.Position.Z &gt; -148)">
+						<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Inside the Thul phase" XYZ="58.085674,28.302006,-150.9222" />
+						<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Outside the Thul phase" XYZ="58.54197,28.278412,-150.88686" />
+					</If>
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="House Thul Taxi" XYZ="63.042,28.278208,-160.0131" />
+					<UseTransport Type="Taxi" TransporterName="House Thul Taxi" Option="Outpost Bolym Thranta" XYZ="63.042,28.278208,-160.0131" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 150) or ((Me.Position.Z &gt; 40) and (Me.Position.X &gt; 61))">
+					<If Condition="(Me.Position.X &gt; 61)">
+						<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Outside the generator phase" XYZ="61.273396,24.366531,54.228146" />
+					</If>
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Inside the generator phase" XYZ="60.3481,24.435307,54.33913" />
+				</If>
+				<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Generator elevator" XYZ="55.892376,24.468767,54.87242" />
+				<UseTransport Type="Wonkavator" TransporterName="Elevator" Option="Upper Level" XYZ="55.892376,24.468767,54.87242" />
+				<Interact QuestId="0xE0002D39B29C22B7" Name="Planetary Generator" XYZ="60.3481,24.435307,54.33913" />
+			</If>
+			<If Condition="HasQuest(0xE0002D39B29C22B7) and not IsBranchStepComplete(0xE0002D39B29C22B7, 1, 4)">
+				<If Condition="(Me.Position.Y &lt; 20) and (Me.Position.Z &gt; 45)">
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="51.501637,15.519852,71.4658" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="52.557438,15.635307,68.76376" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="52.580383,15.635307,66.615555" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="55.007957,15.635307,63.809177" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="56.53571,15.702028,60.275955" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="59.336113,15.635307,58.710598" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Back up the generator hall" XYZ="55.8845,15.706769,54.823402" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Generator elevator" XYZ="55.892376,24.468767,54.87242" />
+				</If>
+				<If Condition="(Me.Position.Z &gt; 40) and (Me.Position.X &lt; 61)">
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Inside the generator phase" XYZ="60.3481,24.435307,54.33913" />
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Outside the generator phase" XYZ="61.273396,24.366531,54.228146" />
+				</If>
+				<If Condition="(Me.Position.X &gt; 61.5) or (Me.Position.Z &gt; 40) or (Me.Position.Y &gt; 20)">
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Outside the camp phase" XYZ="61.923374,18.734852,33.19704" />
+				</If>
+				<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Inside the camp phase" XYZ="61.21266,18.737,33.28812" />
+			</If>
+			<If Condition="HasQuest(0xE0002D39B29C22B7) and not IsBranchStepComplete(0xE0002D39B29C22B7, 1, 5)">
+				<If Condition="(Me.Position.X &gt; 50) and (Me.Position.Z &lt; 40)">
+					<NoCombatMoveTo QuestId="0xE0002D39B29C22B7" Name="Camp hall" XYZ="53.58568,19.594515,33.286926" />
+				</If>
+				<!-- Kick Nar Shaddaa lift: bottom of the ele, then the top. The path between them is the ride. -->
+				<MoveTo QuestId="1" Name="Top of ele" XYZ="47.232468,19.602,33.811207" />
+				<MoveTo QuestId="1" Name="Bottom of ele" XYZ="48.055412,17.202,33.310696" />
+				<If Condition="(Me.Position.Y &lt; 18.5) and (Me.Position.Z &lt; 40)">
+					<Interact QuestId="0xE0002D39B29C22B7" Name="Security Door" XYZ="48.055412,17.202,33.310696" />
+				</If>
+			</If>
+		</If>
+		<!-- After the Security Door, leave the same way. Kick lift: bottom of the ele, then the top, then on out. -->
+		<If Condition="(Me.Position.Z &lt; 40) and (Me.Position.Y &lt; 25) and (Me.Position.X &gt; 45) and (Me.Position.X &lt; 63) and (IsBranchStepComplete(0xE0002D39B29C22B7, 1, 4) or IsQuestComplete(0xE0002D39B29C22B7))">
+			<MoveTo QuestId="1" Name="Bottom of ele" XYZ="48.055412,17.202,33.310696" />
+			<MoveTo QuestId="1" Name="Top of ele" XYZ="47.232468,19.602,33.811207" />
+			<MoveTo QuestId="1" Name="Camp hall" XYZ="53.58568,19.594515,33.286926" />
+			<MoveTo QuestId="1" Name="Inside the camp phase" XYZ="61.21266,18.737,33.28812" />
+			<MoveTo QuestId="1" Name="Outside the camp phase" XYZ="61.923374,18.734852,33.19704" />
+		</If>
+		<!-- Front Lines continued. Branch 1: infiltrate the planetary power generator, disable it, invade General Gesselle's encampment, breach the security door, then leave the camp.
+		     Battle Organa 0xE0001C7D85CBC29A. Branch 1 find the parents and speak to Parvin Willsaam. Dark fight is branch 10, defeat Master Volryder, then the personal holocom.
+		     Deal with Kendoh 0xE0002BBEEFE85553. Branch 1 confront Duke Kendoh. Dark fight is branch 12, defeat Duke Kendoh and FimmRess, then the ship holoterminal.
+		     Those rooms were not recorded. The file stops on the active one instead of walking to a guessed door. -->
+		<If Condition="((HasQuest(0xE00081B93EFFAA6F)) and (not IsQuestComplete(0xE00081B93EFFAA6F))) or ((HasQuest(0xE0002D39B29C22B7)) and (not IsQuestComplete(0xE0002D39B29C22B7))) or ((HasQuest(0xE0001C7D85CBC29A)) and (not IsQuestComplete(0xE0001C7D85CBC29A))) or ((HasQuest(0xE0002BBEEFE85553)) and (not IsQuestComplete(0xE0002BBEEFE85553)))">
+			<UserDialog Title="Alderaan class story" Message="Left General Gesselle's camp the way it came in. Battle Organa is next. This file will not load it." />
+		</If>
+		<If Condition="IsQuestComplete(0xE0002BBEEFE85553)">
+			<UserDialog Title="Alderaan done" Message="Warrior Alderaan is finished. The next class story is the ship, then Hutta. This file will not load it." />
+		</If>
+	</Questing>
+</Profile>

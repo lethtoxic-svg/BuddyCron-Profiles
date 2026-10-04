@@ -1,0 +1,25 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[E - Dark] Warrior - Corellia</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<Vendors>
+		<Hotspot Name="Calagott" XYZ="-155.3007,4.901,189.091" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Wilem" XYZ="-162.1088,4.801,187.951" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-170.9642,2.402679,211.4816" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-203.5322,-1.555804,272.3289" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Supply Officer Lanesord" XYZ="-313.9077,-9.8902,-152.9478" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-308.5991,-9.600938,-159.5656" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Specialist Ukadan" XYZ="110.1429,2.1088,-167.0002" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="145.466,6.38804,-257.1393" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Supply Officer Riencam" XYZ="101.2318,2.1088,-165.8214" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Sergeant Calle" XYZ="303.7735,20.1139,-125.9355" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="265.8513,22.39676,-215.5932" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="265.8513,22.39676,-215.5932" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Vendors>
+	<Trainers>
+		<Hotspot Name="Lord Sylen Kempar" Class="Warrior" XYZ="-160.116,5.596123,182.3726" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Trainers>
+	<GrindAreas></GrindAreas>
+	<Questing>
+		<UserDialog Title="Corellia done" Message="No recorded Warrior class steps exist for Corellia in the source profiles. Coordinates were not invented." />
+	</Questing>
+</Profile>

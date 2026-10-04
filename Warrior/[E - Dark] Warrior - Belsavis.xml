@@ -1,0 +1,23 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[E - Dark] Warrior - Belsavis</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<Vendors>
+		<Hotspot Name="Jailbreaker Klin" XYZ="158.4986,32.4143,142.0877" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="76.4841,27.84953,116.6636" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-10.16789,25.03061,156.1826" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-148.097,22.07742,55.7381" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-247.2969,18.42914,-66.1909" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-229.8259,19.25472,-108.7635" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-235.1284,17.71244,-163.3512" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-157.8194,17.84014,-185.2043" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="-125.2853,17.97067,-185.9195" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+		<Hotspot Name="Imperial Medical Droid" XYZ="36.0748,16.66702,-287.7637" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Vendors>
+	<Trainers>
+		<Hotspot Name="Lord Trechane" Class="Warrior" XYZ="162.9731,33.23462,146.5557" xmlns="http://tempuri.org/ProfileSchema.xsd" />
+	</Trainers>
+	<GrindAreas></GrindAreas>
+	<Questing>
+		<UserDialog Title="Belsavis done" Message="No recorded Warrior class steps exist for Belsavis in the source profiles. Coordinates were not invented. Load the Voss profile when you are ready, or stop here." />
+	</Questing>
+</Profile>

@@ -1,0 +1,18 @@
+BuddyCron 1.0.62.0
+Planet: Balmorra, Sundari flatlands, on the walk to the Balmorran Arms Factory.
+Log: 39204 2026-10-04 01.14.txt
+
+The navigator returns a path and then never walks it. A profile that is only one MoveTo does the same thing, so this is not quest logic.
+
+Test profile: LethToxic\Warrior\[Test] Factory Walk.xml
+One tag: MoveTo "Balmorran Arms Factory" to <145.6342, 15.53988, -5.029582>
+
+15:17:58 Loaded that profile.
+15:17:58 Requesting path on 4611686022220993772-0 from <111.43853, 13.478341, 129.9967> to <145.6342, 15.53988, -5.029582>
+15:17:58 Received path response in 359 ms.
+15:18:05 Still at <111.4664, 13.492454, 129.98405>. A few more path requests creep the position to <111.973335, 13.615163, 129.06653> by 15:18:09.
+No path request after 15:18:09. No "Stopped moving" reason. No unstuck attempt. The character stays there.
+
+Same destination earlier in this log, on the class profile, from <102.38244, 13.419112, 138.72678>. Path received, then no walk until the character was moved by hand. Hand movement does not hand the walk back. Stop and start receives a new path and still does not walk.
+
+The player is in the part of Balmorra where Republic force fields block the ground. The log never names a force field. What it shows is a successful path response followed by the mover going idle.

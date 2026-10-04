@@ -1,0 +1,40 @@
+Later fix. Do not treat stop/start as a way through the profile. A step change has to continue on its own.
+
+Log: Logs\29184 2026-10-03 23.00.txt
+Profile: LethToxic\Warrior\[E - Dark] Warrior - Dromund Kaas.xml
+Quest: Laying Waste 0xE0009FF7D4D67CE5
+
+What happened twice on this run:
+
+1. 13:50:05 to 13:50:49, at Dri'kill Ba'al.
+   The first speak step completed on arrival. No click was logged.
+   The profile switched to the second-speak If (line 249) and that If stayed current for 44 seconds.
+   The TalkTo inside it never started. No new path was requested.
+   Stop/start rebuilt the order. Both talks were already done, so the new run walked to the first Monitoring Station.
+
+2. 13:54:40 to 13:55:56, in the Cellvanta room.
+   Security panel finished, then the profile switched to the speak-to-Cellvanta If (line 268).
+   The TalkTo never started. Combat engaged Cellvanta Grathan and Beelzlit Grathan.
+   At 13:55:15 the target vanished ("Poi was no longer a valid object") and the character stood still until stop at 13:55:56.
+   Stop/start rebuilt the order. The quest had already moved to branch 2 step 2, return to Dri'kill (line 282), and the new run pathed out.
+
+Why stop/start is the only thing that clears it:
+IfTag caches its condition the first time it is checked and does not look again until the profile order is reset.
+When a step change lands on an If and the child never starts, that If stays the current behavior.
+Stop/start is that reset. Profile XML cannot patch ProfileOrderManager.
+Plugins\MoverWake does not compile (Logging, and NavigationProvider.GetCurrentStraightPathPoints is not public).
+It also would not have fired these two stalls: there was no fresh path, and the character was already at the old destination.
+
+Leave this until asked. Do not reload the profile to chase it mid-quest.
+
+Same stall on Nar Shaddaa. Log: Logs\32068 2026-10-04 01.50.txt
+Quest: Disrupt Negotiations 0xE00073956804C0B7
+
+16:14:52 the speak-to-Girik If (line 165) became current.
+The TalkTo inside it never started. No conversation was logged.
+Combat killed Apprentice Girik and the Hutt Cartel Bodyguards anyway.
+From 16:15:09 until the stop button at 16:16:14 the character did not move and no new behavior started.
+Stop/start rebuilt the order. The post-fight speak was already done, so the new run taxied back toward Halidrell.
+
+The fight order is speak, kill Girik and the guards, then speak to Girik again.
+That second speak is now a profile step of its own, not a child of the If that stalled.

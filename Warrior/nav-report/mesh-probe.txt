@@ -1,0 +1,43 @@
+Mesh probe
+Standing at 164.99, 42.72, 87.14
+Facing -0.97, 0.00, 0.24
+A point is free when the navigation service can path to it and the path is not much longer than the straight line.
+A detour means a path exists, but it is much longer than the straight line. Blocked means no path.
+
+ahead
+   1  blocked 164.02, 42.72, 87.38  path 0.00  straight 1.00  flag 0
+   2  blocked 163.05, 42.72, 87.62  path 0.00  straight 2.00  flag 0
+   3  blocked 162.08, 42.72, 87.87  path 0.00  straight 3.00  flag 0
+   4  blocked 161.11, 42.72, 88.11  path 0.00  straight 4.00  flag 0
+   5  blocked 160.14, 42.72, 88.35  path 0.00  straight 5.00  flag 0
+   6  blocked 159.17, 42.72, 88.60  path 0.00  straight 6.00  flag 0
+   7  blocked 158.20, 42.72, 88.84  path 0.00  straight 7.00  flag 0
+   8  blocked 157.23, 42.72, 89.08  path 0.00  straight 8.00  flag 0
+   9  blocked 156.26, 42.72, 89.33  path 0.00  straight 9.00  flag 0
+  10  blocked 155.29, 42.72, 89.57  path 0.00  straight 10.00  flag 0
+  11  blocked 154.32, 42.72, 89.81  path 0.00  straight 11.00  flag 0
+  12  blocked 153.35, 42.72, 90.06  path 0.00  straight 12.00  flag 0
+  13  blocked 152.38, 42.72, 90.30  path 0.00  straight 13.00  flag 0
+  14  blocked 151.41, 42.72, 90.54  path 0.00  straight 14.00  flag 0
+  15  blocked 150.44, 42.72, 90.79  path 0.00  straight 15.00  flag 0
+Farthest free ahead: 0 units at 164.99, 42.72, 87.14
+behind
+   2  blocked 166.93, 42.72, 86.65  path 0.00  straight 2.00  flag 0
+   4  blocked 168.87, 42.72, 86.16  path 0.00  straight 4.00  flag 0
+   6  blocked 170.81, 42.72, 85.68  path 0.00  straight 6.00  flag 0
+   8  blocked 172.74, 42.72, 85.19  path 0.00  straight 8.00  flag 0
+
+right
+   2  blocked 165.47, 42.72, 89.08  path 0.00  straight 2.00  flag 0
+   4  blocked 165.96, 42.72, 91.02  path 0.00  straight 4.00  flag 0
+   6  blocked 166.44, 42.72, 92.96  path 0.00  straight 6.00  flag 0
+   8  blocked 166.93, 42.72, 94.90  path 0.00  straight 8.00  flag 0
+
+left
+   2  blocked 164.50, 42.72, 85.20  path 0.00  straight 2.00  flag 0
+   4  blocked 164.01, 42.72, 83.26  path 0.00  straight 4.00  flag 0
+   6  blocked 163.53, 42.72, 81.32  path 0.00  straight 6.00  flag 0
+   8  blocked 163.04, 42.72, 79.38  path 0.00  straight 8.00  flag 0
+
+Sampled mesh points the service says are reachable from here:
+Zone id 4611686018427650020 is not a mesh-sample zone. The ray results above are the probe.

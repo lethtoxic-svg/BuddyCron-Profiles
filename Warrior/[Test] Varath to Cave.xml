@@ -1,0 +1,30 @@
+<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
+	<Name>[Test] Varath to Cave</Name>
+	<Vendors>
+	</Vendors>
+	<GrindAreas>
+	</GrindAreas>
+	<Questing>
+		<If Condition="(Me.Position.X &lt; 124) or ((Me.Position.Z &gt; 62) and (Me.Position.X &lt; 130))">
+			<NoCombatMoveTo Name="Sand Demon's Cave entrance" QuestId="0xE0005EB05591FAFD" XYZ="125.69133,45.138634,57.45016" />
+		</If>
+		<If Condition="(Me.Position.X &lt; 136) and (Me.Position.Z &lt; 70)">
+			<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="131.09906,45.0705,57.486473" />
+		</If>
+		<If Condition="(Me.Position.X &lt; 148) and (Me.Position.Z &lt; 70)">
+			<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="139.25034,44.602707,53.17396" />
+		</If>
+		<If Condition="(Me.Position.X &lt; 160) and (Me.Position.Z &lt; 70)">
+			<NoCombatMoveTo QuestId="0xE0005EB05591FAFD" XYZ="151.72862,43.622498,51.333572" />
+		</If>
+		<If Condition="(Me.Position.Z &lt; 95)">
+			<NoCombatMoveTo Name="Quest entrance" QuestId="0xE0005EB05591FAFD" XYZ="163.56873,42.861378,87.63899" />
+			<NoCombatMoveTo Name="Inside the cave phase" QuestId="0xE0005EB05591FAFD" XYZ="162.65308,42.998802,87.78699" />
+		</If>
+		<NoCombatMoveTo Name="Sand Demon's Cave" QuestId="0xE0005EB05591FAFD" XYZ="156.7524,42.32241,107.1846" />
+		<NoCombatMoveTo Name="Cave" QuestId="0xE0005EB05591FAFD" XYZ="151.6136,42.27711,110.2668" />
+		<NoCombatMoveTo Name="Cave" QuestId="0xE0005EB05591FAFD" XYZ="146.3805,42.35143,107.6223" />
+		<NoCombatMoveTo Name="Cave" QuestId="0xE0005EB05591FAFD" XYZ="144.0126,42.41828,104.5062" />
+		<UserDialog Title="Cave" Message="The test walk reached the recorded points inside the Sand Demon's Cave. Stop here and load the Tatooine profile." />
+	</Questing>
+</Profile>

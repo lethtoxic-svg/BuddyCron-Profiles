@@ -1,0 +1,290 @@
+[15:14:15.779 N] BuddyCron 1.0.62.0
+[15:14:19.414 N] Logging in...
+[15:14:19.880 N] T:5250952391021550316 H: 4258833474
+[15:14:19.880 N] R:0 -1 -1
+[15:14:20.333 D] Loading data from database
+[15:14:20.334 N] Compiling custom behaviors...
+[15:14:21.409 D] Reloading AssemblyLoader<BotBase> - Precompile
+[15:14:21.436 D] Reloading AssemblyLoader<BotPlugin> - Precompile
+[15:14:21.665 D] Reloading AssemblyLoader<CombatRoutine> - Precompile
+[15:14:21.960 D] Done compiling custom behaviors...
+[15:14:21.960 D] [BotManager] Initializing
+[15:14:21.964 D] [BotManager] Botbases have been reloaded.
+[15:14:21.964 D] Combat Assist v0.0.0.0
+[15:14:21.965 D] New bot added!: Order Bot
+[15:14:21.965 D] New bot added!: Space Mission Bot
+[15:14:21.968 D] [PluginManager] Initializing
+[15:14:21.972 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(61,17): error CS0103: The name 'Logging' does not exist in the current context
+[15:14:21.972 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(90,21): error CS0103: The name 'Logging' does not exist in the current context
+[15:14:21.972 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(181,13): error CS0103: The name 'Logging' does not exist in the current context
+[15:14:21.972 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(188,17): error CS0103: The name 'Logging' does not exist in the current context
+[15:14:21.972 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(217,17): error CS0103: The name 'Logging' does not exist in the current context
+[15:14:21.972 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(224,17): error CS0103: The name 'Logging' does not exist in the current context
+[15:14:21.978 N] Compiler Error: C:\Users\lielv\OneDrive\Documents\BuddyCron 1.0.47.0\Plugins\MoverWake\MoverWakePlugin.cs(239,48): error CS0122: 'NavigationProvider.GetCurrentStraightPathPoints()' is inaccessible due to its protection level
+[15:14:21.981 D] [PluginManager] Plugins have been reloaded.
+[15:14:21.981 D] Auto Equip v1.0.0
+[15:14:21.981 D] Character Name In Titlebar v0.0.1
+[15:14:21.981 D] Minimize To Tray v0.0.1
+[15:14:21.981 D] QuestDevTools v0.0.2
+[15:14:21.981 D] 3D Overlay v1.0.0
+[15:14:21.981 D] RebornConsole v0.0.1
+[15:14:21.981 D] RebornMcp v1.0
+[15:14:21.981 D] Scavenger v1.3.0
+[15:14:21.982 D] [RoutineManager] Initializing
+[15:14:21.986 D] [RoutineManager] Routines have been reloaded. Current class-specific list:
+[15:14:21.986 D] Guardian Vigilance v0.0.0.0
+[15:14:21.987 N] [DefaultCombat] *** Default Combat v90***
+[15:14:21.987 N] [DefaultCombat] Level: 18
+[15:14:21.987 N] [DefaultCombat] Class: Warrior
+[15:14:21.988 N] [DefaultCombat] Discipline: Vigilance
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F4] Toggle Raid Buffs
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F5] Toggle Interrupts
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F6] Toggle Charge
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F7] Toggle AOE
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F8] Pause Rotation
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F9] Pause/Resume Bot
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F10] Start/Stop Bot
+[15:14:21.989 N] [DefaultCombat] [Hot Key][F12] Set Tank
+[15:14:21.989 N] [DefaultCombat] Rotation Selected : Guardian Vigilance
+[15:14:21.995 D] Medpac  Created!
+[15:14:21.997 D] Replaced hook [PreCombatBuff] c38638f7-d662-4550-929f-2b506d9ba5ba
+[15:14:21.997 D] Replaced hook [Heal] e18cfe0b-31ca-40a9-bc79-72d247558814
+[15:14:21.997 D] Replaced hook [Pull] d4698b30-305b-4fc3-b401-ef15f24e9635
+[15:14:21.997 D] Replaced hook [CombatBuff] 6ea3ac26-4cfa-44a6-9150-cd50b7c35c9d
+[15:14:21.997 D] Replaced hook [Combat] 352050ed-0117-47fc-9398-4a4279d31654
+[15:14:21.997 D] Replaced hook [Rest] ed5c2299-94f7-4151-b8cd-6f6bb0c40927
+[15:14:21.997 D] Finished loading addons in 00:00:01.6631366
+[15:14:22.038 D] Memory compaction: 70,488,400 -> 54,115,304
+[15:14:23.753 N] Loading profile [E - Dark] Warrior - Balmorra.xml
+[15:14:23.987 N] Parsing xml...
+[15:14:23.989 D] [{http://tempuri.org/ProfileSchema.xsd}Profile @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:23.992 D] [{http://tempuri.org/ProfileSchema.xsd}Hotspot @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:23.993 D] [{http://tempuri.org/ProfileSchema.xsd}GrindArea @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:23.996 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 69] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:23.997 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 71] has attribute 'waittime' which is not implemented by the tag.
+[15:14:23.997 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 74] has attribute 'waittime' which is not implemented by the tag.
+[15:14:23.999 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 86] has attribute 'questname' which is not implemented by the tag.
+[15:14:23.999 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 89] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:24.000 D] [{http://tempuri.org/ProfileSchema.xsd}AnswerHolocomCall @ line 97] has attribute 'questname' which is not implemented by the tag.
+[15:14:24.000 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 100] has attribute 'questname' which is not implemented by the tag.
+[15:14:24.000 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 103] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:24.003 D] [{http://tempuri.org/ProfileSchema.xsd}TurnInQuest @ line 126] has attribute 'questname' which is not implemented by the tag.
+[15:14:24.003 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 127] has attribute 'questname' which is not implemented by the tag.
+[15:14:24.003 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 131] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:24.005 D] [{http://tempuri.org/ProfileSchema.xsd}AnswerHolocomCall @ line 156] has attribute 'questname' which is not implemented by the tag.
+[15:14:24.006 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 201] has attribute 'userange' which is not implemented by the tag.
+[15:14:24.006 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 201] has attribute 'waittime' which is not implemented by the tag.
+[15:14:24.006 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 204] has attribute 'waittime' which is not implemented by the tag.
+[15:14:24.006 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 205] has attribute 'questname' which is not implemented by the tag.
+[15:14:24.288 D] IronPython syntax-precompiled 45 conditions in 12ms; delegates materialize in bounded groups on first use.
+[15:14:24.288 N] Loaded profile [E - Dark] Warrior - Balmorra
+[15:14:25.452 N] Loading profile [E - Dark] Warrior - Balmorra.xml
+[15:14:25.510 N] Parsing xml...
+[15:14:25.510 D] [{http://tempuri.org/ProfileSchema.xsd}Profile @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}Hotspot @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}GrindArea @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 69] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 71] has attribute 'waittime' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 74] has attribute 'waittime' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 86] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.511 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 89] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.513 D] [{http://tempuri.org/ProfileSchema.xsd}AnswerHolocomCall @ line 97] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.513 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 100] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.513 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 103] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.513 D] [{http://tempuri.org/ProfileSchema.xsd}TurnInQuest @ line 126] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.513 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 127] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.513 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 131] has attribute 'xmlns' which is not implemented by the tag.
+[15:14:25.514 D] [{http://tempuri.org/ProfileSchema.xsd}AnswerHolocomCall @ line 156] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.514 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 201] has attribute 'userange' which is not implemented by the tag.
+[15:14:25.514 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 201] has attribute 'waittime' which is not implemented by the tag.
+[15:14:25.514 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 204] has attribute 'waittime' which is not implemented by the tag.
+[15:14:25.514 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 205] has attribute 'questname' which is not implemented by the tag.
+[15:14:25.515 D] IronPython syntax-precompiled 0 conditions in 0ms; delegates materialize in bounded groups on first use.
+[15:14:25.515 N] Loaded profile [E - Dark] Warrior - Balmorra
+[15:14:25.516 N] Bot Thread Started.
+[15:14:25.629 N] Clearing all hooks.
+[15:14:25.629 D] Replaced hook [PreCombatBuff] 3b1dfdaf-a805-4b7a-a6a2-9901f5eb7b79
+[15:14:25.629 D] Replaced hook [Heal] 378d2ec9-9ab5-482b-b97d-3bfde363eb93
+[15:14:25.629 D] Replaced hook [Pull] d4698b30-305b-4fc3-b401-ef15f24e9635
+[15:14:25.629 D] Replaced hook [CombatBuff] b792bd6d-277b-4098-863a-c36181e8976f
+[15:14:25.629 D] Replaced hook [Combat] 352050ed-0117-47fc-9398-4a4279d31654
+[15:14:25.629 D] Replaced hook [Rest] ed5c2299-94f7-4151-b8cd-6f6bb0c40927
+[15:14:25.630 D] Added new hook [RepopCorpse] 00fe27a1-55c0-4154-b8dc-3b25dc4cc0f7
+[15:14:25.632 D] Added new hook [HotspotPoi] a05d778b-017b-4fd6-8e97-c63fea465d19
+[15:14:25.632 D] Added new hook [SellVendorPoi] 2da90e2c-f4a9-4c3f-aaae-2f0eb021199d
+[15:14:25.632 D] Added new hook [SetLootPoi] 52f6c239-6d00-483a-a292-c0a23a712afa
+[15:14:25.632 D] Added new hook [SetCombatPoi] 416bcad2-1c9d-4ab2-9087-a9666baa8597
+[15:14:25.632 D] Added new hook [SetVendorPoi] 38627a46-fd9f-4cd2-805a-c76f0f71cfff
+[15:14:25.632 D] Added new hook [SetHotspotPoi] b5183b1c-a4c3-4e31-9ad5-54f444d96954
+[15:14:25.632 D] Added new hook [SelectPoiType] e3637011-7d2f-4e56-a565-0db10a7e46f7
+[15:14:25.632 D] Replaced hook [SelectPoiType] 3709d462-88fa-4f9a-9b37-ba9dea96a0b7
+[15:14:25.632 D] Inserted new hook [TreeStart @0] 8737e4cb-f03b-4b56-8ca1-d150023c3b59
+[15:14:25.633 N] Setting force alignment settings.
+[15:14:25.781 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: ((HasQuest(0xE00016DD20D96D29)) and (not IsQuestComplete(0xE00016DD20D96D29))), ScriptCondition: ((HasQuest(0xE00016DD20D96D29)) and (not IsQuestComplete(0xE00016DD20D96D29))), LineNumber: 131 }.
+[15:14:25.784 D] Removed all hooks from [HighPriorityProfileOrderBehavior_Hook]
+[15:14:25.832 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: HasQuest(0xE00016DD20D96D29) and not IsBranchStepComplete(0xE00016DD20D96D29, 1, 3), ScriptCondition: HasQuest(0xE00016DD20D96D29) and not IsBranchStepComplete(0xE00016DD20D96D29, 1, 3), LineNumber: 137 }.
+[15:14:25.847 V] [Poi.Clear] Reason: Current behavior changed to MoveToTag: { Position: <145.6342, 15.53988, -5.029582>, LineNumber: 141, QuestId: 0xE00016DD20D96D29 }.
+[15:14:25.847 D] Replaced hook [ProfileOrderBehavior_Hook] 49e9116d-61fb-497a-9b34-ebcdc3a37d1b
+[15:14:25.873 N] Requesting path on 4611686022220993772-0 from <102.38244, 13.419112, 138.72678> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:26.316 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.4427242 ms
+[15:14:26.869 D] Moving to <145.6342, 15.53988, -5.029582> from <102.38244, 13.419112, 138.72678>
+[15:14:37.281 N] Requesting path on 4611686022220993772-0 from <102.39591, 13.419014, 138.69981> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:37.607 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3262774 ms
+[15:14:37.643 N] Requesting path on 4611686022220993772-0 from <102.541954, 13.426077, 138.40771> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:38.097 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.4540744 ms
+[15:14:38.154 N] Requesting path on 4611686022220993772-0 from <102.568794, 13.430345, 138.35403> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:38.473 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3194402 ms
+[15:14:39.113 N] Requesting path on 4611686022220993772-0 from <102.57846, 13.430345, 138.32556> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:39.556 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.4433744 ms
+[15:14:39.609 N] Requesting path on 4611686022220993772-0 from <102.72157, 13.432743, 137.90431> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:39.931 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3216522 ms
+[15:14:39.971 N] Requesting path on 4611686022220993772-0 from <102.826866, 13.469815, 137.5943> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:40.293 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3214214 ms
+[15:14:40.334 N] Requesting path on 4611686022220993772-0 from <102.9317, 13.543055, 137.28546> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:40.660 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3260142 ms
+[15:14:40.715 N] Requesting path on 4611686022220993772-0 from <103.01423, 13.594457, 136.95354> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:41.029 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3143525 ms
+[15:14:41.082 N] Requesting path on 4611686022220993772-0 from <103.032295, 13.588792, 136.6247> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:41.402 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3198044 ms
+[15:14:41.445 N] Requesting path on 4611686022220993772-0 from <103.03455, 13.576074, 136.2965> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:41.887 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.4416041 ms
+[15:14:41.925 N] Requesting path on 4611686022220993772-0 from <103.03577, 13.577027, 135.86551> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:42.246 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3208896 ms
+[15:14:42.292 N] Requesting path on 4611686022220993772-0 from <103.03669, 13.583665, 135.53467> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:42.614 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3219503 ms
+[15:14:42.675 N] Requesting path on 4611686022220993772-0 from <103.05857, 13.584191, 135.1911> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:42.996 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3215492 ms
+[15:14:43.075 N] Requesting path on 4611686022220993772-0 from <103.1731, 13.548868, 134.85223> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:43.399 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3237717 ms
+[15:14:43.459 N] Requesting path on 4611686022220993772-0 from <103.411606, 13.388709, 134.60571> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:43.780 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3210375 ms
+[15:14:43.856 N] Requesting path on 4611686022220993772-0 from <103.7158, 13.295052, 134.41978> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:44.181 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3252079 ms
+[15:14:44.204 N] Requesting path on 4611686022220993772-0 from <104.01783, 13.218953, 134.3253> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:44.532 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3285201 ms
+[15:14:44.566 N] Requesting path on 4611686022220993772-0 from <104.21919, 13.178303, 134.27972> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:14:44.888 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3218590 ms
+[15:15:53.325 N] Requesting path on 4611686022220993772-0 from <104.23526, 13.173856, 134.27342> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:53.650 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3248893 ms
+[15:15:53.709 N] Requesting path on 4611686022220993772-0 from <104.33133, 13.149147, 134.23573> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:54.028 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3192442 ms
+[15:15:56.222 N] Requesting path on 4611686022220993772-0 from <104.32026, 13.1585245, 134.26219> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:56.542 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3203638 ms
+[15:15:56.602 N] Requesting path on 4611686022220993772-0 from <104.2589, 13.217919, 134.40903> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:56.925 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3228709 ms
+[15:15:56.964 N] Requesting path on 4611686022220993772-0 from <104.31798, 13.211685, 134.41554> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:57.283 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3187304 ms
+[15:15:57.343 N] Requesting path on 4611686022220993772-0 from <104.65474, 13.157905, 134.39925> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:57.668 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3244613 ms
+[15:15:57.708 N] Requesting path on 4611686022220993772-0 from <104.964005, 13.085786, 134.28941> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:58.027 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3187476 ms
+[15:15:58.093 N] Requesting path on 4611686022220993772-0 from <104.9927, 13.080787, 134.27919> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:15:58.411 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3184259 ms
+[15:16:29.695 N] Requesting path on 4611686022220993772-0 from <105.02065, 13.074954, 134.26851> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:30.134 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.4391225 ms
+[15:16:30.175 N] Requesting path on 4611686022220993772-0 from <105.36227, 13.003298, 134.01482> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:30.496 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3207545 ms
+[15:16:30.574 N] Requesting path on 4611686022220993772-0 from <105.66165, 12.996744, 133.8157> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:30.897 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3228623 ms
+[15:16:30.954 N] Requesting path on 4611686022220993772-0 from <105.95041, 12.996744, 133.63208> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:31.273 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3189131 ms
+[15:16:31.315 N] Requesting path on 4611686022220993772-0 from <106.22457, 12.996744, 133.45877> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:31.632 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3173105 ms
+[15:16:31.683 N] Requesting path on 4611686022220993772-0 from <106.5046, 13.005311, 133.28174> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:31.997 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3144823 ms
+[15:16:32.045 N] Requesting path on 4611686022220993772-0 from <106.78163, 12.996744, 133.10915> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:32.367 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3217754 ms
+[15:16:32.401 N] Requesting path on 4611686022220993772-0 from <107.060265, 12.996744, 132.95267> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:32.722 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3210411 ms
+[15:16:32.763 N] Requesting path on 4611686022220993772-0 from <107.34661, 12.994555, 132.7978> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:33.308 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.5450525 ms
+[15:16:33.356 N] Requesting path on 4611686022220993772-0 from <107.84897, 12.974927, 132.62393> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:33.679 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3230364 ms
+[15:16:33.717 N] Requesting path on 4611686022220993772-0 from <108.156906, 12.967022, 132.52307> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:34.039 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3215116 ms
+[15:16:34.111 N] Requesting path on 4611686022220993772-0 from <108.46948, 13.047142, 132.42502> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:34.431 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3208487 ms
+[15:16:34.459 N] Requesting path on 4611686022220993772-0 from <108.75051, 12.944442, 132.33104> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:34.779 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3200592 ms
+[15:16:34.836 N] Requesting path on 4611686022220993772-0 from <109.06565, 12.958674, 132.20755> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:35.156 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3200673 ms
+[15:16:35.218 N] Requesting path on 4611686022220993772-0 from <109.368774, 12.987494, 132.0478> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:35.539 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3211720 ms
+[15:16:35.582 N] Requesting path on 4611686022220993772-0 from <109.64599, 13.035713, 131.87341> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:35.900 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3188952 ms
+[15:16:35.963 N] Requesting path on 4611686022220993772-0 from <109.91345, 13.087323, 131.65787> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:36.281 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3184408 ms
+[15:16:36.316 N] Requesting path on 4611686022220993772-0 from <110.1672, 13.079645, 131.45311> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:36.632 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3163544 ms
+[15:16:36.693 N] Requesting path on 4611686022220993772-0 from <110.424675, 13.107936, 131.24539> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:37.010 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3172795 ms
+[15:16:37.076 N] Requesting path on 4611686022220993772-0 from <110.692406, 13.161048, 131.02937> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:37.397 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3210256 ms
+[15:16:37.439 N] Requesting path on 4611686022220993772-0 from <110.941864, 13.227393, 130.81792> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:37.760 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3215257 ms
+[15:16:37.803 N] Requesting path on 4611686022220993772-0 from <111.134285, 13.308371, 130.5518> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:38.123 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3201269 ms
+[15:16:38.167 N] Requesting path on 4611686022220993772-0 from <111.3224, 13.387637, 130.28493> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:38.485 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3182879 ms
+[15:16:38.545 N] Requesting path on 4611686022220993772-0 from <111.43853, 13.478341, 129.9967> to <145.6342, 15.53988, -5.029582> within 0.5 ()
+[15:16:38.867 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3215608 ms
+[15:17:53.865 N] Stopping the bot. Reason:Pushed the stop button.
+[15:17:53.887 D] CurrentBot.Stop()
+[15:17:53.888 D] TreeHooks.Instance.ClearAll()
+[15:17:53.888 N] Clearing all hooks.
+[15:17:53.888 D] Replaced hook [PreCombatBuff] c4b6ca32-346d-4432-b317-b18861037a30
+[15:17:53.888 D] Replaced hook [Heal] f8f39883-ab7e-42c7-a348-cb1e0a0306a3
+[15:17:53.888 D] Replaced hook [Pull] d4698b30-305b-4fc3-b401-ef15f24e9635
+[15:17:53.888 D] Replaced hook [CombatBuff] 351e422e-3f97-416c-98c0-0f32fac47319
+[15:17:53.888 D] Replaced hook [Combat] 352050ed-0117-47fc-9398-4a4279d31654
+[15:17:53.888 D] Replaced hook [Rest] ed5c2299-94f7-4151-b8cd-6f6bb0c40927
+[15:17:53.888 D] Navigator.Clear()
+[15:17:53.888 D] OnStop event
+[15:17:53.888 D] OnStop Event Invoking
+[15:17:53.888 N] Resetting force alignment settings.
+[15:17:53.888 N] Bot Thread Ended.
+[15:17:56.984 N] Loading profile [Test] Factory Walk.xml
+[15:17:56.997 N] Parsing xml...
+[15:17:56.997 D] [{http://tempuri.org/ProfileSchema.xsd}Profile @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:17:56.998 D] IronPython syntax-precompiled 0 conditions in 0ms; delegates materialize in bounded groups on first use.
+[15:17:56.999 N] Loaded profile [Test] Factory Walk
+[15:17:58.549 N] Loading profile [Test] Factory Walk.xml
+[15:17:58.564 N] Parsing xml...
+[15:17:58.564 D] [{http://tempuri.org/ProfileSchema.xsd}Profile @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[15:17:58.564 D] IronPython syntax-precompiled 0 conditions in 0ms; delegates materialize in bounded groups on first use.
+[15:17:58.564 N] Loaded profile [Test] Factory Walk
+[15:17:58.564 N] Bot Thread Started.
+[15:17:58.581 N] Clearing all hooks.
+[15:17:58.581 D] Replaced hook [PreCombatBuff] 6043b1d9-5fee-4930-904d-03b01e7dc1ce
+[15:17:58.581 D] Replaced hook [Heal] b3782dac-24d3-45f4-baed-391e37b916f6
+[15:17:58.581 D] Replaced hook [Pull] d4698b30-305b-4fc3-b401-ef15f24e9635
+[15:17:58.581 D] Replaced hook [CombatBuff] a001d66e-8ee0-47d2-94bb-a1849fecbdf8
+[15:17:58.581 D] Replaced hook [Combat] 352050ed-0117-47fc-9398-4a4279d31654
+[15:17:58.581 D] Replaced hook [Rest] ed5c2299-94f7-4151-b8cd-6f6bb0c40927
+[15:17:58.581 D] Added new hook [RepopCorpse] 08de4677-13e8-4d54-9c19-1c1d6b662949
+[15:17:58.581 D] Added new hook [HotspotPoi] d5a7d4db-1ce7-40cd-a92d-ea4965207f2c
+[15:17:58.581 D] Added new hook [SellVendorPoi] e4f96ecd-3a7d-40b9-b5ea-8e219c3cc723
+[15:17:58.581 D] Added new hook [SetLootPoi] a5791f35-4f7f-4a81-bbc2-885291c306ad
+[15:17:58.581 D] Added new hook [SetCombatPoi] 2e4db6eb-b77b-4269-8bf6-408b80a73fa2
+[15:17:58.581 D] Added new hook [SetVendorPoi] 846c46e2-a893-4ec8-865a-32c7589693e4
+[15:17:58.581 D] Added new hook [SetHotspotPoi] 561bb95f-18fb-4e8f-83e3-4e2b4724ac57
+[15:17:58.581 D] Added new hook [SelectPoiType] 2c682d2c-3c6f-440a-8740-7734035457d8
+[15:17:58.581 D] Replaced hook [SelectPoiType] 3b9a5b48-42b5-4de6-8d4a-2e9f0f67070d
+[15:17:58.581 D] Inserted new hook [TreeStart @0] fe68334b-86b2-4336-9aec-822e2782e544
+[15:17:58.594 V] [Poi.Clear] Reason: Current behavior changed to MoveToTag: { Position: <145.6342, 15.53988, -5.029582>, Name: Balmorran Arms Factory, LineNumber: 8, QuestId: 0xE00016DD20D96D29 }.
+[15:17:58.594 D] Removed all hooks from [HighPriorityProfileOrderBehavior_Hook]
+[15:17:58.594 D] Replaced hook [ProfileOrderBehavior_Hook] c560eca1-9870-427e-b904-3d140ddf9e8b
+[15:17:58.606 N] Requesting path on 4611686022220993772-0 from <111.43853, 13.478341, 129.9967> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:17:58.965 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3587647 ms
+[15:18:05.902 N] Requesting path on 4611686022220993772-0 from <111.4664, 13.492454, 129.98405> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:18:07.131 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:01.2291777 ms
+[15:18:07.174 N] Requesting path on 4611686022220993772-0 from <111.70023, 13.555522, 129.87833> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:18:07.496 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3217039 ms
+[15:18:07.556 N] Requesting path on 4611686022220993772-0 from <111.70629, 13.582783, 129.6836> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:18:07.877 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3216717 ms
+[15:18:08.033 N] Requesting path on 4611686022220993772-0 from <111.711754, 13.583876, 129.66971> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:18:08.351 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3183044 ms
+[15:18:08.396 N] Requesting path on 4611686022220993772-0 from <111.8375, 13.631896, 129.36775> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:18:08.715 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3183498 ms
+[15:18:08.763 N] Requesting path on 4611686022220993772-0 from <111.973335, 13.615163, 129.06653> to <145.6342, 15.53988, -5.029582> within 0.5 (Balmorran Arms Factory)
+[15:18:09.081 N] Received path response to <145.6342, 15.53988, -5.029582> in 00:00:00.3179010 ms

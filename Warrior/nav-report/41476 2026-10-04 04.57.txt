@@ -1,0 +1,186 @@
+[17:57:35.647 N] BuddyCron 1.0.62.0
+[17:57:38.599 N] Logging in...
+[17:57:40.162 N] T:5250952489013396081 H: 1542245200
+[17:57:40.162 N] R:0 -1 -1
+[17:57:40.594 D] Loading data from database
+[17:57:40.595 N] Compiling custom behaviors...
+[17:57:41.637 D] Reloading AssemblyLoader<BotBase> - Precompile
+[17:57:41.681 D] Reloading AssemblyLoader<BotPlugin> - Precompile
+[17:57:41.975 D] Reloading AssemblyLoader<CombatRoutine> - Precompile
+[17:57:42.374 D] Done compiling custom behaviors...
+[17:57:42.375 D] [BotManager] Initializing
+[17:57:42.378 D] [BotManager] Botbases have been reloaded.
+[17:57:42.378 D] Combat Assist v0.0.0.0
+[17:57:42.379 D] New bot added!: Order Bot
+[17:57:42.379 D] New bot added!: Space Mission Bot
+[17:57:42.382 D] [PluginManager] Initializing
+[17:57:42.385 D] [PluginManager] Plugins have been reloaded.
+[17:57:42.385 D] Auto Equip v1.0.0
+[17:57:42.385 D] Character Name In Titlebar v0.0.1
+[17:57:42.385 D] Minimize To Tray v0.0.1
+[17:57:42.385 D] Mover Wake v1.0.0
+[17:57:42.385 D] QuestDevTools v0.0.2
+[17:57:42.385 D] 3D Overlay v1.0.0
+[17:57:42.385 D] RebornConsole v0.0.1
+[17:57:42.385 D] RebornMcp v1.0
+[17:57:42.386 D] Scavenger v1.3.0
+[17:57:42.387 D] [RoutineManager] Initializing
+[17:57:42.392 D] [RoutineManager] Routines have been reloaded. Current class-specific list:
+[17:57:42.392 D] Guardian Vigilance v0.0.0.0
+[17:57:42.393 N] [DefaultCombat] *** Default Combat v90***
+[17:57:42.393 N] [DefaultCombat] Level: 23
+[17:57:42.393 N] [DefaultCombat] Class: Warrior
+[17:57:42.394 N] [DefaultCombat] Discipline: Vigilance
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F4] Toggle Raid Buffs
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F5] Toggle Interrupts
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F6] Toggle Charge
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F7] Toggle AOE
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F8] Pause Rotation
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F9] Pause/Resume Bot
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F10] Start/Stop Bot
+[17:57:42.395 N] [DefaultCombat] [Hot Key][F12] Set Tank
+[17:57:42.395 N] [DefaultCombat] Rotation Selected : Guardian Vigilance
+[17:57:42.401 D] Medpac  Created!
+[17:57:42.404 D] Replaced hook [PreCombatBuff] d90aa413-45fc-43ed-8bf4-f906d2d1c0ef
+[17:57:42.404 D] Replaced hook [Heal] 1257413c-366b-4be9-a3bd-324b14039901
+[17:57:42.404 D] Replaced hook [Pull] c635c207-06fd-4f82-96e0-23da2674777d
+[17:57:42.404 D] Replaced hook [CombatBuff] 2876db7e-8d80-4be2-864d-5abae2b2cf8a
+[17:57:42.404 D] Replaced hook [Combat] 4f41c8f5-3946-4bca-aab0-011135045829
+[17:57:42.404 D] Replaced hook [Rest] 4041c62c-948b-4c4c-a9bf-62a518404250
+[17:57:42.404 D] Finished loading addons in 00:00:01.8093766
+[17:57:42.450 D] Memory compaction: 100,389,384 -> 56,376,440
+[17:57:50.588 N] Loading profile [E - Dark] Warrior - Tatooine.xml
+[17:57:50.806 N] Parsing xml...
+[17:57:50.808 D] [{http://tempuri.org/ProfileSchema.xsd}Profile @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.811 D] [{http://tempuri.org/ProfileSchema.xsd}Hotspot @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.812 D] [{http://tempuri.org/ProfileSchema.xsd}GrindArea @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.814 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 62] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.816 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 70] has attribute 'waittime' which is not implemented by the tag.
+[17:57:50.816 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 74] has attribute 'waittime' which is not implemented by the tag.
+[17:57:50.819 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 90] has attribute 'questname' which is not implemented by the tag.
+[17:57:50.819 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 94] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.822 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 142] has attribute 'questname' which is not implemented by the tag.
+[17:57:50.822 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 146] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.823 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 159] has attribute 'questname' which is not implemented by the tag.
+[17:57:50.823 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 163] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:50.825 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 199] has attribute 'waittime' which is not implemented by the tag.
+[17:57:50.825 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 203] has attribute 'waittime' which is not implemented by the tag.
+[17:57:50.825 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 204] has attribute 'questname' which is not implemented by the tag.
+[17:57:51.113 D] IronPython syntax-precompiled 45 conditions in 10ms; delegates materialize in bounded groups on first use.
+[17:57:51.113 N] Loaded profile [E - Dark] Warrior - Tatooine
+[17:57:52.293 N] Loading profile [E - Dark] Warrior - Tatooine.xml
+[17:57:52.347 N] Parsing xml...
+[17:57:52.347 D] [{http://tempuri.org/ProfileSchema.xsd}Profile @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.348 D] [{http://tempuri.org/ProfileSchema.xsd}Hotspot @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.348 D] [{http://tempuri.org/ProfileSchema.xsd}GrindArea @ line 0] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.348 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 62] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.348 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 70] has attribute 'waittime' which is not implemented by the tag.
+[17:57:52.348 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 74] has attribute 'waittime' which is not implemented by the tag.
+[17:57:52.349 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 90] has attribute 'questname' which is not implemented by the tag.
+[17:57:52.349 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 94] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 142] has attribute 'questname' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 146] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 159] has attribute 'questname' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}If @ line 163] has attribute 'xmlns' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 199] has attribute 'waittime' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}Interact @ line 203] has attribute 'waittime' which is not implemented by the tag.
+[17:57:52.350 D] [{http://tempuri.org/ProfileSchema.xsd}CompleteQuest @ line 204] has attribute 'questname' which is not implemented by the tag.
+[17:57:52.351 D] IronPython syntax-precompiled 0 conditions in 0ms; delegates materialize in bounded groups on first use.
+[17:57:52.351 N] Loaded profile [E - Dark] Warrior - Tatooine
+[17:57:52.352 N] Bot Thread Started.
+[17:57:52.473 N] Clearing all hooks.
+[17:57:52.473 D] Replaced hook [PreCombatBuff] e8771721-9af4-49c5-b31c-1b79ef6694a7
+[17:57:52.473 D] Replaced hook [Heal] 864ff5f5-12fd-44f6-abf0-3cb6ae20c588
+[17:57:52.473 D] Replaced hook [Pull] c635c207-06fd-4f82-96e0-23da2674777d
+[17:57:52.473 D] Replaced hook [CombatBuff] 8d6e9b9c-a35e-4f62-91e4-6eabce49fa74
+[17:57:52.473 D] Replaced hook [Combat] 4f41c8f5-3946-4bca-aab0-011135045829
+[17:57:52.473 D] Replaced hook [Rest] 4041c62c-948b-4c4c-a9bf-62a518404250
+[17:57:52.474 D] Added new hook [RepopCorpse] 45845b0f-40f4-462f-8987-ff6312ee23e2
+[17:57:52.476 D] Added new hook [HotspotPoi] ac1b4ae2-dcc8-426d-8eb8-ca857c4ef356
+[17:57:52.476 D] Added new hook [SellVendorPoi] ba639881-637a-4fc8-86a2-c3ca321f155d
+[17:57:52.476 D] Added new hook [SetLootPoi] 23c51005-6ff3-4a6e-87cd-f1ba90070fb3
+[17:57:52.476 D] Added new hook [SetCombatPoi] 8dcfbb31-3300-41ed-bf13-57550178cc48
+[17:57:52.476 D] Added new hook [SetVendorPoi] fcafdced-c3b6-4e2c-8c22-e76987af2421
+[17:57:52.476 D] Added new hook [SetHotspotPoi] 4e53e605-5dec-41e8-b568-17f71e4f86dd
+[17:57:52.476 D] Added new hook [SelectPoiType] 8cb9a590-063a-4a82-9e6b-d9456e45713a
+[17:57:52.476 D] Replaced hook [SelectPoiType] 5161d053-d1ec-4175-b2c1-771f710648b8
+[17:57:52.476 D] Inserted new hook [TreeStart @0] 4fd6bdc6-e254-429b-92bf-5e7f86b6e9a5
+[17:57:52.477 N] Setting force alignment settings.
+[17:57:52.578 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: ((HasQuest(0xE0005EB05591FAFD)) and (not IsQuestComplete(0xE0005EB05591FAFD))), ScriptCondition: ((HasQuest(0xE0005EB05591FAFD)) and (not IsQuestComplete(0xE0005EB05591FAFD))), LineNumber: 94 }.
+[17:57:52.580 D] Removed all hooks from [HighPriorityProfileOrderBehavior_Hook]
+[17:57:52.622 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: HasQuest(0xE0005EB05591FAFD) and not IsBranchStepComplete(0xE0005EB05591FAFD, 1, 2), ScriptCondition: HasQuest(0xE0005EB05591FAFD) and not IsBranchStepComplete(0xE0005EB05591FAFD, 1, 2), LineNumber: 95 }.
+[17:57:52.637 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: (Me.Position.Z < 180), ScriptCondition: (Me.Position.Z < 180), LineNumber: 99 }.
+[17:57:52.654 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: (Me.Position.Z < 95), ScriptCondition: (Me.Position.Z < 95), LineNumber: 100 }.
+[17:57:52.670 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: (Me.Position.X < 124) or ((Me.Position.Z > 62) and (Me.Position.X < 130)), ScriptCondition: (Me.Position.X < 124) or ((Me.Position.Z > 62) and (Me.Position.X < 130)), LineNumber: 101 }.
+[17:57:52.687 V] [Poi.Clear] Reason: Current behavior changed to NoCombatMoveTo: { Position: <125.69133, 45.138634, 57.45016>, Name: Sand Demon's Cave entrance, Distance: 0.08, LineNumber: 102, QuestId: 0xE0005EB05591FAFD }.
+[17:57:52.687 D] Removed all hooks from [ProfileOrderBehavior_Hook]
+[17:57:52.687 D] Replaced hook [HighPriorityProfileOrderBehavior_Hook] 82a455cb-766f-43f1-94f3-df2ec7d2b839
+[17:57:52.739 N] Requesting path on 4611686018427650020-0 from <120.33739, 45.63127, 60.111164> to <125.69133, 45.138634, 57.45016> within 0.5 (Sand Demon's Cave entrance)
+[17:57:53.220 N] Received path response to <125.69133, 45.138634, 57.45016> in 00:00:00.4803744 ms
+[17:57:53.694 D] Moving to Sand Demon's Cave entrance from <120.77199, 45.647774, 59.86717>
+[17:57:58.725 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+[17:57:58.725 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+   at Reborn.Behaviors.Coroutines.Coroutine.InternalYield()
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+[17:57:58.726 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+   at Reborn.Behaviors.Coroutines.Coroutine.InternalYield()
+   at BuddyCron.Navigation.Service_Navigation.Paths.TransformableTemplate.ProgressCoroutine()
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+[17:57:58.759 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: (Me.Position.X < 136) and (Me.Position.Z < 70), ScriptCondition: (Me.Position.X < 136) and (Me.Position.Z < 70), LineNumber: 104 }.
+[17:57:58.759 D] Removed all hooks from [HighPriorityProfileOrderBehavior_Hook]
+[17:57:58.792 V] [Poi.Clear] Reason: Current behavior changed to NoCombatMoveTo: { Position: <131.09906, 45.0705, 57.486473>, Distance: 0.08, LineNumber: 105, QuestId: 0xE0005EB05591FAFD }.
+[17:57:58.792 D] Removed all hooks from [ProfileOrderBehavior_Hook]
+[17:57:58.792 D] Replaced hook [HighPriorityProfileOrderBehavior_Hook] e8dffa51-b9e1-49ec-b8d6-50b202d3b783
+[17:57:58.793 D] Moving to <131.09906, 45.0705, 57.486473> from <125.62777, 45.139107, 57.47137>
+[17:57:58.793 N] Requesting path on 4611686018427650020-0 from <125.62777, 45.139107, 57.47137> to <131.09906, 45.0705, 57.486473> within 0.5 (<131.09906, 45.0705, 57.486473>)
+[17:57:59.124 N] Received path response to <131.09906, 45.0705, 57.486473> in 00:00:00.3307094 ms
+[17:58:04.300 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+[17:58:04.300 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+   at Reborn.Behaviors.Coroutines.Coroutine.InternalYield()
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+[17:58:04.300 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+   at Reborn.Behaviors.Coroutines.Coroutine.InternalYield()
+   at BuddyCron.Navigation.Service_Navigation.Paths.TransformableTemplate.ProgressCoroutine()
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+[17:58:04.333 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: (Me.Position.X < 148) and (Me.Position.Z < 70), ScriptCondition: (Me.Position.X < 148) and (Me.Position.Z < 70), LineNumber: 107 }.
+[17:58:04.333 D] Removed all hooks from [HighPriorityProfileOrderBehavior_Hook]
+[17:58:04.382 V] [Poi.Clear] Reason: Current behavior changed to NoCombatMoveTo: { Position: <139.25034, 44.602707, 53.17396>, Distance: 0.08, LineNumber: 108, QuestId: 0xE0005EB05591FAFD }.
+[17:58:04.382 D] Removed all hooks from [ProfileOrderBehavior_Hook]
+[17:58:04.382 D] Replaced hook [HighPriorityProfileOrderBehavior_Hook] 9521e03d-a45f-46b6-ae12-1c739070f249
+[17:58:04.383 D] Moving to <139.25034, 44.602707, 53.17396> from <131.04427, 45.06884, 57.486324>
+[17:58:04.415 N] Requesting path on 4611686018427650020-0 from <131.04427, 45.06884, 57.486324> to <139.25034, 44.602707, 53.17396> within 0.5 (<139.25034, 44.602707, 53.17396>)
+[17:58:04.918 N] Received path response to <139.25034, 44.602707, 53.17396> in 00:00:00.5030204 ms
+[17:58:14.496 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+[17:58:14.497 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+   at Reborn.Behaviors.Coroutines.Coroutine.InternalYield()
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+[17:58:14.497 D] First-chance exception thrown by GreyMagic:
+Reborn.Behaviors.Coroutines.CoroutineStoppedException: Coroutine was stopped
+   at Reborn.Behaviors.Coroutines.Coroutine.ConcreteSubscriber.GetResult()
+   at Reborn.Behaviors.Coroutines.Coroutine.InternalYield()
+   at BuddyCron.Navigation.Service_Navigation.Paths.TransformableTemplate.ProgressCoroutine()
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+[17:58:14.530 V] [Poi.Clear] Reason: Current behavior changed to IfTag: { Condition: (Me.Position.X < 160) and (Me.Position.Z < 70), ScriptCondition: (Me.Position.X < 160) and (Me.Position.Z < 70), LineNumber: 110 }.
+[17:58:14.530 D] Removed all hooks from [HighPriorityProfileOrderBehavior_Hook]
+[17:58:14.563 V] [Poi.Clear] Reason: Current behavior changed to NoCombatMoveTo: { Position: <151.72862, 43.622498, 51.333572>, Distance: 0.08, LineNumber: 111, QuestId: 0xE0005EB05591FAFD }.
+[17:58:14.563 D] Removed all hooks from [ProfileOrderBehavior_Hook]
+[17:58:14.563 D] Replaced hook [HighPriorityProfileOrderBehavior_Hook] 7641ced7-344c-4bb5-91a1-342e40f69bdc
+[17:58:14.564 D] Moving to <151.72862, 43.622498, 51.333572> from <139.2262, 44.60647, 53.244568>
+[17:58:14.595 N] Requesting path on 4611686018427650020-0 from <139.2262, 44.60647, 53.244568> to <151.72862, 43.622498, 51.333572> within 0.5 (<151.72862, 43.622498, 51.333572>)
+[17:58:14.923 N] Received path response to <151.72862, 43.622498, 51.333572> in 00:00:00.3282647 ms
