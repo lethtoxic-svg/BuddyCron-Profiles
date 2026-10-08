@@ -1,6 +1,0 @@
-<Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
-	<Name>[Test] Hold</Name>
-	<Questing>
-		<WaitTimer WaitTime="3600" />
-	</Questing>
-</Profile>
