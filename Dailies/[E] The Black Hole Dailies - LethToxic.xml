@@ -1,0 +1,384 @@
+<Profile>
+	<!-- Made by Quest Recorder 1.2 - LethToxic. Recording: The Black Hole-2026-11-07_13-46 -->
+	<Name>[E] The Black Hole Dailies - LethToxic</Name>
+	<!-- Needs the Quest Recorder plugin (PickUpIfOffered / UseMissionItemOnce steps): https://github.com/lethtoxic-svg/QuestRecorder -->
+	<!-- The End of Torvix ends in the Pipeline Controls puzzle: a pop-up asks you to do it, then press Continue. -->
+	<GrindAreas>
+		<GrindArea Name="[DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield:">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Torvix Underboss</Mob>
+				<Mob>Torvix Ambusher</Mob>
+				<Mob>Torvix War Droid</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Torvix War Droid" XYZ="-17.756,-0.105,25.419" />
+				<Hotspot Name="Torvix War Droid" XYZ="-11.883,-0.103,23.865" />
+				<Hotspot Name="Torvix War Droid" XYZ="-5.678,-0.106,21.565" />
+				<Hotspot Name="Torvix War Droid" XYZ="-11.499,-0.101,14.539" />
+				<Hotspot Name="Torvix War Droid" XYZ="-6.554,-0.107,9.096" />
+				<Hotspot Name="Torvix Underboss" XYZ="-5.28,-0.106,17.788" />
+				<Hotspot Name="Torvix Ambusher" XYZ="-4.799,-0.104,26.288" />
+				<Hotspot Name="Torvix War Droid" XYZ="-3.423,-0.104,27.869" />
+				<Hotspot Name="Torvix Underboss" XYZ="-14.759,-0.105,27.839" />
+				<Hotspot Name="Torvix Ambusher" XYZ="-13.776,-0.105,31.402" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Asset Liquidation: Defeat Torvix Forces (19/20)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Torvix Underboss</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Torvix Underboss" XYZ="-5.399,0.039,17.485" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Asset Liquidation: Defeat Torvix Forces (20/20) - step 2 done (next: Destroy Torvi">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Torvix War Droid</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Torvix War Droid" XYZ="-5.662,-0.106,17.589" />
+				<Hotspot Name="Torvix War Droid" XYZ="-5.332,-0.106,21.564" />
+				<Hotspot Name="Torvix War Droid" XYZ="-4.664,-0.104,26.181" />
+				<Hotspot Name="Torvix War Droid" XYZ="-3.423,-0.104,27.869" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[HEROIC 2+] The End of Torvix: step 4 done (next: Take Elevator to the Refinery Core)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Torvix Bruiser</Mob>
+				<Mob>Torvix Security Officer</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Torvix Bruiser" XYZ="-8.836,-11.561,24.538" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[HEROIC 2+] The End of Torvix: step 8 done (next: Reroute the Hypermatter Venting)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Hypermatter Annihilation Droid</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Hypermatter Annihilation Droid" XYZ="-36.443,-11.379,28.087" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Glow: step 3 done (next: Reroute Hypermatter Pipelines)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Hazmat Droid</Mob>
+				<Mob>Torvix Personal Guard</Mob>
+				<Mob>Radiation Treatment Droid</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Hazmat Droid" XYZ="-5.257,-8.398,43.131" />
+				<Hotspot Name="Radiation Treatment Droid" XYZ="-2.406,-9.398,42.221" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Kill and loot Radiation Treatment Droid (your loot moved the game's helper quest - e.g. an">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Radiation Treatment Droid</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Radiation Treatment Droid" XYZ="0.62,-9.2,36.054" />
+				<Hotspot Name="Radiation Treatment Droid" XYZ="-2.108,-9.2,36.027" />
+				<Hotspot Name="Radiation Treatment Droid" XYZ="5.248,-8.398,37.433" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+	<Questing>
+		<!-- Pick up [HEROIC 2+] The End of Torvix -->
+		<If Condition="(not HasQuest(0xE000D9F1A734F486)) and (not IsQuestComplete(0xE000D9F1A734F486))">
+			<PickUpIfOffered QuestName="[HEROIC 2+] The End of Torvix" QuestId="0xE000D9F1A734F486" UseRange="20" GiverName="General Konya" XYZ="-25.46,-2.088,43.445" />
+		</If>
+		<!-- Pick up [DAILY] Control the Battlefield -->
+		<If Condition="(not HasQuest(0xE000E9F809193A03)) and (not IsQuestComplete(0xE000E9F809193A03))">
+			<PickUpIfOffered QuestName="[DAILY] Control the Battlefield" QuestId="0xE000E9F809193A03" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+		</If>
+		<!-- Pick up [DAILY] Glow -->
+		<If Condition="(not HasQuest(0xE000A7BF7FECDFDC)) and (not IsQuestComplete(0xE000A7BF7FECDFDC))">
+			<PickUpIfOffered QuestName="[DAILY] Glow" QuestId="0xE000A7BF7FECDFDC" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+		</If>
+		<!-- Pick up [DAILY] Hypermatter Directive -->
+		<If Condition="(not HasQuest(0xE0002D926943E4ED)) and (not IsQuestComplete(0xE0002D926943E4ED))">
+			<PickUpIfOffered QuestName="[DAILY] Hypermatter Directive" QuestId="0xE0002D926943E4ED" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+		</If>
+		<!-- Pick up [DAILY] No Trace Left -->
+		<If Condition="(not HasQuest(0xE0007CEC19F3A0E1)) and (not IsQuestComplete(0xE0007CEC19F3A0E1))">
+			<PickUpIfOffered QuestName="[DAILY] No Trace Left" QuestId="0xE0007CEC19F3A0E1" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+		</If>
+		<!-- Pick up [WEEKLY] Daily Area: Black Hole -->
+		<If Condition="(not HasQuest(0xE000499515A96C81))">
+			<PickUpIfOffered QuestName="[WEEKLY] Daily Area: Black Hole" QuestId="0xE000499515A96C81" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" Repeatable="True" />
+		</If>
+		<!-- [DAILY] No Trace Left: Identify Torvix's Spies (1/3) -->
+		<If Condition="HasQuest(0xE0007CEC19F3A0E1) and not IsTaskValueGreaterThan(0xE0007CEC19F3A0E1, 2, 0, 0)">
+			<UseItem QuestId="0xE0007CEC19F3A0E1" BranchId="1" StepId="2" TaskId="0" TaskValue="0" ItemName="Radiation Sensor" WaitTime="3000" XYZ="-27.316,-2.098,42.693" Range="3" Radius="200" InCombat="False">
+				<Npcs>
+					<Npc>Imperial Soldier</Npc>
+					<Npc>Imperial Officer</Npc>
+					<Npc>Imperial Engineer</Npc>
+					<Npc>Imperial Agent</Npc>
+				</Npcs>
+				<Hotspots>
+					<Hotspot Name="Where you used it" XYZ="-27.316,-2.098,42.693" />
+					<Hotspot Name="Where you used it" XYZ="-29.008,-1.098,46.365" />
+					<Hotspot Name="Where you used it" XYZ="-26.089,-2.098,48.731" />
+					<Hotspot Name="Where you used it" XYZ="-25.537,-2.088,43.379" />
+					<Hotspot Name="Where you used it" XYZ="-23.13,-2.098,48.072" />
+					<Hotspot Name="Where you used it" XYZ="-24.774,-2.098,52.777" />
+				</Hotspots>
+			</UseItem>
+		</If>
+		<!-- [DAILY] No Trace Left: Identify Torvix's Spies (2/3) -->
+		<If Condition="HasQuest(0xE0007CEC19F3A0E1) and not IsTaskValueGreaterThan(0xE0007CEC19F3A0E1, 2, 0, 1)">
+			<UseItem QuestId="0xE0007CEC19F3A0E1" BranchId="1" StepId="2" TaskId="0" TaskValue="1" ItemName="Radiation Sensor" WaitTime="3000" XYZ="-29.008,-1.098,46.365" Range="3" Radius="200" InCombat="False">
+				<Npcs>
+					<Npc>Imperial Soldier</Npc>
+					<Npc>Imperial Officer</Npc>
+					<Npc>Imperial Engineer</Npc>
+					<Npc>Imperial Agent</Npc>
+				</Npcs>
+				<Hotspots>
+					<Hotspot Name="Where you used it" XYZ="-27.316,-2.098,42.693" />
+					<Hotspot Name="Where you used it" XYZ="-29.008,-1.098,46.365" />
+					<Hotspot Name="Where you used it" XYZ="-26.089,-2.098,48.731" />
+					<Hotspot Name="Where you used it" XYZ="-25.537,-2.088,43.379" />
+					<Hotspot Name="Where you used it" XYZ="-23.13,-2.098,48.072" />
+					<Hotspot Name="Where you used it" XYZ="-24.774,-2.098,52.777" />
+				</Hotspots>
+			</UseItem>
+		</If>
+		<!-- [DAILY] No Trace Left: Identify Torvix's Spies (3/3) - step 2 done (next: Return to Mission Terminal) -->
+		<If Condition="HasQuest(0xE0007CEC19F3A0E1) and not IsTaskValueGreaterThan(0xE0007CEC19F3A0E1, 2, 0, 2)">
+			<UseItem QuestId="0xE0007CEC19F3A0E1" BranchId="1" StepId="2" ItemName="Radiation Sensor" WaitTime="3000" XYZ="-26.089,-2.098,48.731" Range="3" Radius="200" InCombat="False">
+				<Npcs>
+					<Npc>Imperial Soldier</Npc>
+					<Npc>Imperial Officer</Npc>
+					<Npc>Imperial Engineer</Npc>
+					<Npc>Imperial Agent</Npc>
+				</Npcs>
+				<Hotspots>
+					<Hotspot Name="Where you used it" XYZ="-27.316,-2.098,42.693" />
+					<Hotspot Name="Where you used it" XYZ="-29.008,-1.098,46.365" />
+					<Hotspot Name="Where you used it" XYZ="-26.089,-2.098,48.731" />
+					<Hotspot Name="Where you used it" XYZ="-25.537,-2.088,43.379" />
+					<Hotspot Name="Where you used it" XYZ="-23.13,-2.098,48.072" />
+					<Hotspot Name="Where you used it" XYZ="-24.774,-2.098,52.777" />
+				</Hotspots>
+			</UseItem>
+		</If>
+		<!-- Reward: [DAILY] No Trace Left -->
+		<If Condition="(HasQuest(0xE0007CEC19F3A0E1) and not IsQuestComplete(0xE0007CEC19F3A0E1)) or any(r.QuestId == 0xE0007CEC19F3A0E1 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE0007CEC19F3A0E1" />
+		</If>
+		<!-- Pick up [DAILY] Asset Liquidation -->
+		<If Condition="(not HasQuest(0xE000964F15142AF9)) and (not IsQuestComplete(0xE000964F15142AF9))">
+			<PickUpIfOffered QuestName="[DAILY] Asset Liquidation" QuestId="0xE000964F15142AF9" UseRange="20" GiverName="Recon Droid" XYZ="-23.071,-0.097,31.767" />
+		</If>
+		<!-- [DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield: step done -->
+		<If Condition="(HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 17)) or (HasQuest(0xE000E9F809193A03) and not IsBranchStepComplete(0xE000E9F809193A03, 1, 2))">
+			<Grind GrindRef="[DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield:" While="(HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 17)) or (HasQuest(0xE000E9F809193A03) and not IsBranchStepComplete(0xE000E9F809193A03, 1, 2))" />
+		</If>
+		<!-- Reward: [DAILY] Control the Battlefield -->
+		<If Condition="(HasQuest(0xE000E9F809193A03) and not IsQuestComplete(0xE000E9F809193A03)) or any(r.QuestId == 0xE000E9F809193A03 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000E9F809193A03" />
+		</If>
+		<!-- [DAILY] Asset Liquidation: Defeat Torvix Forces (19/20) -->
+		<If Condition="HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 18)">
+			<Grind GrindRef="[DAILY] Asset Liquidation: Defeat Torvix Forces (19/20)" While="HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 18)" />
+		</If>
+		<!-- [DAILY] Asset Liquidation: Defeat Torvix Forces (20/20) - step 2 done (next: Destroy Torvix Munitions Caches) -->
+		<If Condition="HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 19)">
+			<Grind GrindRef="[DAILY] Asset Liquidation: Defeat Torvix Forces (20/20) - step 2 done (next: Destroy Torvi" While="HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 19)" />
+		</If>
+		<!-- [DAILY] Asset Liquidation: Destroy Torvix Munitions Caches (1/6) -->
+		<If Condition="HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 3, 0, 0)">
+			<UseObject ObjectName="Torvix Munition Cache" QuestId="0xE000964F15142AF9" BranchId="1" StepId="3" TaskId="0" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-11.59,-0.101,15.709" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 2 done (next: Breach Lobby Security) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 2)">
+			<MoveTo QuestId="0xE000D9F1A734F486" Name="Where it ticked" XYZ="-16.887,-0.098,10.128" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 3 done (next: Locate a Security Card) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 3)">
+			<MoveTo QuestId="0xE000D9F1A734F486" Name="Where it ticked" XYZ="-21.3,-12.698,14.75" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 4 done (next: Take Elevator to the Refinery Core) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 4)">
+			<Grind GrindRef="[HEROIC 2+] The End of Torvix: step 4 done (next: Take Elevator to the Refinery Core)" While="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 4)" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 5 done (next: Breach the First Security Checkpoint) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 5)">
+			<MoveTo QuestId="0xE000D9F1A734F486" Name="Where it ticked" XYZ="-22.24,-9.398,8.802" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 6 done (next: Breach the Second Security Checkpoint) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 6)">
+			<UseObject ObjectName="Security Door Control Panel" QuestId="0xE000D9F1A734F486" BranchId="1" StepId="6" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-27.225,-9.223,13.02" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 7 done (next: Disable Safety Measures) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 7)">
+			<UseObject ObjectName="Security Door Control Panel" QuestId="0xE000D9F1A734F486" BranchId="1" StepId="7" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-27.225,-9.24,20.199" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 8 done (next: Reroute the Hypermatter Venting) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 8)">
+			<!-- click the console once, then stay and fight: the droids come, then the Hypermatter Annihilation Droid spawns - kill it (LethToxic) -->
+			<ClickObject QuestId="0xE000D9F1A734F486" Name="Master Safety Control" XYZ="-37.882,-11.272,27.974" />
+			<While Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 8)">
+				<MoveTo QuestId="1" Name="Wait for the Hypermatter Annihilation Droid" XYZ="-37.58,-11.382,27.293" />
+				<WaitTimer QuestId="1" WaitTime="3" />
+			</While>
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 9 done (next: Vent the Hypermatter) -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 9)">
+			<MoveTo QuestId="1" Name="Pipeline Controls puzzle" XYZ="-39.084,-11.379,28.634" />
+			<UserDialog Title="The End of Torvix" Message="Do the Pipeline Controls puzzle yourself, then press Continue." IsBotContinueAllowed="True" />
+		</If>
+		<!-- [HEROIC 2+] The End of Torvix: step 10 done -->
+		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 10)">
+			<UseObject ObjectName="Vent Hypermatter" QuestId="0xE000D9F1A734F486" BranchId="1" StepId="10" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-39.245,-11.274,28.657" />
+		</If>
+		<!-- Reward: [HEROIC 2+] The End of Torvix -->
+		<If Condition="(HasQuest(0xE000D9F1A734F486) and not IsQuestComplete(0xE000D9F1A734F486)) or any(r.QuestId == 0xE000D9F1A734F486 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000D9F1A734F486" />
+		</If>
+		<!-- Your route -->
+		<If Condition="(Me.Position.X &lt; -27.94) and ((HasQuest(0xE000964F15142AF9) and not IsQuestComplete(0xE000964F15142AF9)) or (HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or (HasQuest(0xE000A590603D52BE) and not IsQuestComplete(0xE000A590603D52BE)) or (HasQuest(0xE0002D926943E4ED) and not IsQuestComplete(0xE0002D926943E4ED)) or (HasQuest(0xE000499515A96C81) and not IsQuestComplete(0xE000499515A96C81)))">
+			<MoveTo QuestId="1" Name="Before the door / phase" XYZ="-38.549,-11.398,26.6" />
+			<MoveTo QuestId="1" Name="Came out here" XYZ="-29.92,-1.098,43.018" />
+		</If>
+		<!-- [DAILY] Asset Liquidation: Destroy Torvix Munitions Caches (6/6) - step 3 done (next: Destroy the Comm Tower and Recover the T-5R7 Memory Core) - any Torvix Munition Cache (4 spots) -->
+		<If Condition="HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 3, 0, 5)">
+			<UseObject ObjectName="Torvix Munition Cache" QuestId="0xE000964F15142AF9" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="-25.153,-0.098,23.996" Radius="2">
+				<Hotspots>
+					<Hotspot Name="Torvix Munition Cache" XYZ="-25.153,-0.098,23.996" />
+					<Hotspot Name="Torvix Munition Cache" XYZ="-17.39,-0.1,25.157" />
+					<Hotspot Name="Torvix Munition Cache" XYZ="-13.205,-0.1,23.807" />
+					<Hotspot Name="Torvix Munition Cache" XYZ="-11.59,-0.101,15.709" />
+				</Hotspots>
+			</UseObject>
+		</If>
+		<!-- [DAILY] Asset Liquidation: step 4 done (next: Turn In the Memory Core at the Mission Terminal) -->
+		<If Condition="HasQuest(0xE000964F15142AF9) and not IsBranchStepComplete(0xE000964F15142AF9, 1, 4)">
+			<UseObject ObjectName="Communications Tower" QuestId="0xE000964F15142AF9" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="8.488,-0.104,33.278" />
+		</If>
+		<!-- Reward: [DAILY] Asset Liquidation -->
+		<If Condition="(HasQuest(0xE000964F15142AF9) and not IsQuestComplete(0xE000964F15142AF9)) or any(r.QuestId == 0xE000964F15142AF9 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000964F15142AF9" />
+		</If>
+		<!-- [DAILY] Glow: step 2 done (next: Secure an Anti-Rad Injector) -->
+		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsBranchStepComplete(0xE000A7BF7FECDFDC, 1, 2)">
+			<MoveTo QuestId="0xE000A7BF7FECDFDC" Name="Where it ticked" XYZ="1.017,-0.078,33.95" />
+		</If>
+		<!-- [DAILY] Glow: step 3 done (next: Reroute Hypermatter Pipelines) -->
+		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsBranchStepComplete(0xE000A7BF7FECDFDC, 1, 3)">
+			<Grind GrindRef="[DAILY] Glow: step 3 done (next: Reroute Hypermatter Pipelines)" While="HasQuest(0xE000A7BF7FECDFDC) and not IsBranchStepComplete(0xE000A7BF7FECDFDC, 1, 3)" />
+		</If>
+		<!-- [DAILY] Glow: Reroute Hypermatter Pipelines (1/4) -->
+		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 0)">
+			<UseObject ObjectName="Hypermatter Pipeline Controls" QuestId="0xE000A7BF7FECDFDC" BranchId="1" StepId="4" TaskId="0" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-4.463,-8.26,42.546" />
+		</If>
+		<!-- Use Anti-rad Injector (it moved the game's helper quest - e.g. an injector that keeps you alive) -->
+		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 1, 2)">
+			<MoveTo QuestId="1" Name="Where you used Anti-rad Injector" XYZ="-4.52,-9.06,40.218" />
+			<UseMissionItemOnce ItemName="Anti-rad Injector" />
+		</If>
+		<!-- [DAILY] Glow: the adds by the 2nd console first (LethToxic) -->
+		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 1)">
+			<MoveTo QuestId="1" Name="Adds by the 2nd console" XYZ="-2.15,-9.272,37.55" />
+			<WaitTimer QuestId="1" WaitTime="5" />
+		</If>
+		<!-- [DAILY] Glow: Reroute Hypermatter Pipelines (3/4) - any Hypermatter Pipeline Controls (2 spots) -->
+		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 2)">
+			<UseObject ObjectName="Hypermatter Pipeline Controls" QuestId="0xE000A7BF7FECDFDC" BranchId="1" StepId="4" TaskId="0" TaskValue="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="0.647,-9.081,35.754" Radius="2">
+				<Hotspots>
+					<Hotspot Name="Hypermatter Pipeline Controls" XYZ="-1.779,-9.081,35.754" />
+					<Hotspot Name="Hypermatter Pipeline Controls" XYZ="0.647,-9.081,35.754" />
+				</Hotspots>
+			</UseObject>
+		</If>
+		<!-- Kill and loot Radiation Treatment Droid (your loot moved the game's helper quest - e.g. an anti-radiation injector) -->
+		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 2, 2)">
+			<Grind GrindRef="Kill and loot Radiation Treatment Droid (your loot moved the game's helper quest - e.g. an" While="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 2, 2)" />
+		</If>
+		<!-- glow injector handler: step 2 done -->
+		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 3, 2)">
+			<UseItem QuestId="0xE000A590603D52BE" BranchId="3" StepId="2" ItemName="Anti-rad Injector" WaitTime="3000" XYZ="0.303,-9.224,37.067">
+				<Hotspots>
+					<Hotspot Name="Where you used it" XYZ="0.303,-9.224,37.067" />
+				</Hotspots>
+			</UseItem>
+		</If>
+		<!-- [DAILY] Glow: Reroute Hypermatter Pipelines (4/4) - step 4 done (next: Return to Mission Terminal) -->
+		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 3)">
+			<UseObject ObjectName="Hypermatter Pipeline Controls" QuestId="0xE000A7BF7FECDFDC" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="2.837,-8.282,42.993" />
+		</If>
+		<!-- Your route -->
+		<If Condition="(Me.Position.X &lt; -27.92) and ((HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or (HasQuest(0xE0002D926943E4ED) and not IsQuestComplete(0xE0002D926943E4ED)) or (HasQuest(0xE000499515A96C81) and not IsQuestComplete(0xE000499515A96C81)))">
+			<MoveTo QuestId="1" Name="Before the door / phase" XYZ="3.853,-8.477,41.162" />
+			<MoveTo QuestId="1" Name="Came out here" XYZ="-29.92,-1.098,43.018" />
+		</If>
+		<!-- Reward: [DAILY] Glow -->
+		<If Condition="(HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or any(r.QuestId == 0xE000A7BF7FECDFDC for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="35" /> <!-- Glow's reward needs about 35 seconds (LethToxic) -->
+			<CompleteQuest QuestId="0xE000A7BF7FECDFDC" />
+		</If>
+		<!-- [DAILY] Hypermatter Directive: step 2 done (next: Steal Emergency Hypermatter Supplies) -->
+		<If Condition="HasQuest(0xE0002D926943E4ED) and not IsBranchStepComplete(0xE0002D926943E4ED, 1, 2)">
+			<MoveTo QuestId="0xE0002D926943E4ED" Name="Where it ticked" XYZ="14.68,-0.078,4.139" />
+		</If>
+		<!-- [DAILY] Hypermatter Directive: Steal Emergency Hypermatter Supplies (5/5) - step 3 done (next: Return to the Mission Terminal) - any HyperMatter Supplies (5 spots) -->
+		<If Condition="HasQuest(0xE0002D926943E4ED) and not IsTaskValueGreaterThan(0xE0002D926943E4ED, 3, 0, 4)">
+			<UseObject ObjectName="HyperMatter Supplies" QuestId="0xE0002D926943E4ED" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="23.062,-10.8,0.257" Radius="2">
+				<Hotspots>
+					<Hotspot Name="HyperMatter Supplies" XYZ="25.32,-10.63,6.239" />
+					<Hotspot Name="HyperMatter Supplies" XYZ="22.488,-10.789,4.576" />
+					<Hotspot Name="HyperMatter Supplies" XYZ="16.711,-10.8,3.326" />
+					<Hotspot Name="HyperMatter Supplies" XYZ="19.243,-10.8,0.191" />
+					<Hotspot Name="HyperMatter Supplies" XYZ="23.062,-10.8,0.257" />
+				</Hotspots>
+			</UseObject>
+		</If>
+		<!-- [WEEKLY] Daily Area: Black Hole: step 2 done (next: Return to Mission Terminal) -->
+		<If Condition="HasQuest(0xE000499515A96C81) and not IsBranchStepComplete(0xE000499515A96C81, 1, 2)">
+			<MoveTo QuestId="0xE000499515A96C81" Name="Where it ticked" XYZ="22.876,-10.798,0.632" />
+		</If>
+		<!-- Reward: [DAILY] Hypermatter Directive -->
+		<If Condition="(HasQuest(0xE0002D926943E4ED) and not IsQuestComplete(0xE0002D926943E4ED)) or any(r.QuestId == 0xE0002D926943E4ED for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE0002D926943E4ED" />
+		</If>
+		<!-- Reward: [WEEKLY] Daily Area: Black Hole -->
+		<If Condition="(HasQuest(0xE000499515A96C81) and not IsQuestComplete(0xE000499515A96C81)) or any(r.QuestId == 0xE000499515A96C81 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000499515A96C81" />
+		</If>
+		<!-- Grab any rewards still waiting -->
+		<WaitTimer QuestId="1" WaitTime="5" />
+		<CompleteQuest QuestId="0xE0007CEC19F3A0E1" />
+		<CompleteQuest QuestId="0xE000E9F809193A03" />
+		<CompleteQuest QuestId="0xE000D9F1A734F486" />
+		<CompleteQuest QuestId="0xE000964F15142AF9" />
+		<CompleteQuest QuestId="0xE000A7BF7FECDFDC" />
+		<CompleteQuest QuestId="0xE0002D926943E4ED" />
+		<CompleteQuest QuestId="0xE000499515A96C81" />
+		<!-- Not finished? Say so instead of starting over -->
+		<If Condition="(HasQuest(0xE000D9F1A734F486) and not IsQuestComplete(0xE000D9F1A734F486)) or (HasQuest(0xE000E9F809193A03) and not IsQuestComplete(0xE000E9F809193A03)) or (HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or (HasQuest(0xE0002D926943E4ED) and not IsQuestComplete(0xE0002D926943E4ED)) or (HasQuest(0xE0007CEC19F3A0E1) and not IsQuestComplete(0xE0007CEC19F3A0E1)) or (HasQuest(0xE000964F15142AF9) and not IsQuestComplete(0xE000964F15142AF9))">
+			<UserDialog Title="Quest Recorder" Message="A quest from this profile isn't finished. Finish it by hand, or start the profile again." />
+		</If>
+		<UserDialog Title="Done!" Message="This profile is done." />
+	</Questing>
+</Profile>
