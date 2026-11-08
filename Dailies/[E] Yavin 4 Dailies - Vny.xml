@@ -1,6 +1,28 @@
 <Profile>
 	<!-- Made by Vny with the help of Quest Recorder 1.0.0.7 - LethToxic. Recording: Yavin 4 -->
 	<Name>[E] Yavin 4 Dailies - Vny</Name>
+	<CodeChunks>
+		<CodeChunk Name="TakeWeekly_B4EA8D_1State" Type="Definition"><![CDATA[
+			static System.DateTime _TakeWeekly_B4EA8D_1_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_B4EA8D_1" Type="Hook"><![CDATA[
+			ulong id = 0xE00029D46BB4EA8DUL;
+			var spot = new System.Numerics.Vector3(344.964f, 40.15f, 14.503f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _TakeWeekly_B4EA8D_1_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Mission Terminal" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_B4EA8D_1_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
+	</CodeChunks>
 
 	<Questing>
 		<!-- Pick up [DAILY] Confederacy -->
@@ -14,6 +36,10 @@
 		<!-- Pick up [WEEKLY] Daily Area: Yavin 4 -->
 		<If Condition="(not HasQuest(0xE00029D46BB4EA8D))">
 			<PickUpQuest QuestName="[WEEKLY] Daily Area: Yavin 4" QuestId="0xE00029D46BB4EA8D" SearchRadius="20" UseRange="10" GiverName="Mission Terminal" XYZ="344.964,40.15,14.503" />
+			<MoveTo QuestId="1" Name="Mission Terminal" XYZ="344.964,40.15,14.503" />
+			<Hook Name="TakeWeekly_B4EA8D_1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="8" />
+			<Hook Name="TakeWeekly_B4EA8D_1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- Pick up [DAILY] Chopping Block -->
 		<If Condition="(not HasQuest(0xE0007EC3F5A3CF10)) and (not IsQuestComplete(0xE0007EC3F5A3CF10))">

@@ -1,6 +1,28 @@
 <Profile>
 	<!-- Made by Quest Recorder 1.2 - LethToxic. Recording: The Black Hole-2026-11-07_13-46 -->
 	<Name>[E] The Black Hole Dailies - LethToxic</Name>
+	<CodeChunks>
+		<CodeChunk Name="TakeWeekly_A96C81_1State" Type="Definition"><![CDATA[
+			static System.DateTime _TakeWeekly_A96C81_1_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_A96C81_1" Type="Hook"><![CDATA[
+			ulong id = 0xE000499515A96C81UL;
+			var spot = new System.Numerics.Vector3(-21.7548f, -1.8982f, 44.7273f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _TakeWeekly_A96C81_1_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Black Hole Mission Terminal" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_A96C81_1_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
+	</CodeChunks>
 	<GrindAreas>
 		<GrindArea Name="[DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield:">
 			<MinLevel>1</MinLevel>
@@ -117,6 +139,10 @@
 		<!-- Pick up [WEEKLY] Daily Area: Black Hole -->
 		<If Condition="(not HasQuest(0xE000499515A96C81))">
 			<PickUpQuest QuestName="[WEEKLY] Daily Area: Black Hole" QuestId="0xE000499515A96C81" SearchRadius="0.02" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
+			<MoveTo QuestId="1" Name="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
+			<Hook Name="TakeWeekly_A96C81_1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="8" />
+			<Hook Name="TakeWeekly_A96C81_1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- [DAILY] No Trace Left: Identify Torvix's Spies (1/3) -->
 		<If Condition="HasQuest(0xE0007CEC19F3A0E1) and not IsTaskValueGreaterThan(0xE0007CEC19F3A0E1, 2, 0, 0)">

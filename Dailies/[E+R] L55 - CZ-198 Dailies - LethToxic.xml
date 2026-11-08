@@ -87,6 +87,46 @@
 			best.SetTarget();
 			return false;
 		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_883A23_1State" Type="Definition"><![CDATA[
+			static System.DateTime _TakeWeekly_883A23_1_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_883A23_1" Type="Hook"><![CDATA[
+			ulong id = 0xE000D5C912883A23UL;
+			var spot = new System.Numerics.Vector3(4.476641f, 8.802309f, 2.756657f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _TakeWeekly_883A23_1_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Mission Terminal" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_883A23_1_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_D88E47_2State" Type="Definition"><![CDATA[
+			static System.DateTime _TakeWeekly_D88E47_2_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_D88E47_2" Type="Hook"><![CDATA[
+			ulong id = 0xE000353261D88E47UL;
+			var spot = new System.Numerics.Vector3(-55.38471f, 8.803679f, 0.3304866f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _TakeWeekly_D88E47_2_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Mission Terminal" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_D88E47_2_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
 	</CodeChunks>
 
 	<Questing>
@@ -114,6 +154,10 @@
 
 			<If Condition="((not HasQuest(0xE000D5C912883A23)) )">
 				<PickUpQuest QuestName="[WEEKLY] Daily Area: CZ-198" QuestId="0xE000D5C912883A23" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="4.476641,8.802309,2.756657" />
+				<MoveTo QuestId="1" Name="Mission Terminal" XYZ="4.476641,8.802309,2.756657" />
+				<Hook Name="TakeWeekly_883A23_1" Operation="I" Index="0" Location="TreeStart" />
+				<WaitTimer QuestId="1" WaitTime="8" />
+				<Hook Name="TakeWeekly_883A23_1" Operation="R" Location="TreeStart" />
 			</If>	
 
 
@@ -292,6 +336,10 @@
 			</If>	
 			<If Condition="((not HasQuest(0xE000353261D88E47)) )">
 				<PickUpQuest QuestName="[WEEKLY] Czerka Takeover" QuestId="0xE000353261D88E47" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
+				<MoveTo QuestId="1" Name="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
+				<Hook Name="TakeWeekly_D88E47_2" Operation="I" Index="0" Location="TreeStart" />
+				<WaitTimer QuestId="1" WaitTime="8" />
+				<Hook Name="TakeWeekly_D88E47_2" Operation="R" Location="TreeStart" />
 			</If>	
 
 			<If Condition="((not HasQuest(0xE0006E78C9AB3836)) and (not IsQuestComplete(0xE0006E78C9AB3836)) )">

@@ -46,12 +46,56 @@
 			_r1_p = true; _r1_s = false; _r1_at = now; _r1_t++;
 			return true;
 		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_827409_1State" Type="Definition"><![CDATA[
+			static System.DateTime _TakeWeekly_827409_1_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_827409_1" Type="Hook"><![CDATA[
+			ulong id = 0xE000A79504827409UL;
+			var spot = new System.Numerics.Vector3(89.534f, 6.606f, 32.901f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _TakeWeekly_827409_1_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Daily Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_827409_1_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_827409_2State" Type="Definition"><![CDATA[
+			static System.DateTime _TakeWeekly_827409_2_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly_827409_2" Type="Hook"><![CDATA[
+			ulong id = 0xE000A79504827409UL;
+			var spot = new System.Numerics.Vector3(89.534f, 6.606f, 32.901f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _TakeWeekly_827409_2_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Daily Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_827409_2_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
 	</CodeChunks>
 	
 	    <Questing>
 		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
 		<If Condition="(not HasQuest(0xE000A79504827409))">
 			<PickUpQuest QuestName="[WEEKLY] Heroic Missions: Dromund Kaas" QuestId="0xE000A79504827409" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+			<MoveTo QuestId="1" Name="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+			<Hook Name="TakeWeekly_827409_1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="8" />
+			<Hook Name="TakeWeekly_827409_1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- Pick up [HEROIC 2+] Friends of Old -->
 		<If Condition="(not HasQuest(0xE000255F7B083BC0)) and (not IsQuestComplete(0xE000255F7B083BC0))">
@@ -76,6 +120,10 @@
 		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
 		<If Condition="(not HasQuest(0xE000A79504827409))">
 			<PickUpQuest QuestName="[WEEKLY] Heroic Missions: Dromund Kaas" QuestId="0xE000A79504827409" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+			<MoveTo QuestId="1" Name="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+			<Hook Name="TakeWeekly_827409_2" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="8" />
+			<Hook Name="TakeWeekly_827409_2" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- Mission item: Heroic Transport: Shadow Spawn -->
 		<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 10000) and ((HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)) or (HasQuest(0xE00095831253A837) and not IsQuestComplete(0xE00095831253A837)) or (HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or (HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)))">
