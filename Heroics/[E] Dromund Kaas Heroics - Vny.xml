@@ -2,27 +2,48 @@
 	<!-- Made by Vny with the help of Quest Recorder 1.0a - LethToxic. Recording: Dromund Kaas -->
 	<Name>[E] Dromund Kaas Heroics	- Vny</Name>
 	<CodeChunks>
-		<CodeChunk Name="RuneState" Type="Definition"><![CDATA[
-			static int _rune, _tries;
-			static bool _pressed, _seen;
-			static System.DateTime _next, _last, _pressAt;
+		<CodeChunk Name="UseInOrder1State" Type="Definition"><![CDATA[
+			static int _r1_i, _r1_t;
+			static bool _r1_p, _r1_s;
+			static System.DateTime _r1_next, _r1_last, _r1_at, _r1_done;
 		]]></CodeChunk>
-		<CodeChunk Name="UseRunes" Type="Hook"><![CDATA[
+		<CodeChunk Name="UseInOrder1" Type="Hook"><![CDATA[
 			var names = new[] { "Sith Rune - Passion", "Sith Rune - Strength", "Sith Rune - Power", "Sith Rune - Victory", "Sith Rune - Freedom" };
+			var npcs = new[] { "", "", "", "", "" };
+			var isAbility = new[] { false, false, false, false, false };
+			var openWith = new[] { "", "", "", "", "" };
 			var me = BuddyCron.Core.Player;
 			var now = System.DateTime.Now;
-			if ((now - _last).TotalSeconds > 60) { _rune = 0; _tries = 0; _pressed = false; _seen = false; _next = now; }
-			_last = now;
-			if (_rune >= names.Length) return false;
-			if (me.IsCasting) { if (_pressed) _seen = true; return true; }
-			if (_pressed && _seen) { _rune++; _tries = 0; _pressed = false; _seen = false; _next = now.AddSeconds(1.5); return true; }
-			if (now < _next) return true;
-			if (_pressed && (now - _pressAt).TotalSeconds < 1.5) return true;
-			if (_tries >= 4) { _rune++; _tries = 0; _pressed = false; _next = now.AddSeconds(1.5); return true; }
-			var item = System.Linq.Enumerable.FirstOrDefault(BuddyCron.Core.Me.QuestItems, i => i.Name == names[_rune]);
-			if (item == null) { _rune++; return true; }
-			item.Use();
-			_pressed = true; _seen = false; _pressAt = now; _tries++;
+			if ((now - _r1_last).TotalSeconds > 60) { _r1_i = 0; _r1_t = 0; _r1_p = false; _r1_s = false; _r1_next = now; }
+			_r1_last = now;
+			if (_r1_i >= names.Length) { if ((now - _r1_done).TotalSeconds > 8) { _r1_i = 0; _r1_next = now; } return false; }
+			if (me.IsCasting) { if (_r1_p) _r1_s = true; return true; }
+			if (_r1_p && _r1_s) { _r1_i++; _r1_t = 0; _r1_p = false; _r1_s = false; _r1_next = now.AddSeconds(1.5); if (_r1_i >= names.Length) _r1_done = now; return true; }
+			if (now < _r1_next) return true;
+			if (_r1_p && (now - _r1_at).TotalSeconds < 1.5) return true;
+			if (_r1_t >= 4) { _r1_i++; _r1_t = 0; _r1_p = false; _r1_next = now.AddSeconds(1.5); if (_r1_i >= names.Length) _r1_done = now; return true; }
+			BuddyCron.Objects.HeroCharacter target = null;
+			if (npcs[_r1_i].Length > 0)
+			    foreach (var c in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroCharacter>())
+			        if (c != null && c.IsValid && c.Name == npcs[_r1_i] && (target == null || c.Distance < target.Distance)) target = c;
+			if (isAbility[_r1_i])
+			{
+			    if (openWith[_r1_i].Length > 0 && !BuddyCron.Managers.AbilityManager.HasAbility(names[_r1_i]))
+			    {
+			        var opener = System.Linq.Enumerable.FirstOrDefault(BuddyCron.Core.Me.QuestItems, i => i.Name == openWith[_r1_i]);
+			        if (opener != null) opener.Use();
+			        _r1_next = now.AddSeconds(2); return true;
+			    }
+			    BuddyCron.Managers.AbilityManager.Cast(names[_r1_i], target ?? (BuddyCron.Objects.HeroCharacter)me, false);
+			}
+			else
+			{
+			    var item = System.Linq.Enumerable.FirstOrDefault(BuddyCron.Core.Me.QuestItems, i => i.Name == names[_r1_i])
+			            ?? System.Linq.Enumerable.FirstOrDefault(BuddyCron.Core.Me.Backpack, i => i.Name == names[_r1_i]);
+			    if (item == null) { _r1_i++; return true; }
+			    if (target != null) item.UseAbility(target); else item.Use();
+			}
+			_r1_p = true; _r1_s = false; _r1_at = now; _r1_t++;
 			return true;
 		]]></CodeChunk>
 	</CodeChunks>
@@ -102,9 +123,9 @@
 		<!-- [HEROIC 2+] Shadow Spawn: Meditate on the Sith Runes in Order -->
 		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 3)">
 			<MoveTo QuestId="0xE00041B75EBA1AF4" Name="Where you used Sith Rune - Passion" XYZ="20.613,-13.806,126.207" />
-			<Hook Name="UseRunes" Operation="I" Index="0" Location="TreeStart" />
-			<WaitTimer QuestId="1" WaitTime="35" />
-			<Hook Name="UseRunes" Operation="R" Location="TreeStart" />
+			<Hook Name="UseInOrder1" Operation="I" Index="0" Location="TreeStart" />
+			<While Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 3)"><WaitTimer QuestId="1" WaitTime="2" /></While>
+			<Hook Name="UseInOrder1" Operation="R" Location="TreeStart" />
 			<WaitTimer QuestId="1" WaitTime="3" />
 		</If>
 		<!-- [HEROIC 2+] Shadow Spawn: Place the Runes on the Altar -->
