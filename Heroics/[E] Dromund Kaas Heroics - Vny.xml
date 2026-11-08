@@ -1,6 +1,17 @@
 <Profile>
 	<!-- Made by Vny with the help of Quest Recorder 1.0a - LethToxic. Recording: Dromund Kaas -->
 	<Name>[E] Dromund Kaas Heroics	- Vny</Name>
+	<CodeChunks>
+		<CodeChunk Name="UseRunes" Type="Statement"><![CDATA[
+			foreach (var name in new[] { "Sith Rune - Passion", "Sith Rune - Strength", "Sith Rune - Power", "Sith Rune - Victory", "Sith Rune - Freedom" })
+			{
+				var item = System.Linq.Enumerable.FirstOrDefault(BuddyCron.Core.Me.QuestItems, i => i.Name == name);
+				if (item == null) continue;
+				item.Use();
+				await Reborn.Behaviors.Coroutines.Coroutine.Sleep(3000);
+			}
+		]]></CodeChunk>
+	</CodeChunks>
 	
 	    <Questing>
 		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
@@ -77,11 +88,7 @@
 		<!-- [HEROIC 2+] Shadow Spawn: Meditate on the Sith Runes in Order -->
 		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 3)">
 			<MoveTo QuestId="0xE00041B75EBA1AF4" Name="Where you used Sith Rune - Passion" XYZ="20.613,-13.806,126.207" />
-			<UseMissionItemOnce ItemName="Sith Rune - Passion" />
-			<UseMissionItemOnce ItemName="Sith Rune - Strength" />
-			<UseMissionItemOnce ItemName="Sith Rune - Power" />
-			<UseMissionItemOnce ItemName="Sith Rune - Victory" />
-			<UseMissionItemOnce ItemName="Sith Rune - Freedom" />
+			<RunCode Name="UseRunes" />
 			<WaitTimer QuestId="1" WaitTime="3" />
 		</If>
 		<!-- [HEROIC 2+] Shadow Spawn: Place the Runes on the Altar -->
