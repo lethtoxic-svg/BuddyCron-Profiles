@@ -1,0 +1,634 @@
+<Profile>
+	<!-- Made by Quest Recorder 1.3 - LethToxic. Recording: Section X-2026-11-07_14-33 -->
+	<Name>[E] Section X Dailies - TEST</Name>
+	<CodeChunks>
+		<CodeChunk Name="TakeWeekly1State" Type="Definition"><![CDATA[
+			static System.DateTime _w1_click;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeWeekly1" Type="Hook"><![CDATA[
+			ulong id = 0xE00094C1F13C31A1UL;
+			var spot = new System.Numerics.Vector3(63.721f, 15.347f, -214.116f);
+			var me = BuddyCron.Core.Player;
+			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
+			if ((System.DateTime.Now - _w1_click).TotalSeconds < 3) return false;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Mission Terminal" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best != null && best.IsWithinInteractRange) { best.Interact(); _w1_click = System.DateTime.Now; }
+			return false;
+		]]></CodeChunk>
+	</CodeChunks>
+
+	<GrindAreas>
+		<GrindArea Name="[DAILY] Hyperbiology: Collect Biological Samples from Mutated Beasts (7/10)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Mutated Muckwing</Mob><Mob>Large Mutated Muckwing</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Mutated Muckwing" XYZ="81.91,13.86,-204.542" />
+				<Hotspot Name="Large Mutated Muckwing" XYZ="81.195,13.48,-207.185" />
+				<Hotspot Name="Mutated Muckwing" XYZ="80.004,13.528,-208.807" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Hyperbiology: step 5 done (next: Return to the Mission Dropbox) (kill and loot)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Hyperbeast</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Hyperbeast" XYZ="102.979,14.68,-224.618" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (12/26)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Republic Infiltration Droid</Mob><Mob>Republic Commando</Mob><Mob>Jedi Special Operative</Mob><Mob>Republic Assault Droid</Mob><Mob>Republic Bladesman</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Republic Assault Droid" XYZ="95.958,13.697,-199.638" />
+				<Hotspot Name="Republic Bladesman" XYZ="98.288,14.294,-196.974" />
+				<Hotspot Name="Republic Bladesman" XYZ="124.078,12.502,-194.254" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="99.892,14.074,-192.097" />
+				<Hotspot Name="Republic Commando" XYZ="103.457,13.481,-193.099" />
+				<Hotspot Name="Jedi Special Operative" XYZ="105.55,13.126,-195.496" />
+				<Hotspot Name="Republic Commando" XYZ="107.97,12.691,-195.123" />
+				<Hotspot Name="Jedi Special Operative" XYZ="110.886,12.512,-194.324" />
+				<Hotspot Name="Republic Assault Droid" XYZ="106.727,12.897,-190.059" />
+				<Hotspot Name="Jedi Special Operative" XYZ="96.314,15.406,-191.468" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="93.078,14.537,-197.023" />
+				<Hotspot Name="Republic Bladesman" XYZ="88.712,14.412,-197.525" />
+				<Hotspot Name="Republic Assault Droid" XYZ="84.311,14.407,-197.4" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Jedi Special Operative</Mob><Mob>Jedi Protector</Mob><Mob>Republic Bladesman</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Republic Marksman" XYZ="124.944,12.602,-193.88" />
+				<Hotspot Name="Republic Bladesman" XYZ="132.882,14.102,-194.121" />
+				<Hotspot Name="Jedi Special Operative" XYZ="134.184,14.102,-191.912" />
+				<Hotspot Name="Jedi Protector" XYZ="133.497,14.102,-187.691" />
+				<Hotspot Name="Jedi Special Operative" XYZ="130.454,14.102,-185.757" />
+				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
+				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (16/26)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Republic Commando</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Republic Bladesman" XYZ="132.527,14.091,-194.321" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Jedi Special Operative</Mob><Mob>Jedi Protector</Mob><Mob>Republic Bladesman</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Republic Bladesman" XYZ="132.882,14.102,-194.121" />
+				<Hotspot Name="Republic Marksman" XYZ="124.944,12.602,-193.88" />
+				<Hotspot Name="Jedi Special Operative" XYZ="134.184,14.102,-191.912" />
+				<Hotspot Name="Jedi Protector" XYZ="133.497,14.102,-187.691" />
+				<Hotspot Name="Jedi Special Operative" XYZ="130.454,14.102,-185.757" />
+				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
+				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (20/26)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Republic Bladesman</Mob><Mob>Republic Infiltration Droid</Mob><Mob>Jedi Protector</Mob><Mob>Republic Marksman</Mob><Mob>Jedi Special Operative</Mob><Mob>Republic Assault Droid</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Jedi Special Operative" XYZ="133.885,14.102,-191.69" />
+				<Hotspot Name="Republic Assault Droid" XYZ="135.14,14.119,-186.87" />
+				<Hotspot Name="Republic Bladesman" XYZ="138.542,14.102,-186.922" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="141.77,14.102,-187.939" />
+				<Hotspot Name="Jedi Protector" XYZ="141.278,14.112,-183.893" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="139.56,14.112,-182.537" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="140.069,14.112,-180.378" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="135.94,14.112,-182.225" />
+				<Hotspot Name="Republic Marksman" XYZ="133.84,14.085,-181.212" />
+				<Hotspot Name="Jedi Special Operative" XYZ="130.454,14.102,-185.757" />
+				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
+				<Hotspot Name="Republic Assault Droid" XYZ="125.55,14.102,-187.2" />
+				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
+				<Hotspot Name="Republic Bladesman" XYZ="133.277,14.102,-194.428" />
+				<Hotspot Name="Jedi Protector" XYZ="141.655,14.102,-192.523" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and lo">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Jedi Special Operative</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Jedi Special Operative" XYZ="133.885,14.102,-191.69" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (23/26)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Republic Infiltration Droid</Mob><Mob>Jedi Protector</Mob><Mob>Republic Bladesman</Mob><Mob>Jedi Special Operative</Mob><Mob>Republic Assault Droid</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Jedi Special Operative" XYZ="134.406,14.102,-185.962" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="134.688,14.085,-181.725" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="139.56,14.112,-182.537" />
+				<Hotspot Name="Jedi Protector" XYZ="141.278,14.112,-183.893" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="140.069,14.112,-180.378" />
+				<Hotspot Name="Republic Bladesman" XYZ="138.542,14.102,-186.922" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="141.77,14.102,-187.939" />
+				<Hotspot Name="Jedi Protector" XYZ="141.655,14.102,-192.523" />
+				<Hotspot Name="Jedi Special Operative" XYZ="134.184,14.102,-191.912" />
+				<Hotspot Name="Republic Bladesman" XYZ="133.277,14.102,-194.428" />
+				<Hotspot Name="Jedi Special Operative" XYZ="130.454,14.102,-185.757" />
+				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
+				<Hotspot Name="Republic Assault Droid" XYZ="125.55,14.102,-187.2" />
+				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Stage 2 - Research Cancellation: step 2 done">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Republic Bladesman</Mob><Mob>Republic Infiltration Droid</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Republic Bladesman" XYZ="134.26,14.085,-181.098" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="135.94,14.112,-182.225" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="139.56,14.112,-182.537" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="140.069,14.112,-180.378" />
+				<Hotspot Name="Republic Bladesman" XYZ="138.542,14.102,-186.922" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="141.77,14.102,-187.939" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="133.783,14.102,-187.072" />
+				<Hotspot Name="Republic Bladesman" XYZ="128.932,14.112,-187.322" />
+				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Final Stage - Research Cancellation: last fight">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Jedi Field Commander</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Jedi Field Commander" XYZ="139.126,14.102,-193.509" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] Targeted Misfire: step 8 done (next: Return to the Mission Dropbox)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Rakata War Droid</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Rakata War Droid" XYZ="150.196,14.497,-172.56" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Dread Guard Elimination: Defeat Dread Guard Forces (16/18)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Dread Host Subordinate</Mob><Mob>Dread Guard Disciple</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Dread Guard Shocktrooper" XYZ="104.588,13.79,-172.794" />
+				<Hotspot Name="Dread Guard Shocktrooper" XYZ="110.359,13.746,-171.578" />
+				<Hotspot Name="Dread Host Mauler" XYZ="109.554,13.001,-162.959" />
+				<Hotspot Name="Dread Host Subordinate" XYZ="110.51,13.058,-158.18" />
+				<Hotspot Name="Dread Host Subordinate" XYZ="110.417,12.838,-150.573" />
+				<Hotspot Name="Dread Host Subordinate" XYZ="112.986,12.86,-147.636" />
+				<Hotspot Name="Dread Guard Disciple" XYZ="111.38,13.128,-167.312" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Dread Guard Elimination: last fight">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Dread Host Minion</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Dread Host Minion" XYZ="110.174,12.829,-150.839" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Prison Break: Defeat Dread Guard Forces (3/24)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Dread Guard Converter</Mob><Mob>Dread Host Soldier</Mob><Mob>Dread Guard Enforcer</Mob><Mob>Dread Host Scout</Mob><Mob>Dread Host Guardian</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Dread Host Watchman" XYZ="92.373,17.275,-153.985" />
+				<Hotspot Name="Dread Guard Converter" XYZ="89.003,17.092,-155.818" />
+				<Hotspot Name="Dread Guard Converter" XYZ="86.208,17.144,-155.831" />
+				<Hotspot Name="Dread Guard Converter" XYZ="85.538,17.599,-152.404" />
+				<Hotspot Name="Dread Host Soldier" XYZ="83.655,17.599,-153.098" />
+				<Hotspot Name="Dread Guard Enforcer" XYZ="81.013,17.378,-151.053" />
+				<Hotspot Name="Dread Host Soldier" XYZ="79.686,17.38,-149.544" />
+				<Hotspot Name="Dread Host Scout" XYZ="88.141,16.853,-151.52" />
+				<Hotspot Name="Dread Host Guardian" XYZ="84.48,16.808,-158.975" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[DAILY] March of the Dread Guard: step 2 done (next: Free the Prisoners)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Dread Host Watchman</Mob><Mob>Dread Guard Attacker</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Dread Host Watchman" XYZ="91.685,17.332,-153.178" />
+				<Hotspot Name="Dread Guard Attacker" XYZ="94.232,17.457,-152.729" />
+				<Hotspot Name="Dread Host Watchman" XYZ="97.102,17.471,-152.438" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Prison Break: Defeat Dread Guard Forces (23/24)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Dread Guard Assassin</Mob><Mob>Dread Guard Converter</Mob><Mob>Dread Host Guardian</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Dread Host Watchman" XYZ="97.168,17.692,-151.127" />
+				<Hotspot Name="Dread Guard Attacker" XYZ="98.231,17.388,-152.893" />
+				<Hotspot Name="Dread Host Scout" XYZ="88.141,16.853,-151.52" />
+				<Hotspot Name="Dread Host Scout" XYZ="84.405,17.599,-152.84" />
+				<Hotspot Name="Dread Host Scout" XYZ="80.473,17.38,-150.344" />
+				<Hotspot Name="Dread Host Guardian" XYZ="79.401,17.023,-156.483" />
+				<Hotspot Name="Dread Guard Assassin" XYZ="75.963,17.056,-154.687" />
+				<Hotspot Name="Dread Guard Converter" XYZ="86.208,17.144,-155.831" />
+				<Hotspot Name="Dread Guard Converter" XYZ="89.003,17.092,-155.818" />
+				<Hotspot Name="Dread Guard Assassin" XYZ="93.142,17.449,-152.849" />
+				<Hotspot Name="Dread Host Guardian" XYZ="84.48,16.808,-158.975" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Prison Break: last fight">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Dread Host Guardian</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Dread Host Guardian" XYZ="80.329,17.38,-154.678" />
+				<Hotspot Name="Dread Host Guardian" XYZ="79.401,17.023,-156.483" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (4/18)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Enraged Bogwing</Mob><Mob>Enraged Alpha Bogwing</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Enraged Bogwing" XYZ="14.452,13.143,-217.625" />
+				<Hotspot Name="Enraged Bogwing" XYZ="16.418,13.174,-216.287" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[AREA 2+] Lost Reconnaissance: Recover Imperial Flight Recorders - collect: any Imperial F">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Voracious Tuk'ata</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Voracious Tuk'ata" XYZ="11.624,12.639,-211.814" />
+				<Hotspot Name="Voracious Tuk'ata" XYZ="5.477,12.648,-210.225" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (8/18)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Voracious Tuk'ata</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Voracious Tuk'ata" XYZ="10.215,12.719,-210.566" />
+				<Hotspot Name="Voracious Tuk'ata" XYZ="5.477,12.648,-210.225" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (10/18)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Voracious Tuk'ata</Mob><Mob>Agitated Vrblther</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Ravenous Tuk'ata" XYZ="4.36,12.769,-211.275" />
+				<Hotspot Name="Voracious Tuk'ata" XYZ="6.332,12.669,-210.349" />
+				<Hotspot Name="Voracious Tuk'ata" XYZ="11.11,12.674,-211.033" />
+				<Hotspot Name="Agitated Vrblther" XYZ="0.33,13.062,-211.975" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (15/18)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Enraged Bogwing</Mob><Mob>Ravenous Tuk'ata</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Enraged Bogwing" XYZ="3.495,12.834,-217.871" />
+				<Hotspot Name="Enraged Bogwing" XYZ="2.319,12.706,-222.073" />
+				<Hotspot Name="Ravenous Tuk'ata" XYZ="4.207,12.624,-225.38" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (18/18)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Enraged Bogwing</Mob><Mob>Ravenous Tuk'ata</Mob></Mobs>
+			<Hotspots>
+				<Hotspot Name="Acklay Hatchling" XYZ="9.465,12.746,-217.011" />
+				<Hotspot Name="Enraged Bogwing" XYZ="4.514,13.019,-219.062" />
+				<Hotspot Name="Enraged Bogwing" XYZ="2.809,12.783,-217.309" />
+				<Hotspot Name="Enraged Bogwing" XYZ="2.319,12.706,-222.073" />
+				<Hotspot Name="Ravenous Tuk'ata" XYZ="4.207,12.624,-225.38" />
+				<Hotspot Name="Enraged Bogwing" XYZ="13.386,13.028,-218.115" />
+				<Hotspot Name="Enraged Bogwing" XYZ="15.163,13.118,-217.06" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+
+	<Questing>
+		<!-- Pick up [DAILY] Data Raid -->
+		<If Condition="(not HasQuest(0xE00058B9BB51079F)) and (not IsQuestComplete(0xE00058B9BB51079F))">
+			<PickUpQuest QuestName="[DAILY] Data Raid" QuestId="0xE00058B9BB51079F" SearchRadius="0.02" UseRange="20" GiverName="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+		</If>
+		<!-- Pick up [DAILY] Hyperbiology -->
+		<If Condition="(not HasQuest(0xE00061A2FB4BB40A)) and (not IsQuestComplete(0xE00061A2FB4BB40A))">
+			<PickUpQuest QuestName="[DAILY] Hyperbiology" QuestId="0xE00061A2FB4BB40A" SearchRadius="0.02" UseRange="20" GiverName="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+		</If>
+		<!-- Pick up [DAILY] March of the Dread Guard -->
+		<If Condition="(not HasQuest(0xE0003DF54538C83F)) and (not IsQuestComplete(0xE0003DF54538C83F))">
+			<PickUpQuest QuestName="[DAILY] March of the Dread Guard" QuestId="0xE0003DF54538C83F" SearchRadius="0.02" UseRange="20" GiverName="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+		</If>
+		<!-- Pick up [DAILY] Targeted Misfire -->
+		<If Condition="(not HasQuest(0xE00065051B12D9B8)) and (not IsQuestComplete(0xE00065051B12D9B8))">
+			<PickUpQuest QuestName="[DAILY] Targeted Misfire" QuestId="0xE00065051B12D9B8" SearchRadius="0.02" UseRange="20" GiverName="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+		</If>
+		<!-- Pick up [WEEKLY] Daily Area: Section X -->
+		<If Condition="(not HasQuest(0xE00094C1F13C31A1))">
+			<PickUpQuest QuestName="[WEEKLY] Daily Area: Section X" QuestId="0xE00094C1F13C31A1" SearchRadius="0.02" UseRange="20" GiverName="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+			<MoveTo QuestId="1" Name="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+			<Hook Name="TakeWeekly1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="8" />
+			<Hook Name="TakeWeekly1" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- [DAILY] Hyperbiology: Collect Biological Samples from Mutated Beasts - collect: any Mutated Beast Egg, any Mutated Beast Bones -->
+		<If Condition="HasQuest(0xE00061A2FB4BB40A) and not IsBranchStepComplete(0xE00061A2FB4BB40A, 1, 2)">
+			<UseObject QuestId="0xE00061A2FB4BB40A" BranchId="1" StepId="2" Radius="150" UseRange="5" WaitTime="3000" BlacklistDuration="30" IgnoreLOS="True"><Placeables><Placeable>Mutated Beast Egg</Placeable><Placeable>Mutated Beast Bones</Placeable></Placeables><Hotspots><Hotspot Name="Mutated Beast Egg" XYZ="71.633,13.565,-206.38" /><Hotspot Name="Mutated Beast Bones" XYZ="76.372,13.499,-207.579" /><Hotspot Name="Mutated Beast Egg" XYZ="79.771,13.604,-209.065" /><Hotspot Name="Mutated Beast Egg" XYZ="82.047,13.839,-202.561" /><Hotspot Name="Mutated Beast Bones" XYZ="84.421,13.822,-206.094" /><Hotspot Name="Mutated Beast Egg" XYZ="65.524,14.46,-202.314" /><Hotspot Name="Mutated Beast Egg" XYZ="71.229,14.413,-199.905" /><Hotspot Name="Mutated Beast Egg" XYZ="87.499,13.471,-208.295" /><Hotspot Name="Mutated Beast Egg" XYZ="81.252,14.661,-216.103" /><Hotspot Name="Mutated Beast Bones" XYZ="62.324,13.52,-202.691" /><Hotspot Name="Mutated Beast Bones" XYZ="67.122,14.458,-197.487" /><Hotspot Name="Mutated Beast Bones" XYZ="76.148,14.089,-198.265" /></Hotspots></UseObject>
+		</If>
+		<!-- [DAILY] Hyperbiology: Collect Biological Samples from Mutated Beasts (7/10) -->
+		<If Condition="HasQuest(0xE00061A2FB4BB40A) and not IsTaskValueGreaterThan(0xE00061A2FB4BB40A, 2, 0, 9)">
+			<Grind GrindRef="[DAILY] Hyperbiology: Collect Biological Samples from Mutated Beasts (7/10)" While="HasQuest(0xE00061A2FB4BB40A) and not IsTaskValueGreaterThan(0xE00061A2FB4BB40A, 2, 0, 9)" />
+		</If>
+		<!-- [DAILY] Hyperbiology: step 3 done (next: Inject the Hyperbeast with the Serum) -->
+		<If Condition="HasQuest(0xE00061A2FB4BB40A) and not IsBranchStepComplete(0xE00061A2FB4BB40A, 1, 3)">
+			<UseObject ObjectName="Science Station" QuestId="0xE00061A2FB4BB40A" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="83.157,14.545,-225.694" />
+		</If>
+		<!-- [DAILY] Hyperbiology: step 4 done (next: Collect Mutated Tissue from the Hyperbeast) (not sure: you targeted Hyperbeast and held Serum Injector - the game gave no signal for the use) -->
+		<If Condition="HasQuest(0xE00061A2FB4BB40A) and not IsBranchStepComplete(0xE00061A2FB4BB40A, 1, 4)">
+			<UseItem QuestId="0xE00061A2FB4BB40A" BranchId="1" StepId="4" ItemName="Serum Injector" WaitTime="3000" XYZ="103.385,14.706,-224.546" Range="12" Radius="200" InCombat="True"><Npcs><Npc>Hyperbeast</Npc></Npcs><Hotspots><Hotspot Name="Hyperbeast" XYZ="103.385,14.706,-224.546" /></Hotspots></UseItem>
+		</If>
+		<!-- [DAILY] Hyperbiology: step 5 done (next: Return to the Mission Dropbox) (kill and loot) -->
+		<If Condition="HasQuest(0xE00061A2FB4BB40A) and not IsBranchStepComplete(0xE00061A2FB4BB40A, 1, 5)">
+			<Grind GrindRef="[DAILY] Hyperbiology: step 5 done (next: Return to the Mission Dropbox) (kill and loot)" While="HasQuest(0xE00061A2FB4BB40A) and not IsBranchStepComplete(0xE00061A2FB4BB40A, 1, 5)" />
+		</If>
+		<!-- Reward: [DAILY] Hyperbiology -->
+		<If Condition="(HasQuest(0xE00061A2FB4BB40A) and not IsQuestComplete(0xE00061A2FB4BB40A)) or any(r.QuestId == 0xE00061A2FB4BB40A for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE00061A2FB4BB40A" />
+		</If>
+		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (12/26) -->
+		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 11)">
+			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (12/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 11)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)" />
+		</If>
+		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (16/26) -->
+		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 15)">
+			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (16/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 15)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)" />
+		</If>
+		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (20/26) -->
+		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 19)">
+			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (20/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 19)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and loot) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and lo" While="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)" />
+		</If>
+		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (23/26) -->
+		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 25)">
+			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (23/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 25)" />
+		</If>
+		<!-- Stage 2 - Research Cancellation: step 2 done -->
+		<If Condition="HasQuest(0xE000898BC502A34A) and not IsBranchStepComplete(0xE000898BC502A34A, 1, 2)">
+			<Grind GrindRef="Stage 2 - Research Cancellation: step 2 done" While="HasQuest(0xE000898BC502A34A) and not IsBranchStepComplete(0xE000898BC502A34A, 1, 2)" />
+		</If>
+		<!-- Reward: Stage 1 - Research Cancellation -->
+		<If Condition="(HasQuest(0xE0008A8BC5025C87) and not IsQuestComplete(0xE0008A8BC5025C87)) or any(r.QuestId == 0xE0008A8BC5025C87 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE0008A8BC5025C87" />
+		</If>
+		<!-- Stage 2 - Research Cancellation: Destroy the Research Stations (2/3) - any Research Station (2 spots) -->
+		<If Condition="HasQuest(0xE000898BC502A34A) and not IsTaskValueGreaterThan(0xE000898BC502A34A, 4, 0, 1)">
+			<UseObject ObjectName="Research Station" QuestId="0xE000898BC502A34A" BranchId="1" StepId="4" TaskId="0" TaskValue="1" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="135.3,14.11,-187.133" Radius="2"><Hotspots><Hotspot Name="Research Station" XYZ="133.966,14.11,-195.4" /><Hotspot Name="Research Station" XYZ="135.3,14.11,-187.133" /></Hotspots></UseObject>
+		</If>
+		<!-- Final Stage - Research Cancellation: step 2 done -->
+		<If Condition="HasQuest(0xE000888BC502A139) and not IsBranchStepComplete(0xE000888BC502A139, 1, 2)">
+			<UseObject ObjectName="Research Station" QuestId="0xE000888BC502A139" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="134.217,14.11,-180.315" />
+		</If>
+		<!-- Reward: Stage 2 - Research Cancellation -->
+		<If Condition="(HasQuest(0xE000898BC502A34A) and not IsQuestComplete(0xE000898BC502A34A)) or any(r.QuestId == 0xE000898BC502A34A for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000898BC502A34A" />
+		</If>
+		<!-- Pick up Research Cancellation -->
+		<If Condition="(not HasQuest(0xE00024E47D19104F)) and (not IsQuestComplete(0xE00024E47D19104F))">
+			<PickUpQuest QuestName="Research Cancellation" QuestId="0xE00024E47D19104F" SearchRadius="0.02" UseRange="20" GiverName="Field Generator" XYZ="138.962,14.109,-193.929" />
+		</If>
+		<!-- Final Stage - Research Cancellation: last fight -->
+		<If Condition="HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139)">
+			<Grind GrindRef="Final Stage - Research Cancellation: last fight" While="HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139)" />
+		</If>
+		<!-- Reward: Final Stage - Research Cancellation -->
+		<If Condition="(HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139)) or any(r.QuestId == 0xE000888BC502A139 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000888BC502A139" />
+		</If>
+		<!-- Research Cancellation: step 2 done (next: Return to the Mission Dropbox) -->
+		<If Condition="HasQuest(0xE00024E47D19104F) and not IsBranchStepComplete(0xE00024E47D19104F, 1, 2)">
+			<MoveTo QuestId="0xE00024E47D19104F" Name="Where it ticked" XYZ="139.661,14.102,-188.672" />
+		</If>
+		<!-- Reward: Research Cancellation -->
+		<If Condition="(HasQuest(0xE00024E47D19104F) and not IsQuestComplete(0xE00024E47D19104F)) or any(r.QuestId == 0xE00024E47D19104F for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE00024E47D19104F" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 3 done (next: Disable the Second Rakata Device) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 3)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="153.849,14.05,-173.102" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 4 done (next: Disable the Third Rakata Device) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 4)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="150.201,14.042,-168.207" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 5 done (next: Plant the Targeting Beacon) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 5)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="5" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="146.55,14.05,-173.098" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 6 done (next: Open the Facility Roof) (not sure: you targeted Rakata War Droid and held Targeting Beacon - the game gave no signal for the use) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 6)">
+			<UseItem QuestId="0xE00065051B12D9B8" BranchId="1" StepId="6" ItemName="Targeting Beacon" WaitTime="3000" XYZ="150.229,14.497,-172.686" Range="22" Radius="200" InCombat="True"><Npcs><Npc>Rakata War Droid</Npc></Npcs><Hotspots><Hotspot Name="Rakata War Droid" XYZ="150.229,14.497,-172.686" /></Hotspots></UseItem>
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 7 done (next: Defeat the Rakata War Droid) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 7)">
+			<UseObject ObjectName="Roof Controls" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="7" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="150.201,14.112,-175.439" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 8 done (next: Return to the Mission Dropbox) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 8)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: step 8 done (next: Return to the Mission Dropbox)" While="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 8)" />
+		</If>
+		<!-- Reward: [DAILY] Targeted Misfire -->
+		<If Condition="(HasQuest(0xE00065051B12D9B8) and not IsQuestComplete(0xE00065051B12D9B8)) or any(r.QuestId == 0xE00065051B12D9B8 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE00065051B12D9B8" />
+		</If>
+		<!-- Dread Guard Elimination: Defeat Dread Guard Forces (16/18) -->
+		<If Condition="HasQuest(0xE000E356EB39D698) and not IsTaskValueGreaterThan(0xE000E356EB39D698, 2, 0, 17)">
+			<Grind GrindRef="Dread Guard Elimination: Defeat Dread Guard Forces (16/18)" While="HasQuest(0xE000E356EB39D698) and not IsTaskValueGreaterThan(0xE000E356EB39D698, 2, 0, 17)" />
+		</If>
+		<!-- Dread Guard Elimination: last fight -->
+		<If Condition="HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)">
+			<Grind GrindRef="Dread Guard Elimination: last fight" While="HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)" />
+		</If>
+		<!-- Reward: Dread Guard Elimination -->
+		<If Condition="(HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)) or any(r.QuestId == 0xE000E356EB39D698 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000E356EB39D698" />
+		</If>
+		<!-- [DAILY] Data Raid: Scan and Disable the Energy Tubes (1/4) -->
+		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsTaskValueGreaterThan(0xE00058B9BB51079F, 2, 0, 0)">
+			<UseObject ObjectName="Energy Tube" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="2" TaskId="0" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="109.41,12.936,-149.997" />
+		</If>
+		<!-- [DAILY] Data Raid: Scan and Disable the Energy Tubes (2/4) -->
+		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsTaskValueGreaterThan(0xE00058B9BB51079F, 2, 0, 1)">
+			<MoveTo QuestId="1" Name="Stand for Energy Tube" XYZ="113.021,12.862,-147.774" />
+			<UseObject ObjectName="Energy Tube" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="2" TaskId="0" TaskValue="1" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="113.119,12.94,-147.897" />
+		</If>
+		<!-- [DAILY] Data Raid: Scan and Disable the Energy Tubes (3/4) -->
+		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsTaskValueGreaterThan(0xE00058B9BB51079F, 2, 0, 2)">
+			<MoveTo QuestId="1" Name="Stand for Energy Tube" XYZ="113.226,12.861,-147.017" />
+			<UseObject ObjectName="Energy Tube" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="2" TaskId="0" TaskValue="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="113.483,12.949,-147.08" />
+		</If>
+		<!-- [DAILY] Data Raid: Scan and Disable the Energy Tubes (4/4) - step 2 done (next: Disable the Eastern Rakatan Pylon) -->
+		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsTaskValueGreaterThan(0xE00058B9BB51079F, 2, 0, 3)">
+			<UseObject ObjectName="Energy Tube" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="111.153,12.929,-142.443" />
+		</If>
+		<!-- [DAILY] Data Raid: step 3 done (next: Return to the Mission Dropbox) - any Ancient Rakatan Pylon (2 spots) -->
+		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsBranchStepComplete(0xE00058B9BB51079F, 2, 3)">
+			<UseObject ObjectName="Ancient Rakatan Pylon" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="120.27,14.617,-153.781" Radius="2"><Hotspots><Hotspot Name="Ancient Rakatan Pylon" XYZ="109.014,13.037,-152.414" /><Hotspot Name="Ancient Rakatan Pylon" XYZ="120.27,14.617,-153.781" /></Hotspots></UseObject>
+		</If>
+		<!-- Reward: [DAILY] Data Raid -->
+		<If Condition="(HasQuest(0xE00058B9BB51079F) and not IsQuestComplete(0xE00058B9BB51079F)) or any(r.QuestId == 0xE00058B9BB51079F for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE00058B9BB51079F" />
+		</If>
+		<!-- Prison Break: Defeat Dread Guard Forces (3/24) -->
+		<If Condition="HasQuest(0xE0008CEE8EAD24B9) and not IsTaskValueGreaterThan(0xE0008CEE8EAD24B9, 2, 0, 2)">
+			<Grind GrindRef="Prison Break: Defeat Dread Guard Forces (3/24)" While="HasQuest(0xE0008CEE8EAD24B9) and not IsTaskValueGreaterThan(0xE0008CEE8EAD24B9, 2, 0, 2)" />
+		</If>
+		<!-- [DAILY] March of the Dread Guard: step 2 done (next: Free the Prisoners) -->
+		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsBranchStepComplete(0xE0003DF54538C83F, 1, 2)">
+			<Grind GrindRef="[DAILY] March of the Dread Guard: step 2 done (next: Free the Prisoners)" While="HasQuest(0xE0003DF54538C83F) and not IsBranchStepComplete(0xE0003DF54538C83F, 1, 2)" />
+		</If>
+		<!-- Prison Break: Defeat Dread Guard Forces (23/24) -->
+		<If Condition="HasQuest(0xE0008CEE8EAD24B9) and not IsTaskValueGreaterThan(0xE0008CEE8EAD24B9, 2, 0, 23)">
+			<Grind GrindRef="Prison Break: Defeat Dread Guard Forces (23/24)" While="HasQuest(0xE0008CEE8EAD24B9) and not IsTaskValueGreaterThan(0xE0008CEE8EAD24B9, 2, 0, 23)" />
+		</If>
+		<!-- Prison Break: last fight -->
+		<If Condition="HasQuest(0xE0008CEE8EAD24B9) and not IsQuestComplete(0xE0008CEE8EAD24B9)">
+			<Grind GrindRef="Prison Break: last fight" While="HasQuest(0xE0008CEE8EAD24B9) and not IsQuestComplete(0xE0008CEE8EAD24B9)" />
+		</If>
+		<!-- Reward: Prison Break -->
+		<If Condition="(HasQuest(0xE0008CEE8EAD24B9) and not IsQuestComplete(0xE0008CEE8EAD24B9)) or any(r.QuestId == 0xE0008CEE8EAD24B9 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE0008CEE8EAD24B9" />
+		</If>
+		<!-- [DAILY] March of the Dread Guard: Free the Prisoners (1/5) -->
+		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsTaskValueGreaterThan(0xE0003DF54538C83F, 3, 0, 0)">
+			<UseItem QuestId="0xE0003DF54538C83F" BranchId="1" StepId="3" TaskId="0" TaskValue="0" ItemName="Shackle Remote" WaitTime="3000" XYZ="85.281,17.599,-152.62" Range="6" Radius="200" InCombat="False"><Npcs><Npc>Gamorrean Prisoner</Npc></Npcs><Hotspots><Hotspot Name="Where you used it" XYZ="85.281,17.599,-152.62" /><Hotspot Name="Where you used it" XYZ="85.267,17.599,-152.026" /></Hotspots></UseItem>
+		</If>
+		<!-- [DAILY] March of the Dread Guard: Free the Prisoners (2/5) -->
+		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsTaskValueGreaterThan(0xE0003DF54538C83F, 3, 0, 1)">
+			<UseItem QuestId="0xE0003DF54538C83F" BranchId="1" StepId="3" TaskId="0" TaskValue="1" ItemName="Shackle Remote" WaitTime="3000" XYZ="85.281,17.599,-152.62" Range="6" Radius="200" InCombat="False"><Npcs><Npc>Trandoshan Prisoner</Npc></Npcs><Hotspots><Hotspot Name="Where you used it" XYZ="85.281,17.599,-152.62" /><Hotspot Name="Where you used it" XYZ="85.267,17.599,-152.026" /></Hotspots></UseItem>
+		</If>
+		<!-- [DAILY] March of the Dread Guard: Free the Prisoners (3/5) -->
+		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsTaskValueGreaterThan(0xE0003DF54538C83F, 3, 0, 2)">
+			<UseItem QuestId="0xE0003DF54538C83F" BranchId="1" StepId="3" TaskId="0" TaskValue="2" ItemName="Shackle Remote" WaitTime="3000" XYZ="85.281,17.599,-152.62" Range="6" Radius="200" InCombat="False"><Npcs><Npc>Gamorrean Leader</Npc></Npcs><Hotspots><Hotspot Name="Where you used it" XYZ="85.281,17.599,-152.62" /><Hotspot Name="Where you used it" XYZ="85.267,17.599,-152.026" /></Hotspots></UseItem>
+		</If>
+		<!-- [DAILY] March of the Dread Guard: Free the Prisoners (4/5) -->
+		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsTaskValueGreaterThan(0xE0003DF54538C83F, 3, 0, 3)">
+			<UseItem QuestId="0xE0003DF54538C83F" BranchId="1" StepId="3" TaskId="0" TaskValue="3" ItemName="Shackle Remote" WaitTime="3000" XYZ="85.462,17.599,-152.298" Range="4" Radius="200" InCombat="False"><Npcs><Npc>Trandoshan Prisoner</Npc></Npcs><Hotspots><Hotspot Name="Where you used it" XYZ="85.281,17.599,-152.62" /><Hotspot Name="Where you used it" XYZ="85.267,17.599,-152.026" /></Hotspots></UseItem>
+		</If>
+		<!-- [DAILY] March of the Dread Guard: Free the Prisoners (5/5) - step 3 done (next: Return to the Mission Dropbox) -->
+		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsTaskValueGreaterThan(0xE0003DF54538C83F, 3, 0, 4)">
+			<UseItem QuestId="0xE0003DF54538C83F" BranchId="1" StepId="3" ItemName="Shackle Remote" WaitTime="3000" XYZ="85.267,17.599,-152.026" Range="3" Radius="200" InCombat="False"><Npcs><Npc>Trandoshan Prisoner</Npc></Npcs><Hotspots><Hotspot Name="Where you used it" XYZ="85.281,17.599,-152.62" /><Hotspot Name="Where you used it" XYZ="85.267,17.599,-152.026" /></Hotspots></UseItem>
+		</If>
+		<!-- Reward: [DAILY] March of the Dread Guard -->
+		<If Condition="(HasQuest(0xE0003DF54538C83F) and not IsQuestComplete(0xE0003DF54538C83F)) or any(r.QuestId == 0xE0003DF54538C83F for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE0003DF54538C83F" />
+		</If>
+		<!-- Pick up [AREA 2+] Lost Reconnaissance -->
+		<If Condition="(not HasQuest(0xE000FFD91CDE7CB6)) and (not IsQuestComplete(0xE000FFD91CDE7CB6))">
+			<PickUpQuest QuestName="[AREA 2+] Lost Reconnaissance" QuestId="0xE000FFD91CDE7CB6" UseRange="20" GiverName="Dreadtooth" XYZ="57.792,13.191,-181.2" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: step 2 done (next: Recover Imperial Flight Recorders) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsBranchStepComplete(0xE000FFD91CDE7CB6, 1, 2)">
+			<MoveTo QuestId="0xE000FFD91CDE7CB6" Name="Where it ticked" XYZ="20.06,13.577,-215.38" />
+		</If>
+		<!-- Your route -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 3)">
+			<MoveTo QuestId="1" Name="come here to get Area 2+ Lost Reconnaissance mission" XYZ="20.06,13.577,-215.38" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (4/18) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 3)">
+			<Grind GrindRef="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (4/18)" While="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 3)" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: Recover Imperial Flight Recorders - collect: any Imperial Flight Recorder, and kill and loot Voracious Tuk'ata -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 0, 4)">
+			<UseObject QuestId="0xE000FFD91CDE7CB6" BranchId="1" StepId="3" TaskId="0" Radius="150" UseRange="5" WaitTime="3000" BlacklistDuration="30" IgnoreLOS="True"><Placeables><Placeable>Imperial Flight Recorder</Placeable></Placeables><Hotspots><Hotspot Name="Imperial Flight Recorder" XYZ="13.735,12.968,-217.177" /><Hotspot Name="Imperial Flight Recorder" XYZ="4.174,12.775,-210.787" /><Hotspot Name="Imperial Flight Recorder" XYZ="2.975,12.849,-217.786" /><Hotspot Name="Imperial Flight Recorder" XYZ="-3.673,12.588,-220.99" /></Hotspots></UseObject>
+			<Grind GrindRef="[AREA 2+] Lost Reconnaissance: Recover Imperial Flight Recorders - collect: any Imperial F" While="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 0, 4)" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (8/18) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 7)">
+			<Grind GrindRef="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (8/18)" While="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 7)" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (10/18) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 9)">
+			<Grind GrindRef="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (10/18)" While="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 9)" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (15/18) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 14)">
+			<Grind GrindRef="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (15/18)" While="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 14)" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (18/18) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 17)">
+			<Grind GrindRef="[AREA 2+] Lost Reconnaissance: Defeat Wild Beasts (18/18)" While="HasQuest(0xE000FFD91CDE7CB6) and not IsTaskValueGreaterThan(0xE000FFD91CDE7CB6, 3, 1, 17)" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: step 4 done (next: Locate the Master Black Box and Recover the Contents) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsBranchStepComplete(0xE000FFD91CDE7CB6, 1, 4)">
+			<MoveTo QuestId="0xE000FFD91CDE7CB6" Name="Where it ticked" XYZ="9.812,12.565,-213.76" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: step 5 done -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsBranchStepComplete(0xE000FFD91CDE7CB6, 1, 5)">
+			<UseObject ObjectName="Master Black Box" QuestId="0xE000FFD91CDE7CB6" BranchId="1" StepId="5" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-10.801,15.953,-189.549" />
+		</If>
+		<!-- [AREA 2+] Lost Reconnaissance: step 6 done (next: Return to the Mission Dropbox) -->
+		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsBranchStepComplete(0xE000FFD91CDE7CB6, 1, 6)">
+			<MoveTo QuestId="0xE000FFD91CDE7CB6" Name="Where it ticked" XYZ="-8.966,15.574,-189.737" />
+		</If>
+		<!-- Reward: [AREA 2+] Lost Reconnaissance -->
+		<If Condition="(HasQuest(0xE000FFD91CDE7CB6) and not IsQuestComplete(0xE000FFD91CDE7CB6)) or any(r.QuestId == 0xE000FFD91CDE7CB6 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000FFD91CDE7CB6" />
+		</If>
+		<!-- Grab any rewards still waiting -->
+		<WaitTimer QuestId="1" WaitTime="5" />
+		<CompleteQuest QuestId="0xE00061A2FB4BB40A" />
+		<CompleteQuest QuestId="0xE0008A8BC5025C87" />
+		<CompleteQuest QuestId="0xE000898BC502A34A" />
+		<CompleteQuest QuestId="0xE000888BC502A139" />
+		<CompleteQuest QuestId="0xE00024E47D19104F" />
+		<CompleteQuest QuestId="0xE00065051B12D9B8" />
+		<CompleteQuest QuestId="0xE000E356EB39D698" />
+		<CompleteQuest QuestId="0xE00058B9BB51079F" />
+		<CompleteQuest QuestId="0xE0008CEE8EAD24B9" />
+		<CompleteQuest QuestId="0xE0003DF54538C83F" />
+		<CompleteQuest QuestId="0xE000FFD91CDE7CB6" />
+		<!-- Not finished? Say so instead of starting over -->
+		<If Condition="(HasQuest(0xE00058B9BB51079F) and not IsQuestComplete(0xE00058B9BB51079F)) or (HasQuest(0xE00061A2FB4BB40A) and not IsQuestComplete(0xE00061A2FB4BB40A)) or (HasQuest(0xE0003DF54538C83F) and not IsQuestComplete(0xE0003DF54538C83F)) or (HasQuest(0xE00065051B12D9B8) and not IsQuestComplete(0xE00065051B12D9B8)) or (HasQuest(0xE00024E47D19104F) and not IsQuestComplete(0xE00024E47D19104F)) or (HasQuest(0xE000FFD91CDE7CB6) and not IsQuestComplete(0xE000FFD91CDE7CB6))">
+			<UserDialog Title="Quest Recorder" Message="A quest from this profile isn't finished. Finish it by hand, or start the profile again." />
+		</If>
+		<UserDialog Title="Done!" Message="This profile is done." />
+	</Questing>
+</Profile>
