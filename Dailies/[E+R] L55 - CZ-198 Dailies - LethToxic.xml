@@ -1,7 +1,6 @@
 <Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
 	<Name>[E+R] L55 - CZ-198 Dailies - LethToxic</Name>
-	<!-- LethToxic created. Timothy said drop UseTransport, built-in lifts handle it. -->
-	<!-- Empire and Republic in one file: your class picks the side. Each side is your own profile, plus the elevator rides down to Freight Depot and Waste Disposal. -->
+	<!-- LethToxic created. -->
 	
 	<Vendors>
 		<Hotspot Name="Imperial Medical Droid" XYZ="8.2288,8.801001,-0.895" /> <!-- CZ-198 Imperial Landing Zone -->
@@ -145,7 +144,7 @@
 			</If>	
 		
 		
-			<!-- Elevator to Freight Depot (your recorded lift spot) -->
+			<!-- Elevator to Freight Depot -->
 			<If Condition="(Me.Position.X &gt; -14.66) and (Me.Position.Y &gt; 7) and ((HasQuest(0xE000A89E340382EC) and not IsStepComplete(0xE000A89E340382EC, 2)) or (HasQuest(0xE0001AC2FCB6FD6F) and not IsQuestComplete(0xE0001AC2FCB6FD6F)) or (HasQuest(0xE000746FA7B97065) and not IsStepComplete(0xE000746FA7B97065, 8)))">
 				<UseTransport TransporterName="Elevator" Type="Wonkavator" Option="Freight Depot" XYZ="-12.764,7.961,-0.363" />
 			</If>
@@ -196,7 +195,7 @@
 					<Grind GrindRef="Off Message" While="(not IsQuestComplete(0xE0001AC2FCB6FD6F))"/>
 				</If>
 
-				<!-- Elevator down to Waste Disposal (your recorded lift spot) -->
+				<!-- Elevator down to Waste Disposal -->
 				<If Condition="(Me.Position.Y &gt; 3.9) and (not IsStepComplete(0xE000746FA7B97065, 8))">
 					<UseTransport TransporterName="Elevator" Type="Wonkavator" Option="Waste Disposal" XYZ="-23.364,6.47,9.985" />
 				</If>
@@ -265,7 +264,6 @@
 				<CompleteQuest QuestName="[WEEKLY] Daily Area: CZ-198" QuestId="0xE000D5C912883A23"/>
 			</If>
 
-			<!-- Last check: take any reward still waiting (in case a daily finishes on the spot with a reward window and leaves the log before the block above runs). -->
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestName="[DAILY] What's Yours Is Mine" QuestId="0xE000A89E340382EC"/>
 			<CompleteQuest QuestName="[DAILY] Staff Cuts" QuestId="0xE0009CF3F58AD94C"/>
@@ -327,7 +325,7 @@
 			</If>	
 		
 		
-			<!-- Elevator to Freight Depot (your recorded lift spot) -->
+			<!-- Elevator to Freight Depot -->
 			<If Condition="(Me.Position.X &lt; -36.88) and (Me.Position.Y &gt; 7) and ((HasQuest(0xE000E14F725E1809) and not IsStepComplete(0xE000E14F725E1809, 2)) or (HasQuest(0xE0006E78C9AB3836) and not IsQuestComplete(0xE0006E78C9AB3836)) or (HasQuest(0xE00009A5ADED8A3C) and not IsStepComplete(0xE00009A5ADED8A3C, 8)))">
 				<UseTransport TransporterName="Elevator" Type="Wonkavator" Option="Freight Depot" XYZ="-38.338,7.951,1.764" />
 			</If>
@@ -377,7 +375,7 @@
 					<Grind GrindRef="Off Message" While="(not IsQuestComplete(0xE0006E78C9AB3836))"/>
 				</If>
 
-				<!-- Elevator down to Waste Disposal (your recorded lift spot) -->
+				<!-- Elevator down to Waste Disposal -->
 				<If Condition="(Me.Position.Y &gt; 3.9) and (not IsStepComplete(0xE00009A5ADED8A3C, 8))">
 					<UseTransport TransporterName="Elevator" Type="Wonkavator" Option="Waste Disposal" XYZ="-23.364,6.47,9.985" />
 				</If>
@@ -447,7 +445,6 @@
 				<CompleteQuest QuestName="[WEEKLY] Czerka Takeover" QuestId="0xE000353261D88E47"/> 			
 			</If>
 
-			<!-- Last check: take any reward still waiting. The Republic dailies finish on the spot with a reward window (no dropbox), so they leave the log before the block above runs. -->
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestName="[DAILY] Give And Take" QuestId="0xE000E14F725E1809"/>
 			<CompleteQuest QuestName="[DAILY] Workforce Reduction" QuestId="0xE0009D1B108AE7B4"/>

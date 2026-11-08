@@ -114,7 +114,6 @@
 			</If>		
 		
 
-			<!-- Fix: Always check the terminal for the Weekly if it isn't currently in our log -->
 			<If Condition="(not HasQuest(0xE000CB43C400CE19))">
 				<PickUpQuest QuestName="[WEEKLY] Daily Area: Oricon" QuestId="0xE000CB43C400CE19" GiverType="Placeable" UseRange="2" SearchRadius="80" GiverName="Mission Terminal" XYZ="-68.0,1.22,23.8" />
 			</If>
@@ -143,7 +142,6 @@
 			</If>		
 		
 
-			<!-- Fix: Always check the terminal for the Weekly if it isn't currently in our log -->
 			<If Condition="(not HasQuest(0xE000CB43C400CE19))">
 				<PickUpQuest QuestName="[WEEKLY] Daily Area: Oricon" QuestId="0xE000CB43C400CE19" GiverType="Placeable" UseRange="2" SearchRadius="80" GiverName="Mission Terminal" XYZ="-67.90842,1.221729,-27.32974" />
 			</If>
@@ -184,8 +182,6 @@
 			</If>
 		</If>
 
-		<!-- Take the reward as soon as it is done (LethToxic) -->
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE00001B055A99E2B) and (not IsQuestComplete(0xE00001B055A99E2B)) and IsStepComplete(0xE00001B055A99E2B, 2)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE00001B055A99E2B" />
@@ -195,10 +191,9 @@
 			<CompleteQuest QuestId="0xE00001B055A99E2B" />
 		</If>
 
-		<!-- 2. [DAILY] Dread Engines. Skip while in Watchtower Upper (Y ~12). -->
+		<!-- 2. [DAILY] Dread Engines -->
 		<If Condition="((HasQuest(0xE000F85E33CCE6DD)) and (not IsQuestComplete(0xE000F85E33CCE6DD)) and (Me.Position.Y &lt; 8) )">
 			<If Condition="(not IsStepComplete(0xE000F85E33CCE6DD, 2))">
-				<!-- Fix: Added BlacklistDuration and tightened Radius to force switching to other active devices -->
 				<UseObject QuestId="0xE000F85E33CCE6DD" BranchId="1" StepId="2" Radius="15" UseRange="5" WaitTime="2" BlacklistDuration="15" IgnoreLOS="True" >
 					<Placeables>
 						<Placeable>Terraforming Device</Placeable>
@@ -225,7 +220,6 @@
 					<MoveTo QuestId="0xE000F85E33CCE6DD" Name="Custom Step 3" IgnoreMesh="True" XYZ="-15.411768,0.23756234,49.235703" />
 					<MoveTo QuestId="0xE000F85E33CCE6DD" Name="Custom Step 4" IgnoreMesh="True" XYZ="-11.76836,0.24558315,50.439537" />
 					<MoveTo QuestId="0xE000F85E33CCE6DD" Name="Custom Step 5" IgnoreMesh="True" XYZ="-9.751115,0.29077318,56.65476" />
-				<!-- Once inside, the bot can safely execute its automated grind loop -->
 				<UseObject QuestId="0xE000F85E33CCE6DD" BranchId="1" StepId="3" IgnoreLOS="True" Radius="20" UseRange="5" WaitTime="5" >
 					<Placeables>
 						<Placeable>Primary Terraforming Device</Placeable>
@@ -245,7 +239,6 @@
 			</If>
 		</If>
 
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE0006202361A4C71) and (not IsQuestComplete(0xE0006202361A4C71)) and IsStepComplete(0xE0006202361A4C71, 4)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE0006202361A4C71" />
@@ -254,7 +247,6 @@
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE0006202361A4C71" />
 		</If>
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE000F85E33CCE6DD) and (not IsQuestComplete(0xE000F85E33CCE6DD)) and IsStepComplete(0xE000F85E33CCE6DD, 5)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE000F85E33CCE6DD" />
@@ -264,7 +256,6 @@
 			<CompleteQuest QuestId="0xE000F85E33CCE6DD" />
 		</If>
 
-		<!-- Walk out of Dread Cavern toward the devices tract, never back to Primary. -->
 		<If Condition="((Me.Position.Y &lt; 8) and (Me.Position.Z &gt; 30) and (IsStepComplete(0xE000F85E33CCE6DD, 5) or IsQuestComplete(0xE000F85E33CCE6DD) or (not HasQuest(0xE000F85E33CCE6DD))))">
 			<MoveTo QuestId="1" Name="Leave cavern / pyramid" XYZ="-16.25516,0.9567933,36.79689" />
 			<MoveTo QuestId="1" Name="Leave cavern / tract" XYZ="-11.20174,-0.2057055,12.01245" />
@@ -296,14 +287,12 @@
 				<MoveTo QuestId="1" Name="Shuttle 4 mid" IgnoreMesh="True" XYZ="21.75733,0.87932473,-23.96974" />
 				<MoveTo QuestId="1" Name="Shuttle 4 start" IgnoreMesh="True" XYZ="21.260921,0.45445818,-25.107454" />
 			</While>
-			<!-- Fix: Only move to the commander hotspot if the kill objective isn't finished yet -->
 			<If Condition="(not IsTaskComplete(0xE00002686C7A0013, 2, 0))">
 				<MoveTo QuestId="1" Name="Selgh Kap'gohe" XYZ="20.83805,0.38809997,-13.175829" />
 				<Grind GrindRef="Preemptive Strike Commanders" While="(not IsTaskComplete(0xE00002686C7A0013, 2, 0))"/>
 			  </If>
 		</If>
 
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE00002686C7A0013) and (not IsQuestComplete(0xE00002686C7A0013)) and IsStepComplete(0xE00002686C7A0013, 2)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE00002686C7A0013" />
@@ -329,7 +318,6 @@
 			</If>
 		</If>
 
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE00057236AF20B38) and (not IsQuestComplete(0xE00057236AF20B38)) and IsStepComplete(0xE00057236AF20B38, 5)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE00057236AF20B38" />
@@ -339,7 +327,6 @@
 			<CompleteQuest QuestId="0xE00057236AF20B38" />
 		</If>
 
-		<!-- Fix: Ensure we don't run back to arrays if we are already progressing or done with the weekly loop -->
 		<If Condition="((not HasQuest(0xE0009768A8665D68)) and (not IsQuestComplete(0xE0009768A8665D68)) and (not IsQuestComplete(0xE000CB43C400CE19)) and (not HasQuest(0xE00002686C7A0013)) and (Me.Position.Y &lt; 8))">
 			<UseObject QuestId="0xE000CB43C400CE19" IgnoreLOS="True" Radius="20" UseRange="5" WaitTime="1000" >
 				<Placeables>
@@ -376,7 +363,6 @@
 			</If>
 		</If>
 
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE0009768A8665D68) and (not IsQuestComplete(0xE0009768A8665D68)) and IsStepComplete(0xE0009768A8665D68, 2)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE0009768A8665D68" />
@@ -434,7 +420,6 @@
 			</If>
 		</If>
 		
-		<!-- Quest finished: give the game time to show the reward window, then accept it (twice, in case a fight delays the window) -->
 		<If Condition="HasQuest(0xE000AE5C37109DC3) and (not IsQuestComplete(0xE000AE5C37109DC3)) and IsStepComplete(0xE000AE5C37109DC3, 6)">
 			<WaitTimer QuestId="1" WaitTime="5" />
 			<CompleteQuest QuestId="0xE000AE5C37109DC3" />
@@ -444,14 +429,12 @@
 			<CompleteQuest QuestId="0xE000AE5C37109DC3" />
 		</If>
 
-		<!-- Last check: any reward still waiting (also the weekly once all dailies are done) -->
 		<WaitTimer QuestId="1" WaitTime="5" />
 		<CompleteQuest QuestId="0xE00001B055A99E2B" />
 		<CompleteQuest QuestId="0xE000F85E33CCE6DD" />
 		<CompleteQuest QuestId="0xE00002686C7A0013" />
 		<CompleteQuest QuestId="0xE00057236AF20B38" />
 		<CompleteQuest QuestId="0xE000AE5C37109DC3" />
-		<!-- the weekly's reward shows once the dailies are handed in -->
 		<If Condition="HasQuest(0xE000CB43C400CE19) and (not IsQuestComplete(0xE000CB43C400CE19))">
 			<WaitTimer QuestId="1" WaitTime="5" />
 		</If>

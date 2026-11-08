@@ -1,6 +1,5 @@
 <Profile>
 	<!-- Made by Vny with the help of Quest Recorder 1.0a - LethToxic. Recording: Dromund Kaas -->
-	<!-- Shadow Spawn redone by LethToxic with Quest Recorder 1.2a (rune spots only, the bot fights what attacks). Every heroic takes its reward straight after. -->
 	<Name>[E] Dromund Kaas Heroics	- Vny</Name>
 	
 	    <Questing>
@@ -43,7 +42,6 @@
 		</If>
 		
 
-		<!-- [HEROIC 2+] Shadow Spawn - from LethToxic's Quest Recorder 1.2a recording (Dromund Kaas 2026-11-08 15-18): the rune spots only, in that order. No fight steps for the adds - BuddyCron fights whatever attacks on the way. -->
 		<!-- Mission item: Heroic Transport: Shadow Spawn -->
 		<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and ((any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.Backpack)) or (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))) and ((HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)))">
 			<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and (any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.Backpack))">
@@ -71,9 +69,9 @@
 		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsTaskValueGreaterThan(0xE00041B75EBA1AF4, 2, 2, 0)">
 			<UseObject ObjectName="Apprentice Shon's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" TaskId="2" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="1.281,-12.357,139.226" />
 		</If>
-		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Victory (the last rune - step 2 done) -->
+		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Victory -->
 		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 2)">
-			<MoveTo QuestId="0xE00041B75EBA1AF4" Name="Next to Apprentice Dhaiv's Corpse (nav plans a quick travel from the Gundark spot)" XYZ="8.521688,-12.796983,154.10213" />
+			<MoveTo QuestId="0xE00041B75EBA1AF4" Name="Apprentice Dhaiv's Corpse" XYZ="8.521688,-12.796983,154.10213" />
 			<UseObject ObjectName="Apprentice Dhaiv's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="6.845,-12.76,157.108" />
 		</If>
 		<!-- [HEROIC 2+] Shadow Spawn: Meditate on the Sith Runes in Order -->

@@ -1,8 +1,6 @@
 <Profile>
 	<!-- Made by Quest Recorder 1.2 - LethToxic. Recording: The Black Hole-2026-11-07_13-46 -->
 	<Name>[E] The Black Hole Dailies - LethToxic</Name>
-	<!-- Needs the Quest Recorder plugin (PickUpIfOffered / UseMissionItemOnce steps): https://github.com/lethtoxic-svg/QuestRecorder -->
-	<!-- The End of Torvix ends in the Pipeline Controls puzzle: a pop-up asks you to do it, then press Continue. -->
 	<GrindAreas>
 		<GrindArea Name="[DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield:">
 			<MinLevel>1</MinLevel>
@@ -233,7 +231,6 @@
 		</If>
 		<!-- [HEROIC 2+] The End of Torvix: step 8 done (next: Reroute the Hypermatter Venting) -->
 		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 8)">
-			<!-- click the console once, then stay and fight: the droids come, then the Hypermatter Annihilation Droid spawns - kill it (LethToxic) -->
 			<ClickObject QuestId="0xE000D9F1A734F486" Name="Master Safety Control" XYZ="-37.882,-11.272,27.974" />
 			<While Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 8)">
 				<MoveTo QuestId="1" Name="Wait for the Hypermatter Annihilation Droid" XYZ="-37.58,-11.382,27.293" />
@@ -291,12 +288,11 @@
 		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 0)">
 			<UseObject ObjectName="Hypermatter Pipeline Controls" QuestId="0xE000A7BF7FECDFDC" BranchId="1" StepId="4" TaskId="0" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-4.463,-8.26,42.546" />
 		</If>
-		<!-- Use Anti-rad Injector (it moved the game's helper quest - e.g. an injector that keeps you alive) -->
 		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 1, 2)">
 			<MoveTo QuestId="1" Name="Where you used Anti-rad Injector" XYZ="-4.52,-9.06,40.218" />
 			<UseMissionItemOnce ItemName="Anti-rad Injector" />
 		</If>
-		<!-- [DAILY] Glow: the adds by the 2nd console first (LethToxic) -->
+		<!-- [DAILY] Glow: adds by the 2nd console -->
 		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 1)">
 			<MoveTo QuestId="1" Name="Adds by the 2nd console" XYZ="-2.15,-9.272,37.55" />
 			<WaitTimer QuestId="1" WaitTime="5" />
@@ -310,11 +306,9 @@
 				</Hotspots>
 			</UseObject>
 		</If>
-		<!-- Kill and loot Radiation Treatment Droid (your loot moved the game's helper quest - e.g. an anti-radiation injector) -->
 		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 2, 2)">
 			<Grind GrindRef="Kill and loot Radiation Treatment Droid (your loot moved the game's helper quest - e.g. an" While="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 2, 2)" />
 		</If>
-		<!-- glow injector handler: step 2 done -->
 		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 3, 2)">
 			<UseItem QuestId="0xE000A590603D52BE" BranchId="3" StepId="2" ItemName="Anti-rad Injector" WaitTime="3000" XYZ="0.303,-9.224,37.067">
 				<Hotspots>
@@ -333,7 +327,7 @@
 		</If>
 		<!-- Reward: [DAILY] Glow -->
 		<If Condition="(HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or any(r.QuestId == 0xE000A7BF7FECDFDC for r in Me.Quests.PendingQuestRewards)">
-			<WaitTimer QuestId="1" WaitTime="35" /> <!-- Glow's reward needs about 35 seconds (LethToxic) -->
+			<WaitTimer QuestId="1" WaitTime="35" />
 			<CompleteQuest QuestId="0xE000A7BF7FECDFDC" />
 		</If>
 		<!-- [DAILY] Hypermatter Directive: step 2 done (next: Steal Emergency Hypermatter Supplies) -->
@@ -375,7 +369,6 @@
 		<CompleteQuest QuestId="0xE000A7BF7FECDFDC" />
 		<CompleteQuest QuestId="0xE0002D926943E4ED" />
 		<CompleteQuest QuestId="0xE000499515A96C81" />
-		<!-- Not finished? Say so instead of starting over -->
 		<If Condition="(HasQuest(0xE000D9F1A734F486) and not IsQuestComplete(0xE000D9F1A734F486)) or (HasQuest(0xE000E9F809193A03) and not IsQuestComplete(0xE000E9F809193A03)) or (HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or (HasQuest(0xE0002D926943E4ED) and not IsQuestComplete(0xE0002D926943E4ED)) or (HasQuest(0xE0007CEC19F3A0E1) and not IsQuestComplete(0xE0007CEC19F3A0E1)) or (HasQuest(0xE000964F15142AF9) and not IsQuestComplete(0xE000964F15142AF9))">
 			<UserDialog Title="Quest Recorder" Message="A quest from this profile isn't finished. Finish it by hand, or start the profile again." />
 		</If>
