@@ -96,27 +96,34 @@
 	<Questing>
 		<!-- Pick up [HEROIC 2+] The End of Torvix -->
 		<If Condition="(not HasQuest(0xE000D9F1A734F486)) and (not IsQuestComplete(0xE000D9F1A734F486))">
-			<PickUpIfOffered QuestName="[HEROIC 2+] The End of Torvix" QuestId="0xE000D9F1A734F486" UseRange="20" GiverName="General Konya" XYZ="-25.46,-2.088,43.445" />
+			<PickUpQuest QuestName="[HEROIC 2+] The End of Torvix" QuestId="0xE000D9F1A734F486" UseRange="20" GiverName="General Konya" XYZ="-25.46,-2.088,43.445" />
+		</If>
+		<!-- Open the mission terminal -->
+		<If Condition="(not HasQuest(0xE000E9F809193A03) and not IsQuestComplete(0xE000E9F809193A03)) or (not HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or (not HasQuest(0xE0002D926943E4ED) and not IsQuestComplete(0xE0002D926943E4ED)) or (not HasQuest(0xE0007CEC19F3A0E1) and not IsQuestComplete(0xE0007CEC19F3A0E1)) or (not HasQuest(0xE000499515A96C81))">
+			<Interact Name="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
+			<If Condition="not Me.MissionBoardOpen">
+				<Interact Name="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
+			</If>
 		</If>
 		<!-- Pick up [DAILY] Control the Battlefield -->
 		<If Condition="(not HasQuest(0xE000E9F809193A03)) and (not IsQuestComplete(0xE000E9F809193A03))">
-			<PickUpIfOffered QuestName="[DAILY] Control the Battlefield" QuestId="0xE000E9F809193A03" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+			<PickUpQuest QuestName="[DAILY] Control the Battlefield" QuestId="0xE000E9F809193A03" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
 		</If>
 		<!-- Pick up [DAILY] Glow -->
 		<If Condition="(not HasQuest(0xE000A7BF7FECDFDC)) and (not IsQuestComplete(0xE000A7BF7FECDFDC))">
-			<PickUpIfOffered QuestName="[DAILY] Glow" QuestId="0xE000A7BF7FECDFDC" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+			<PickUpQuest QuestName="[DAILY] Glow" QuestId="0xE000A7BF7FECDFDC" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
 		</If>
 		<!-- Pick up [DAILY] Hypermatter Directive -->
 		<If Condition="(not HasQuest(0xE0002D926943E4ED)) and (not IsQuestComplete(0xE0002D926943E4ED))">
-			<PickUpIfOffered QuestName="[DAILY] Hypermatter Directive" QuestId="0xE0002D926943E4ED" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+			<PickUpQuest QuestName="[DAILY] Hypermatter Directive" QuestId="0xE0002D926943E4ED" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
 		</If>
 		<!-- Pick up [DAILY] No Trace Left -->
 		<If Condition="(not HasQuest(0xE0007CEC19F3A0E1)) and (not IsQuestComplete(0xE0007CEC19F3A0E1))">
-			<PickUpIfOffered QuestName="[DAILY] No Trace Left" QuestId="0xE0007CEC19F3A0E1" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
+			<PickUpQuest QuestName="[DAILY] No Trace Left" QuestId="0xE0007CEC19F3A0E1" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Black Hole -->
 		<If Condition="(not HasQuest(0xE000499515A96C81))">
-			<PickUpIfOffered QuestName="[WEEKLY] Daily Area: Black Hole" QuestId="0xE000499515A96C81" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" Repeatable="True" />
+			<PickUpQuest QuestName="[WEEKLY] Daily Area: Black Hole" QuestId="0xE000499515A96C81" SearchRadius="20" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.755,-1.898,44.727" />
 		</If>
 		<!-- [DAILY] No Trace Left: Identify Torvix's Spies (1/3) -->
 		<If Condition="HasQuest(0xE0007CEC19F3A0E1) and not IsTaskValueGreaterThan(0xE0007CEC19F3A0E1, 2, 0, 0)">
@@ -182,7 +189,7 @@
 		</If>
 		<!-- Pick up [DAILY] Asset Liquidation -->
 		<If Condition="(not HasQuest(0xE000964F15142AF9)) and (not IsQuestComplete(0xE000964F15142AF9))">
-			<PickUpIfOffered QuestName="[DAILY] Asset Liquidation" QuestId="0xE000964F15142AF9" UseRange="20" GiverName="Recon Droid" XYZ="-23.071,-0.097,31.767" />
+			<PickUpQuest QuestName="[DAILY] Asset Liquidation" QuestId="0xE000964F15142AF9" UseRange="20" GiverName="Recon Droid" XYZ="-23.071,-0.097,31.767" />
 		</If>
 		<!-- [DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield: step done -->
 		<If Condition="(HasQuest(0xE000964F15142AF9) and not IsTaskValueGreaterThan(0xE000964F15142AF9, 2, 0, 17)) or (HasQuest(0xE000E9F809193A03) and not IsBranchStepComplete(0xE000E9F809193A03, 1, 2))">
@@ -231,7 +238,7 @@
 		</If>
 		<!-- [HEROIC 2+] The End of Torvix: step 8 done (next: Reroute the Hypermatter Venting) -->
 		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 8)">
-			<ClickObject QuestId="0xE000D9F1A734F486" Name="Master Safety Control" XYZ="-37.882,-11.272,27.974" />
+			<Interact Name="Master Safety Control" XYZ="-37.882,-11.272,27.974" />
 			<While Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 8)">
 				<MoveTo QuestId="1" Name="Wait for the Hypermatter Annihilation Droid" XYZ="-37.58,-11.382,27.293" />
 				<WaitTimer QuestId="1" WaitTime="3" />
@@ -290,7 +297,7 @@
 		</If>
 		<If Condition="HasQuest(0xE000A590603D52BE) and not IsBranchStepComplete(0xE000A590603D52BE, 1, 2)">
 			<MoveTo QuestId="1" Name="Where you used Anti-rad Injector" XYZ="-4.52,-9.06,40.218" />
-			<UseMissionItemOnce ItemName="Anti-rad Injector" />
+			<UseItem ItemName="Anti-rad Injector" Condition="any(i.Name == 'Anti-rad Injector' for i in Me.QuestItems) and not IsBranchStepComplete(0xE000A590603D52BE, 1, 2)" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="-4.52,-9.06,40.218" /></Hotspots></UseItem>
 		</If>
 		<!-- [DAILY] Glow: adds by the 2nd console -->
 		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 1)">
