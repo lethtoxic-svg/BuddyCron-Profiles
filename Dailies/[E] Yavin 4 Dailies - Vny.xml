@@ -1,7 +1,6 @@
 <Profile>
 	<!-- Made by Vny with the help of Quest Recorder 1.0.0.7 - LethToxic. Recording: Yavin 4 -->
 	<Name>[E] Yavin 4 Dailies - Vny</Name>
-	<!-- The weekly pickup needs the Quest Recorder plugin (its pickup takes the weekly every time the terminal offers it): https://github.com/lethtoxic-svg/QuestRecorder -->
 
 	<Questing>
 		<!-- Pick up [DAILY] Confederacy -->
@@ -14,7 +13,7 @@
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Yavin 4 -->
 		<If Condition="(not HasQuest(0xE00029D46BB4EA8D))">
-			<PickUpIfOffered QuestName="[WEEKLY] Daily Area: Yavin 4" QuestId="0xE00029D46BB4EA8D" SearchRadius="20" UseRange="10" GiverName="Mission Terminal" XYZ="344.964,40.15,14.503" Repeatable="True" />
+			<PickUpQuest QuestName="[WEEKLY] Daily Area: Yavin 4" QuestId="0xE00029D46BB4EA8D" SearchRadius="20" UseRange="10" GiverName="Mission Terminal" XYZ="344.964,40.15,14.503" />
 		</If>
 		<!-- Pick up [DAILY] Chopping Block -->
 		<If Condition="(not HasQuest(0xE0007EC3F5A3CF10)) and (not IsQuestComplete(0xE0007EC3F5A3CF10))">

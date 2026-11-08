@@ -1,6 +1,5 @@
 <Profile xmlns="http://tempuri.org/ProfileSchema.xsd">
 	<Name>[E+R] L55 - CZ-198 Dailies - LethToxic</Name>
-	<!-- The weekly pickup needs the Quest Recorder plugin (its pickup takes the weekly every time the terminal offers it): https://github.com/lethtoxic-svg/QuestRecorder -->
 	<!-- LethToxic created. Timothy said drop UseTransport, built-in lifts handle it. -->
 	<!-- Empire and Republic in one file: your class picks the side. Each side is your own profile, plus the elevator rides down to Freight Depot and Waste Disposal. -->
 	
@@ -115,7 +114,7 @@
 			</If>	
 
 			<If Condition="((not HasQuest(0xE000D5C912883A23)) )">
-				<PickUpIfOffered QuestName="[WEEKLY] Daily Area: CZ-198" QuestId="0xE000D5C912883A23" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="4.476641,8.802309,2.756657" Repeatable="True" />
+				<PickUpQuest QuestName="[WEEKLY] Daily Area: CZ-198" QuestId="0xE000D5C912883A23" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="4.476641,8.802309,2.756657" />
 			</If>	
 
 
@@ -294,7 +293,7 @@
 				<PickUpQuest QuestName="[DAILY] Anti-Toxin Recovery" QuestId="0xE00009A5ADED8A3C" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
 			</If>	
 			<If Condition="((not HasQuest(0xE000353261D88E47)) )">
-				<PickUpIfOffered QuestName="[WEEKLY] Czerka Takeover" QuestId="0xE000353261D88E47" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" Repeatable="True" />
+				<PickUpQuest QuestName="[WEEKLY] Czerka Takeover" QuestId="0xE000353261D88E47" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
 			</If>	
 
 			<If Condition="((not HasQuest(0xE0006E78C9AB3836)) and (not IsQuestComplete(0xE0006E78C9AB3836)) )">
