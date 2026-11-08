@@ -22,6 +22,20 @@
 			if (best != null && best.IsWithinInteractRange) { best.Interact(); _w1_click = System.DateTime.Now; }
 			return false;
 		]]></CodeChunk>
+		<CodeChunk Name="FieldGeneratorState" Type="Definition"><![CDATA[
+			static System.DateTime _genClick;
+		]]></CodeChunk>
+		<CodeChunk Name="FieldGenerator" Type="Hook"><![CDATA[
+			var spot = new System.Numerics.Vector3(138.962f, 14.109f, -193.929f);
+			if ((System.DateTime.Now - _genClick).TotalSeconds < 3) return false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroPlaceable>())
+			    if (o != null && o.IsValid && o.Name == "Field Generator" && System.Numerics.Vector3.DistanceSquared(o.Location, spot) <= 4f && o.IsUsable)
+			    {
+			        if (!o.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(o.Location); return true; }
+			        BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); o.Interact(); _genClick = System.DateTime.Now; break;
+			    }
+			return false;
+		]]></CodeChunk>
 	</CodeChunks>
 
 	<GrindAreas>
@@ -409,8 +423,8 @@
 			<CompleteQuest QuestId="0xE0008A8BC5025C87" />
 		</If>
 		<!-- Stage 2 - Research Cancellation: Destroy the Research Stations (2/3) - any Research Station (2 spots) -->
-		<If Condition="HasQuest(0xE000898BC502A34A) and not IsTaskValueGreaterThan(0xE000898BC502A34A, 4, 0, 1)">
-			<UseObject ObjectName="Research Station" QuestId="0xE000898BC502A34A" BranchId="1" StepId="4" TaskId="0" TaskValue="1" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="135.3,14.11,-187.133" Radius="2"><Hotspots><Hotspot Name="Research Station" XYZ="133.966,14.11,-195.4" /><Hotspot Name="Research Station" XYZ="135.3,14.11,-187.133" /></Hotspots></UseObject>
+		<If Condition="HasQuest(0xE000898BC502A34A) and not IsTaskValueGreaterThan(0xE000898BC502A34A, 4, 0, 2)">
+			<UseObject ObjectName="Research Station" QuestId="0xE000898BC502A34A" BranchId="1" StepId="4" TaskId="0" TaskValue="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="135.3,14.11,-187.133" Radius="2"><Hotspots><Hotspot Name="Research Station" XYZ="133.966,14.11,-195.4" /><Hotspot Name="Research Station" XYZ="135.3,14.11,-187.133" /><Hotspot Name="Research Station" XYZ="134.217,14.11,-180.315" /></Hotspots></UseObject>
 		</If>
 		<!-- Final Stage - Research Cancellation: step 2 done -->
 		<If Condition="HasQuest(0xE000888BC502A139) and not IsBranchStepComplete(0xE000888BC502A139, 1, 2)">
@@ -425,9 +439,17 @@
 		<If Condition="(not HasQuest(0xE00024E47D19104F)) and (not IsQuestComplete(0xE00024E47D19104F))">
 			<PickUpQuest QuestName="Research Cancellation" QuestId="0xE00024E47D19104F" SearchRadius="0.02" UseRange="20" GiverName="Field Generator" XYZ="138.962,14.109,-193.929" />
 		</If>
+		<!-- Stage 2 - Research Cancellation: Destroy the Research Stations (2/3) - any Research Station (2 spots) -->
+		<If Condition="HasQuest(0xE000898BC502A34A) and not IsTaskValueGreaterThan(0xE000898BC502A34A, 4, 0, 2)">
+			<UseObject ObjectName="Research Station" QuestId="0xE000898BC502A34A" BranchId="1" StepId="4" TaskId="0" TaskValue="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="135.3,14.11,-187.133" Radius="2"><Hotspots><Hotspot Name="Research Station" XYZ="133.966,14.11,-195.4" /><Hotspot Name="Research Station" XYZ="135.3,14.11,-187.133" /><Hotspot Name="Research Station" XYZ="134.217,14.11,-180.315" /></Hotspots></UseObject>
+		</If>
 		<!-- Final Stage - Research Cancellation: last fight -->
-		<If Condition="HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139)">
-			<Grind GrindRef="Final Stage - Research Cancellation: last fight" While="HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139)" />
+		<If Condition="HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139) and not (HasQuest(0xE000898BC502A34A) and not IsQuestComplete(0xE000898BC502A34A))">
+			<MoveTo QuestId="1" Name="Next to the Field Generator" XYZ="138.932,14.102,-192.834" />
+			<Hook Name="FieldGenerator" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="4" />
+			<Hook Name="FieldGenerator" Operation="R" Location="TreeStart" />
+			<Grind GrindRef="Final Stage - Research Cancellation: last fight" While="HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139) and not (HasQuest(0xE000898BC502A34A) and not IsQuestComplete(0xE000898BC502A34A))" />
 		</If>
 		<!-- Reward: Final Stage - Research Cancellation -->
 		<If Condition="(HasQuest(0xE000888BC502A139) and not IsQuestComplete(0xE000888BC502A139)) or any(r.QuestId == 0xE000888BC502A139 for r in Me.Quests.PendingQuestRewards)">
@@ -560,7 +582,8 @@
 		</If>
 		<!-- Pick up [AREA 2+] Lost Reconnaissance -->
 		<If Condition="(not HasQuest(0xE000FFD91CDE7CB6)) and (not IsQuestComplete(0xE000FFD91CDE7CB6))">
-			<PickUpQuest QuestName="[AREA 2+] Lost Reconnaissance" QuestId="0xE000FFD91CDE7CB6" UseRange="20" GiverName="Dreadtooth" XYZ="57.792,13.191,-181.2" />
+			<MoveTo QuestId="1" Name="come here to get Area 2+ Lost Reconnaissance mission" XYZ="20.06,13.577,-215.38" />
+			<WaitTimer QuestId="1" WaitTime="3" />
 		</If>
 		<!-- [AREA 2+] Lost Reconnaissance: step 2 done (next: Recover Imperial Flight Recorders) -->
 		<If Condition="HasQuest(0xE000FFD91CDE7CB6) and not IsBranchStepComplete(0xE000FFD91CDE7CB6, 1, 2)">
