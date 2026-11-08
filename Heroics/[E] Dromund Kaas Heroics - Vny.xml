@@ -1,0 +1,346 @@
+<Profile>
+	<!-- Made by Vny with the help of Quest Recorder 1.0a - LethToxic. Recording: Dromund Kaas -->
+	<!-- Shadow Spawn redone by LethToxic with Quest Recorder 1.2a (rune spots only, the bot fights what attacks). Every heroic takes its reward straight after. -->
+	<Name>[E] Dromund Kaas Heroics	- Vny</Name>
+	
+	    <Questing>
+		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
+		<If Condition="(not HasQuest(0xE000A79504827409))">
+			<PickUpQuest QuestName="[WEEKLY] Heroic Missions: Dromund Kaas" QuestId="0xE000A79504827409" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Friends of Old -->
+		<If Condition="(not HasQuest(0xE000255F7B083BC0)) and (not IsQuestComplete(0xE000255F7B083BC0))">
+			<PickUpQuest QuestName="[HEROIC 2+] Friends of Old" QuestId="0xE000255F7B083BC0" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Possessed Hunter -->
+		<If Condition="(not HasQuest(0xE000506F03B0BD68)) and (not IsQuestComplete(0xE000506F03B0BD68))">
+			<PickUpQuest QuestName="[HEROIC 2+] Possessed Hunter" QuestId="0xE000506F03B0BD68" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Personal Challenge -->
+		<If Condition="(not HasQuest(0xE000DCD6D19E73AC)) and (not IsQuestComplete(0xE000DCD6D19E73AC))">
+			<PickUpQuest QuestName="[HEROIC 2+] Personal Challenge" QuestId="0xE000DCD6D19E73AC" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Saving Face -->
+		<If Condition="(not HasQuest(0xE0009A717FBD7A76)) and (not IsQuestComplete(0xE0009A717FBD7A76))">
+			<PickUpQuest QuestName="[HEROIC 2+] Saving Face" QuestId="0xE0009A717FBD7A76" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Shadow Spawn -->
+		<If Condition="(not HasQuest(0xE00041B75EBA1AF4)) and (not IsQuestComplete(0xE00041B75EBA1AF4))">
+			<PickUpQuest QuestName="[HEROIC 2+] Shadow Spawn" QuestId="0xE00041B75EBA1AF4" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
+		<If Condition="(not HasQuest(0xE000A79504827409))">
+			<PickUpQuest QuestName="[WEEKLY] Heroic Missions: Dromund Kaas" QuestId="0xE000A79504827409" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		</If>
+		<!-- Mission item: Heroic Transport: Shadow Spawn -->
+		<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 10000) and ((HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)) or (HasQuest(0xE00095831253A837) and not IsQuestComplete(0xE00095831253A837)) or (HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or (HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)))">
+			<UseItem ItemName="Heroic Transport: Shadow Spawn" Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="89.712,6.608,33.111" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport" Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="89.712,6.608,33.111" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			</If>
+		</If>
+		
+
+		<!-- [HEROIC 2+] Shadow Spawn - from LethToxic's Quest Recorder 1.2a recording (Dromund Kaas 2026-11-08 15-18): the rune spots only, in that order. No fight steps for the adds - BuddyCron fights whatever attacks on the way. -->
+		<!-- Mission item: Heroic Transport: Shadow Spawn -->
+		<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and ((any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.Backpack)) or (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))) and ((HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)))">
+			<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and (any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport: Shadow Spawn" Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and (any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Shadow Spawn' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="88.393,6.331,34.175" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="5" />
+			</If>
+			<If Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport" Condition="(((Me.Position.X - (-16.263)) ** 2 + (Me.Position.Z - (142.459)) ** 2) &gt; 5717) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="88.393,6.331,34.175" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="5" />
+			</If>
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Freedom (1/1) -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsTaskValueGreaterThan(0xE00041B75EBA1AF4, 2, 4, 0)">
+			<UseObject ObjectName="Apprentice Zane's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" TaskId="4" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-11.546,-8.173,138.2" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Passion (1/1) -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsTaskValueGreaterThan(0xE00041B75EBA1AF4, 2, 3, 0)">
+			<UseObject ObjectName="Apprentice Zeevon's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" TaskId="3" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-15.545,-8.242,151.438" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Power (1/1) -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsTaskValueGreaterThan(0xE00041B75EBA1AF4, 2, 1, 0)">
+			<UseObject ObjectName="Apprentice Mkaal's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" TaskId="1" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="-9.967,-9.979,146.38" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Strength (1/1) -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsTaskValueGreaterThan(0xE00041B75EBA1AF4, 2, 2, 0)">
+			<UseObject ObjectName="Apprentice Shon's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" TaskId="2" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="1.281,-12.357,139.226" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Victory (the last rune - step 2 done) -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 2)">
+			<UseObject ObjectName="Apprentice Dhaiv's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="6.845,-12.76,157.108" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Meditate on the Sith Runes in Order -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 3)">
+			<MoveTo QuestId="0xE00041B75EBA1AF4" Name="Where you used Sith Rune - Passion" XYZ="20.613,-13.806,126.207" />
+			<UseMissionItemOnce ItemName="Sith Rune - Passion" />
+			<UseMissionItemOnce ItemName="Sith Rune - Strength" />
+			<UseMissionItemOnce ItemName="Sith Rune - Power" />
+			<UseMissionItemOnce ItemName="Sith Rune - Victory" />
+			<UseMissionItemOnce ItemName="Sith Rune - Freedom" />
+			<WaitTimer QuestId="1" WaitTime="3" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Place the Runes on the Altar -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 4)">
+			<UseObject ObjectName="Ancient Altar" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="20.58,-13.819,125.523" />
+		</If>
+		<!-- [HEROIC 2+] Shadow Spawn: Defeat the Dark Sithspawn -->
+		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)">
+			<Grind While="HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)">
+				<GrindArea Name="[HEROIC 2+] Shadow Spawn: last fight">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Dark Sithspawn</Mob></Mobs>
+					<Hotspots>
+						<Hotspot Name="Dark Sithspawn" XYZ="20.4,-13.806,126.154" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+		<!-- Reward: [HEROIC 2+] Shadow Spawn -->
+		<If Condition="(HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)) or any(r.QuestId == 0xE00041B75EBA1AF4 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE00041B75EBA1AF4" />
+		</If>
+		
+		<!-- Mission item: Heroic Transport: Friends of Old -->
+		<If Condition="(((Me.Position.X - (-117.228)) ** 2 + (Me.Position.Z - (24.284)) ** 2) &gt; 10000) and ((HasQuest(0xE00095831253A837) and not IsQuestComplete(0xE00095831253A837)) or (HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or (HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)))">
+			<UseItem ItemName="Heroic Transport: Friends of Old" Condition="(((Me.Position.X - (-117.228)) ** 2 + (Me.Position.Z - (24.284)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport: Friends of Old' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Friends of Old' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="21.205,-13.806,125.794" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			<If Condition="(((Me.Position.X - (-117.228)) ** 2 + (Me.Position.Z - (24.284)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport" Condition="(((Me.Position.X - (-117.228)) ** 2 + (Me.Position.Z - (24.284)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="21.205,-13.806,125.794" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			</If>
+		</If>
+
+		<!-- [HEROIC 2+] Friends of Old: Recover Thermal Detonators (1/3) (kill and loot) -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsTaskValueGreaterThan(0xE000255F7B083BC0, 2, 0, 2)">
+			<Grind While="HasQuest(0xE000255F7B083BC0) and not IsTaskValueGreaterThan(0xE000255F7B083BC0, 2, 0, 2)">
+				<GrindArea Name="[HEROIC 2+] Friends of Old: Recover Thermal Detonators (kill and loot)">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Mercenary Demolitionist</Mob></Mobs>
+					<Hotspots>
+					    <Hotspot Name="Mercenary Demolitionist" XYZ="-116.6506, -5.80891, 30.881" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-121.1127,-5.7951145,31.2581" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-123.8014,-5.9896226,22.8262" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-128.679,-6.511214,16.5828" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-132.2296,-6.31914,18.4151" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-131.1514,-7.542849,12.4957" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-126.0366,-7.6784835,7.0374002" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-125.148,-7.640407,2.8251998" />
+						<Hotspot Name="Mercenary Demolitionist" XYZ="-120.4446,-7.753611,8.548312" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+
+		<!-- [HEROIC 2+] Friends of Old: step 2 done (next: Destroy Landing Shuttle One) -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsBranchStepComplete(0xE000255F7B083BC0, 1, 2)">
+			<MoveTo QuestId="0xE000255F7B083BC0" Name="Where it ticked" XYZ="-128.696,-6.497,16.698" />
+		</If>
+
+		<!-- [HEROIC 2+] Friends of Old: Destroy Landing Shuttle Two (1/1) -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsTaskValueGreaterThan(0xE000255F7B083BC0, 3, 1, 0)">
+			<UseObject ObjectName="Landing Shuttle Two" QuestId="0xE000255F7B083BC0" BranchId="1" StepId="3" TaskId="1" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="-124.076,-5.652,30.892" />
+		</If>
+
+		<!-- [HEROIC 2+] Friends of Old: Destroy Landing Shuttle One (1/1) -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsTaskValueGreaterThan(0xE000255F7B083BC0, 3, 0, 0)">
+			<UseObject ObjectName="Landing Shuttle One" QuestId="0xE000255F7B083BC0" BranchId="1" StepId="3" TaskId="0" TaskValue="0" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="-125.312,-7.404,2.236" />
+		</If>
+
+		<!-- [HEROIC 2+] Friends of Old: Destroy Landing Shuttle Three (1/1) -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsBranchStepComplete(0xE000255F7B083BC0, 1, 3)">
+			<UseObject ObjectName="Landing Shuttle Three" QuestId="0xE000255F7B083BC0" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="-81.291,-13.593,15.31" />
+		</If>
+
+		<!-- [HEROIC 2+] Friends of Old: Defeat Begeren Apprentices and Acolytes (1/1) -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsTaskValueGreaterThan(0xE000255F7B083BC0, 4, 1, 0)">
+			<Grind While="HasQuest(0xE000255F7B083BC0) and not IsTaskValueGreaterThan(0xE000255F7B083BC0, 4, 1, 0)">
+				<GrindArea Name="[HEROIC 2+] Friends of Old: Defeat Begeren Apprentices and Acolytes (1/1)">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Begeren Acolyte</Mob><Mob>Begeren Apprentice</Mob></Mobs>
+					<Hotspots>
+						<Hotspot Name="Begeren Acolyte" XYZ="-87.197,-13.588,32.818" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+		<!-- [HEROIC 2+] Friends of Old: last fight -->
+		<If Condition="HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)">
+			<Grind While="HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)">
+				<GrindArea Name="[HEROIC 2+] Friends of Old: last fight">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Lord Tytonus</Mob></Mobs>
+					<Hotspots>
+						<Hotspot Name="Lord Tytonus" XYZ="-84.031,-13.618,34.172" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+		<!-- Reward: [HEROIC 2+] Friends of Old -->
+		<If Condition="(HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or any(r.QuestId == 0xE000255F7B083BC0 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000255F7B083BC0" />
+		</If>
+		
+		<!-- Mission item: Heroic Transport: Personal Challenge -->
+		<If Condition="(((Me.Position.X - (48.033)) ** 2 + (Me.Position.Z - (70.032)) ** 2) &gt; 10000) and ((HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)))">
+			<UseItem ItemName="Heroic Transport: Personal Challenge" Condition="(((Me.Position.X - (48.033)) ** 2 + (Me.Position.Z - (70.032)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport: Personal Challenge' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Personal Challenge' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="-84.226,-13.618,34.13" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			<If Condition="(((Me.Position.X - (48.033)) ** 2 + (Me.Position.Z - (70.032)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport" Condition="(((Me.Position.X - (48.033)) ** 2 + (Me.Position.Z - (70.032)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="-84.226,-13.618,34.13" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			</If>
+		</If>
+
+		<!-- [HEROIC 2+] Personal Challenge: Defeat Kregg's Mandalorians (8/8) -->
+		<If Condition="HasQuest(0xE000DCD6D19E73AC) and not IsTaskValueGreaterThan(0xE000DCD6D19E73AC, 2, 1, 7)">
+			<Grind While="HasQuest(0xE000DCD6D19E73AC) and not IsTaskValueGreaterThan(0xE000DCD6D19E73AC, 2, 1, 7)">
+				<GrindArea Name="[HEROIC 2+] Personal Challenge: Consolidated Mandalorian Grind">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs>
+						<Mob>Mandalorian Equalizer</Mob>
+						<Mob>Mandalorian Trophy Hunter</Mob>
+						<Mob>Mandalorian Beast Slayer</Mob>
+					</Mobs>
+					<Hotspots>
+						<Hotspot Name="Mandalorian" XYZ="56.166,0.546,62.608" />
+						<Hotspot Name="Mandalorian" XYZ="59.089,0.330,59.582" />
+						<Hotspot Name="Mandalorian" XYZ="58.142,1.411,52.421" />
+						<Hotspot Name="Mandalorian" XYZ="60.913,1.134,52.702" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+
+		
+		<!-- [HEROIC 2+] Personal Challenge: Draw Out Kregg -->
+		<If Condition="HasQuest(0xE000DCD6D19E73AC) and not IsBranchStepComplete(0xE000DCD6D19E73AC, 1, 2)">
+			<UseObject ObjectName="Kregg's Locker" QuestId="0xE000DCD6D19E73AC" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="61.014233,0.39339998,65.27724" />
+		</If>
+		
+		<!-- [HEROIC 2+] Personal Challenge: last fight -->
+		<If Condition="HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)">
+			<Grind While="HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)">
+				<GrindArea Name="[HEROIC 2+] Personal Challenge: last fight">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Kregg</Mob></Mobs>
+					<Hotspots>
+						<Hotspot Name="Kregg" XYZ="58.857,0.337,65.083" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+		<!-- Reward: [HEROIC 2+] Personal Challenge -->
+		<If Condition="(HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or any(r.QuestId == 0xE000DCD6D19E73AC for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000DCD6D19E73AC" />
+		</If>
+
+		<!-- Mission item: Heroic Transport: Saving Face -->
+		<If Condition="(((Me.Position.X - (47.799)) ** 2 + (Me.Position.Z - (113.803)) ** 2) &gt; 629) and ((any(i.Name == 'Heroic Transport: Saving Face' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Saving Face' for i in Me.Backpack)) or (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))) and ((HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)))">
+			<If Condition="(((Me.Position.X - (47.799)) ** 2 + (Me.Position.Z - (113.803)) ** 2) &gt; 629) and (any(i.Name == 'Heroic Transport: Saving Face' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Saving Face' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport: Saving Face" Condition="(((Me.Position.X - (47.799)) ** 2 + (Me.Position.Z - (113.803)) ** 2) &gt; 629) and (any(i.Name == 'Heroic Transport: Saving Face' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Saving Face' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="60.43,0.276,65.289" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="5" />
+			</If>
+			<If Condition="(((Me.Position.X - (47.799)) ** 2 + (Me.Position.Z - (113.803)) ** 2) &gt; 629) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport" Condition="(((Me.Position.X - (47.799)) ** 2 + (Me.Position.Z - (113.803)) ** 2) &gt; 629) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="60.43,0.276,65.289" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="5" />
+			</If>
+		</If>
+
+		<!-- [HEROIC 2+] Saving Face: step 2 done (next: Plant the Explosives on a Drill) -->
+		<If Condition="HasQuest(0xE0009A717FBD7A76) and not IsBranchStepComplete(0xE0009A717FBD7A76, 1, 2)">
+			<UseObject ObjectName="Explosives" QuestId="0xE0009A717FBD7A76" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="43.043,2.007,103.412" />
+		</If>
+
+		<!-- [HEROIC 2+] Saving Face: step 3 done (next: Defeat Rebel Slaves) -->
+		<If Condition="HasQuest(0xE0009A717FBD7A76) and not IsBranchStepComplete(0xE0009A717FBD7A76, 1, 3)">
+			<UseObject ObjectName="Drill Panel" QuestId="0xE0009A717FBD7A76" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="38.947,2.305,113.49" />
+		</If>
+		<!-- [HEROIC 2+] Saving Face: last fight -->
+		<If Condition="HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)">
+			<Grind While="HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)">
+				<GrindArea Name="[HEROIC 2+] Saving Face: last fight">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Rebel Slave Demolitionist</Mob><Mob>Rebel Slave Taskmaster</Mob></Mobs>
+					<Hotspots>
+						<Hotspot Name="Rebel Slave Demolitionist" XYZ="40.882,2.03,112.756" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+		<!-- Reward: [HEROIC 2+] Saving Face -->
+		<If Condition="(HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or any(r.QuestId == 0xE0009A717FBD7A76 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE0009A717FBD7A76" />
+		</If>
+		<!-- Mission item: Heroic Transport: Possessed Hunter -->
+		<If Condition="(((Me.Position.X - (-187.359)) ** 2 + (Me.Position.Z - (19.735)) ** 2) &gt; 10000) and ((HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)))">
+			<UseItem ItemName="Heroic Transport: Possessed Hunter" Condition="(((Me.Position.X - (-187.359)) ** 2 + (Me.Position.Z - (19.735)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport: Possessed Hunter' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Possessed Hunter' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="39.492,2.207,113.573" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			<If Condition="(((Me.Position.X - (-187.359)) ** 2 + (Me.Position.Z - (19.735)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))">
+			<UseItem ItemName="Heroic Transport" Condition="(((Me.Position.X - (-187.359)) ** 2 + (Me.Position.Z - (19.735)) ** 2) &gt; 10000) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" WaitTime="3000" Range="100000"><Hotspots><Hotspot Name="Where you used it" XYZ="39.492,2.207,113.573" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="4" />
+			</If>
+		</If>
+		<!-- [HEROIC 2+] Possessed Hunter: last fight -->
+		<If Condition="HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)">
+			<Grind While="HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)">
+				<GrindArea Name="[HEROIC 2+] Possessed Hunter: last fight">
+					<MinLevel>1</MinLevel>
+					<MaxLevel>100</MaxLevel>
+					<Mobs><Mob>Valen Korik</Mob></Mobs>
+					<Hotspots>
+						<Hotspot Name="Valen Korik" XYZ="-207.229,14.852,-20.907" />
+					</Hotspots>
+				</GrindArea>
+			</Grind>
+		</If>
+		<!-- Reward: [HEROIC 2+] Possessed Hunter -->
+		<If Condition="(HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or any(r.QuestId == 0xE000506F03B0BD68 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000506F03B0BD68" />
+		</If>
+		<!-- Reward: [WEEKLY] Heroic Missions: Dromund Kaas -->
+		<If Condition="(HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)) or any(r.QuestId == 0xE000A79504827409 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000A79504827409" />
+		</If>
+		<!-- Return to Dromund Kaas Spaceport after defeating Valen Korik -->
+		<If Condition="HasQuest(0xE000506F03B0BD68) and IsQuestComplete(0xE000506F03B0BD68)">
+			<MoveTo QuestId="1" Name="Dromund Kaas Spaceport" XYZ="89.8386,6.592,35.3534" />
+			<WaitTimer QuestId="1" WaitTime="5" />
+		</If>
+
+
+		<!-- Grab any rewards still waiting -->
+		<WaitTimer QuestId="1" WaitTime="5" />
+		<CompleteQuest QuestId="0xE00041B75EBA1AF4" />
+		<CompleteQuest QuestId="0xE000255F7B083BC0" />
+		<CompleteQuest QuestId="0xE000DCD6D19E73AC" />
+		<CompleteQuest QuestId="0xE0009A717FBD7A76" />
+		<CompleteQuest QuestId="0xE000506F03B0BD68" />
+		<CompleteQuest QuestId="0xE000A79504827409" />
+		<!-- Not finished? Go round again (done steps get skipped) -->
+		<If Condition="(HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)) or (HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4))">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<LoadProfile Path="[E] Dromund Kaas Heroics - Vny.xml" />
+		</If>
+		
+		<UserDialog Title="I'm done!" Message="I'm done with Dromund Kaas!" />
+				
+	</Questing>
+</Profile>
