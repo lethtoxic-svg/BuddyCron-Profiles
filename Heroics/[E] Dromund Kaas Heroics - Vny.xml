@@ -73,6 +73,7 @@
 		</If>
 		<!-- [HEROIC 2+] Shadow Spawn: Retrieve the Rune of Victory (the last rune - step 2 done) -->
 		<If Condition="HasQuest(0xE00041B75EBA1AF4) and not IsBranchStepComplete(0xE00041B75EBA1AF4, 1, 2)">
+			<MoveTo QuestId="0xE00041B75EBA1AF4" Name="Next to Apprentice Dhaiv's Corpse (nav plans a quick travel from the Gundark spot)" XYZ="8.521688,-12.796983,154.10213" />
 			<UseObject ObjectName="Apprentice Dhaiv's Corpse" QuestId="0xE00041B75EBA1AF4" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="6.845,-12.76,157.108" />
 		</If>
 		<!-- [HEROIC 2+] Shadow Spawn: Meditate on the Sith Runes in Order -->
