@@ -22,6 +22,18 @@
 			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_A96C81_1_click = System.DateTime.Now; }
 			return false;
 		]]></CodeChunk>
+		<CodeChunk Name="OffTableState" Type="Definition"><![CDATA[
+			static bool _offTableMoving;
+		]]></CodeChunk>
+		<CodeChunk Name="OffTable" Type="Hook"><![CDATA[
+			var me = BuddyCron.Core.Player;
+			var table = new System.Numerics.Vector3(-8.989f, -11.597f, 25.014f);
+			var floor = new System.Numerics.Vector3(-9.229f, -11.698f, 24.188f);
+			if (System.Numerics.Vector3.Distance(me.Location, table) > 0.6f || me.Location.Y < -11.65f) { if (_offTableMoving) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _offTableMoving = false; } return false; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(floor);
+			_offTableMoving = true;
+			return true;
+		]]></CodeChunk>
 	</CodeChunks>
 	<GrindAreas>
 		<GrindArea Name="[DAILY] Asset Liquidation: Defeat Torvix Forces (18/20) + [DAILY] Control the Battlefield:">
@@ -245,6 +257,9 @@
 		</If>
 		<!-- [HEROIC 2+] The End of Torvix: step 5 done (next: Breach the First Security Checkpoint) -->
 		<If Condition="HasQuest(0xE000D9F1A734F486) and not IsBranchStepComplete(0xE000D9F1A734F486, 1, 5)">
+			<Hook Name="OffTable" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="2" />
+			<Hook Name="OffTable" Operation="R" Location="TreeStart" />
 			<MoveTo QuestId="0xE000D9F1A734F486" Name="Where it ticked" XYZ="-22.24,-9.398,8.802" />
 		</If>
 		<!-- [HEROIC 2+] The End of Torvix: step 6 done (next: Breach the Second Security Checkpoint) -->
@@ -320,7 +335,7 @@
 		</If>
 		<!-- [DAILY] Glow: adds by the 2nd console -->
 		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 1)">
-			<MoveTo QuestId="1" Name="2nd console" XYZ="-1.779,-9.081,35.754" />
+			<MoveTo QuestId="1" Name="Adds by the 2nd console" XYZ="-2.15,-9.272,37.55" />
 			<WaitTimer QuestId="1" WaitTime="5" />
 		</If>
 		<!-- [DAILY] Glow: Reroute Hypermatter Pipelines (3/4) - any Hypermatter Pipeline Controls (2 spots) -->
@@ -353,6 +368,10 @@
 		</If>
 		<!-- Reward: [DAILY] Glow -->
 		<If Condition="(HasQuest(0xE000A7BF7FECDFDC) and not IsQuestComplete(0xE000A7BF7FECDFDC)) or any(r.QuestId == 0xE000A7BF7FECDFDC for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="Me.Position.Y &lt; -5">
+				<MoveTo QuestId="1" Name="Before the door / phase" XYZ="3.853,-8.477,41.162" />
+				<MoveTo QuestId="1" Name="Came out here" XYZ="-29.92,-1.098,43.018" />
+			</If>
 			<WaitTimer QuestId="1" WaitTime="35" />
 			<CompleteQuest QuestId="0xE000A7BF7FECDFDC" />
 		</If>
