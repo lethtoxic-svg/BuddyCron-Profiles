@@ -3,15 +3,37 @@
 	<Name>[E] Section X Dailies - TEST</Name>
 	<CodeChunks>
 		<CodeChunk Name="TakeWeekly1State" Type="Definition"><![CDATA[
-			static System.DateTime _w1_click;
+			static System.DateTime _w1_click, _w1_start, _w1_last, _w1_open;
+			static bool _w1_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly1" Type="Hook"><![CDATA[
 			ulong id = 0xE00094C1F13C31A1UL;
 			var spot = new System.Numerics.Vector3(63.721f, 15.347f, -214.116f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _w1_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _w1_last).TotalSeconds > 30) { _w1_start = now; _w1_open = System.DateTime.MinValue; _w1_done = false; }
+			_w1_last = now;
+			if (_w1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _w1_start).TotalSeconds > 20) { _w1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w1_open == System.DateTime.MinValue) _w1_open = now;
+			    if ((now - _w1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w1_done = true; return false; }
+			    if ((now - _w1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w1_click = now; }
+			    return true;
+			}
+			_w1_open = System.DateTime.MinValue;
+			if ((now - _w1_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -19,8 +41,9 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _w1_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _w1_start).TotalSeconds > 6) { _w1_done = true; return false; } return true; }
+			best.Interact(); _w1_click = now;
+			return true;
 		]]></CodeChunk>
 		<CodeChunk Name="FieldGeneratorState" Type="Definition"><![CDATA[
 			static System.DateTime _genClick;
@@ -354,10 +377,9 @@
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Section X -->
 		<If Condition="(not HasQuest(0xE00094C1F13C31A1))">
-			<PickUpQuest QuestName="[WEEKLY] Daily Area: Section X" QuestId="0xE00094C1F13C31A1" SearchRadius="0.02" UseRange="20" GiverName="Mission Terminal" XYZ="63.721,15.347,-214.116" />
 			<MoveTo QuestId="1" Name="Mission Terminal" XYZ="63.721,15.347,-214.116" />
 			<Hook Name="TakeWeekly1" Operation="I" Index="0" Location="TreeStart" />
-			<WaitTimer QuestId="1" WaitTime="8" />
+			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- [DAILY] Hyperbiology: Collect Biological Samples from Mutated Beasts - collect: any Mutated Beast Egg, any Mutated Beast Bones -->

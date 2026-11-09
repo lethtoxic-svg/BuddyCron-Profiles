@@ -88,15 +88,37 @@
 			return false;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_883A23_1State" Type="Definition"><![CDATA[
-			static System.DateTime _TakeWeekly_883A23_1_click;
+			static System.DateTime _TakeWeekly_883A23_1_click, _TakeWeekly_883A23_1_start, _TakeWeekly_883A23_1_last, _TakeWeekly_883A23_1_open;
+			static bool _TakeWeekly_883A23_1_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_883A23_1" Type="Hook"><![CDATA[
 			ulong id = 0xE000D5C912883A23UL;
 			var spot = new System.Numerics.Vector3(4.476641f, 8.802309f, 2.756657f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _TakeWeekly_883A23_1_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _TakeWeekly_883A23_1_last).TotalSeconds > 30) { _TakeWeekly_883A23_1_start = now; _TakeWeekly_883A23_1_open = System.DateTime.MinValue; _TakeWeekly_883A23_1_done = false; }
+			_TakeWeekly_883A23_1_last = now;
+			if (_TakeWeekly_883A23_1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _TakeWeekly_883A23_1_start).TotalSeconds > 20) { _TakeWeekly_883A23_1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_TakeWeekly_883A23_1_open == System.DateTime.MinValue) _TakeWeekly_883A23_1_open = now;
+			    if ((now - _TakeWeekly_883A23_1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _TakeWeekly_883A23_1_done = true; return false; }
+			    if ((now - _TakeWeekly_883A23_1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _TakeWeekly_883A23_1_click = now; }
+			    return true;
+			}
+			_TakeWeekly_883A23_1_open = System.DateTime.MinValue;
+			if ((now - _TakeWeekly_883A23_1_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -104,19 +126,42 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_883A23_1_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _TakeWeekly_883A23_1_start).TotalSeconds > 6) { _TakeWeekly_883A23_1_done = true; return false; } return true; }
+			best.Interact(); _TakeWeekly_883A23_1_click = now;
+			return true;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_D88E47_2State" Type="Definition"><![CDATA[
-			static System.DateTime _TakeWeekly_D88E47_2_click;
+			static System.DateTime _TakeWeekly_D88E47_2_click, _TakeWeekly_D88E47_2_start, _TakeWeekly_D88E47_2_last, _TakeWeekly_D88E47_2_open;
+			static bool _TakeWeekly_D88E47_2_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_D88E47_2" Type="Hook"><![CDATA[
 			ulong id = 0xE000353261D88E47UL;
 			var spot = new System.Numerics.Vector3(-55.38471f, 8.803679f, 0.3304866f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _TakeWeekly_D88E47_2_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _TakeWeekly_D88E47_2_last).TotalSeconds > 30) { _TakeWeekly_D88E47_2_start = now; _TakeWeekly_D88E47_2_open = System.DateTime.MinValue; _TakeWeekly_D88E47_2_done = false; }
+			_TakeWeekly_D88E47_2_last = now;
+			if (_TakeWeekly_D88E47_2_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _TakeWeekly_D88E47_2_start).TotalSeconds > 20) { _TakeWeekly_D88E47_2_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_TakeWeekly_D88E47_2_open == System.DateTime.MinValue) _TakeWeekly_D88E47_2_open = now;
+			    if ((now - _TakeWeekly_D88E47_2_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _TakeWeekly_D88E47_2_done = true; return false; }
+			    if ((now - _TakeWeekly_D88E47_2_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _TakeWeekly_D88E47_2_click = now; }
+			    return true;
+			}
+			_TakeWeekly_D88E47_2_open = System.DateTime.MinValue;
+			if ((now - _TakeWeekly_D88E47_2_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -124,8 +169,9 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_D88E47_2_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _TakeWeekly_D88E47_2_start).TotalSeconds > 6) { _TakeWeekly_D88E47_2_done = true; return false; } return true; }
+			best.Interact(); _TakeWeekly_D88E47_2_click = now;
+			return true;
 		]]></CodeChunk>
 	</CodeChunks>
 
@@ -153,10 +199,9 @@
 			</If>	
 
 			<If Condition="((not HasQuest(0xE000D5C912883A23)) )">
-				<PickUpQuest QuestName="[WEEKLY] Daily Area: CZ-198" QuestId="0xE000D5C912883A23" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="4.476641,8.802309,2.756657" />
 				<MoveTo QuestId="1" Name="Mission Terminal" XYZ="4.476641,8.802309,2.756657" />
 				<Hook Name="TakeWeekly_883A23_1" Operation="I" Index="0" Location="TreeStart" />
-				<WaitTimer QuestId="1" WaitTime="8" />
+				<WaitTimer QuestId="1" WaitTime="1" />
 				<Hook Name="TakeWeekly_883A23_1" Operation="R" Location="TreeStart" />
 			</If>	
 
@@ -335,10 +380,9 @@
 				<PickUpQuest QuestName="[DAILY] Anti-Toxin Recovery" QuestId="0xE00009A5ADED8A3C" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
 			</If>	
 			<If Condition="((not HasQuest(0xE000353261D88E47)) )">
-				<PickUpQuest QuestName="[WEEKLY] Czerka Takeover" QuestId="0xE000353261D88E47" GiverType="Placeable" UseRange="2" Radius="5" GiverName="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
 				<MoveTo QuestId="1" Name="Mission Terminal" XYZ="-55.38471,8.803679,0.3304866" />
 				<Hook Name="TakeWeekly_D88E47_2" Operation="I" Index="0" Location="TreeStart" />
-				<WaitTimer QuestId="1" WaitTime="8" />
+				<WaitTimer QuestId="1" WaitTime="1" />
 				<Hook Name="TakeWeekly_D88E47_2" Operation="R" Location="TreeStart" />
 			</If>	
 

@@ -47,15 +47,37 @@
 			return true;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_827409_1State" Type="Definition"><![CDATA[
-			static System.DateTime _TakeWeekly_827409_1_click;
+			static System.DateTime _TakeWeekly_827409_1_click, _TakeWeekly_827409_1_start, _TakeWeekly_827409_1_last, _TakeWeekly_827409_1_open;
+			static bool _TakeWeekly_827409_1_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_827409_1" Type="Hook"><![CDATA[
 			ulong id = 0xE000A79504827409UL;
 			var spot = new System.Numerics.Vector3(89.534f, 6.606f, 32.901f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _TakeWeekly_827409_1_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _TakeWeekly_827409_1_last).TotalSeconds > 30) { _TakeWeekly_827409_1_start = now; _TakeWeekly_827409_1_open = System.DateTime.MinValue; _TakeWeekly_827409_1_done = false; }
+			_TakeWeekly_827409_1_last = now;
+			if (_TakeWeekly_827409_1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _TakeWeekly_827409_1_start).TotalSeconds > 20) { _TakeWeekly_827409_1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_TakeWeekly_827409_1_open == System.DateTime.MinValue) _TakeWeekly_827409_1_open = now;
+			    if ((now - _TakeWeekly_827409_1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _TakeWeekly_827409_1_done = true; return false; }
+			    if ((now - _TakeWeekly_827409_1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _TakeWeekly_827409_1_click = now; }
+			    return true;
+			}
+			_TakeWeekly_827409_1_open = System.DateTime.MinValue;
+			if ((now - _TakeWeekly_827409_1_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -63,19 +85,42 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_827409_1_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _TakeWeekly_827409_1_start).TotalSeconds > 6) { _TakeWeekly_827409_1_done = true; return false; } return true; }
+			best.Interact(); _TakeWeekly_827409_1_click = now;
+			return true;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_827409_2State" Type="Definition"><![CDATA[
-			static System.DateTime _TakeWeekly_827409_2_click;
+			static System.DateTime _TakeWeekly_827409_2_click, _TakeWeekly_827409_2_start, _TakeWeekly_827409_2_last, _TakeWeekly_827409_2_open;
+			static bool _TakeWeekly_827409_2_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_827409_2" Type="Hook"><![CDATA[
 			ulong id = 0xE000A79504827409UL;
 			var spot = new System.Numerics.Vector3(89.534f, 6.606f, 32.901f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _TakeWeekly_827409_2_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _TakeWeekly_827409_2_last).TotalSeconds > 30) { _TakeWeekly_827409_2_start = now; _TakeWeekly_827409_2_open = System.DateTime.MinValue; _TakeWeekly_827409_2_done = false; }
+			_TakeWeekly_827409_2_last = now;
+			if (_TakeWeekly_827409_2_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _TakeWeekly_827409_2_start).TotalSeconds > 20) { _TakeWeekly_827409_2_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_TakeWeekly_827409_2_open == System.DateTime.MinValue) _TakeWeekly_827409_2_open = now;
+			    if ((now - _TakeWeekly_827409_2_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _TakeWeekly_827409_2_done = true; return false; }
+			    if ((now - _TakeWeekly_827409_2_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _TakeWeekly_827409_2_click = now; }
+			    return true;
+			}
+			_TakeWeekly_827409_2_open = System.DateTime.MinValue;
+			if ((now - _TakeWeekly_827409_2_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -83,18 +128,18 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_827409_2_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _TakeWeekly_827409_2_start).TotalSeconds > 6) { _TakeWeekly_827409_2_done = true; return false; } return true; }
+			best.Interact(); _TakeWeekly_827409_2_click = now;
+			return true;
 		]]></CodeChunk>
 	</CodeChunks>
 	
 	    <Questing>
 		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
-		<If Condition="(not HasQuest(0xE000A79504827409))">
-			<PickUpQuest QuestName="[WEEKLY] Heroic Missions: Dromund Kaas" QuestId="0xE000A79504827409" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		<If Condition="((not HasQuest(0xE000A79504827409))) and ((not ((HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)) or (HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)))) or (((Me.Position.X - (89.534)) ** 2 + (Me.Position.Z - (32.901)) ** 2) &lt; 400))">
 			<MoveTo QuestId="1" Name="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
 			<Hook Name="TakeWeekly_827409_1" Operation="I" Index="0" Location="TreeStart" />
-			<WaitTimer QuestId="1" WaitTime="8" />
+			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly_827409_1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- Pick up [HEROIC 2+] Friends of Old -->
@@ -118,11 +163,10 @@
 			<PickUpQuest QuestName="[HEROIC 2+] Shadow Spawn" QuestId="0xE00041B75EBA1AF4" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
 		</If>
 		<!-- Pick up [WEEKLY] Heroic Missions: Dromund Kaas -->
-		<If Condition="(not HasQuest(0xE000A79504827409))">
-			<PickUpQuest QuestName="[WEEKLY] Heroic Missions: Dromund Kaas" QuestId="0xE000A79504827409" SearchRadius="20" UseRange="20" GiverName="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
+		<If Condition="((not HasQuest(0xE000A79504827409))) and ((not ((HasQuest(0xE000A79504827409) and not IsQuestComplete(0xE000A79504827409)) or (HasQuest(0xE000255F7B083BC0) and not IsQuestComplete(0xE000255F7B083BC0)) or (HasQuest(0xE000506F03B0BD68) and not IsQuestComplete(0xE000506F03B0BD68)) or (HasQuest(0xE000DCD6D19E73AC) and not IsQuestComplete(0xE000DCD6D19E73AC)) or (HasQuest(0xE0009A717FBD7A76) and not IsQuestComplete(0xE0009A717FBD7A76)) or (HasQuest(0xE00041B75EBA1AF4) and not IsQuestComplete(0xE00041B75EBA1AF4)))) or (((Me.Position.X - (89.534)) ** 2 + (Me.Position.Z - (32.901)) ** 2) &lt; 400))">
 			<MoveTo QuestId="1" Name="Daily Heroic Missions" XYZ="89.534,6.606,32.901" />
 			<Hook Name="TakeWeekly_827409_2" Operation="I" Index="0" Location="TreeStart" />
-			<WaitTimer QuestId="1" WaitTime="8" />
+			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly_827409_2" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- Mission item: Heroic Transport: Shadow Spawn -->

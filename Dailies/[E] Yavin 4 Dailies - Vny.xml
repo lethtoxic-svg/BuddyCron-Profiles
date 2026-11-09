@@ -3,15 +3,37 @@
 	<Name>[E] Yavin 4 Dailies - Vny</Name>
 	<CodeChunks>
 		<CodeChunk Name="TakeWeekly_B4EA8D_1State" Type="Definition"><![CDATA[
-			static System.DateTime _TakeWeekly_B4EA8D_1_click;
+			static System.DateTime _TakeWeekly_B4EA8D_1_click, _TakeWeekly_B4EA8D_1_start, _TakeWeekly_B4EA8D_1_last, _TakeWeekly_B4EA8D_1_open;
+			static bool _TakeWeekly_B4EA8D_1_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_B4EA8D_1" Type="Hook"><![CDATA[
 			ulong id = 0xE00029D46BB4EA8DUL;
 			var spot = new System.Numerics.Vector3(344.964f, 40.15f, 14.503f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _TakeWeekly_B4EA8D_1_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _TakeWeekly_B4EA8D_1_last).TotalSeconds > 30) { _TakeWeekly_B4EA8D_1_start = now; _TakeWeekly_B4EA8D_1_open = System.DateTime.MinValue; _TakeWeekly_B4EA8D_1_done = false; }
+			_TakeWeekly_B4EA8D_1_last = now;
+			if (_TakeWeekly_B4EA8D_1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _TakeWeekly_B4EA8D_1_start).TotalSeconds > 20) { _TakeWeekly_B4EA8D_1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_TakeWeekly_B4EA8D_1_open == System.DateTime.MinValue) _TakeWeekly_B4EA8D_1_open = now;
+			    if ((now - _TakeWeekly_B4EA8D_1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _TakeWeekly_B4EA8D_1_done = true; return false; }
+			    if ((now - _TakeWeekly_B4EA8D_1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _TakeWeekly_B4EA8D_1_click = now; }
+			    return true;
+			}
+			_TakeWeekly_B4EA8D_1_open = System.DateTime.MinValue;
+			if ((now - _TakeWeekly_B4EA8D_1_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -19,8 +41,9 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_B4EA8D_1_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _TakeWeekly_B4EA8D_1_start).TotalSeconds > 6) { _TakeWeekly_B4EA8D_1_done = true; return false; } return true; }
+			best.Interact(); _TakeWeekly_B4EA8D_1_click = now;
+			return true;
 		]]></CodeChunk>
 	</CodeChunks>
 
@@ -34,11 +57,10 @@
 			<PickUpQuest QuestName="[DAILY] The Devoted Ones" QuestId="0xE0000FF1639BC9A1" SearchRadius="20" UseRange="20" GiverName="Mission Terminal" XYZ="344.964,40.15,14.503" />
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Yavin 4 -->
-		<If Condition="(not HasQuest(0xE00029D46BB4EA8D))">
-			<PickUpQuest QuestName="[WEEKLY] Daily Area: Yavin 4" QuestId="0xE00029D46BB4EA8D" SearchRadius="20" UseRange="10" GiverName="Mission Terminal" XYZ="344.964,40.15,14.503" />
+		<If Condition="((not HasQuest(0xE00029D46BB4EA8D))) and ((not ((HasQuest(0xE0004A2829872B16) and not IsQuestComplete(0xE0004A2829872B16)) or (HasQuest(0xE0000FF1639BC9A1) and not IsQuestComplete(0xE0000FF1639BC9A1)) or (HasQuest(0xE0007EC3F5A3CF10) and not IsQuestComplete(0xE0007EC3F5A3CF10)) or (HasQuest(0xE00074C9A6567C0F) and not IsQuestComplete(0xE00074C9A6567C0F)) or (HasQuest(0xE000AE0639786886) and not IsQuestComplete(0xE000AE0639786886)) or (HasQuest(0xE0008015AD0AF9C8) and not IsQuestComplete(0xE0008015AD0AF9C8)) or (HasQuest(0xE000D0A60DF8B9CA) and not IsQuestComplete(0xE000D0A60DF8B9CA)) or (HasQuest(0xE0009E9FAED31D0C) and not IsQuestComplete(0xE0009E9FAED31D0C)))) or (((Me.Position.X - (344.964)) ** 2 + (Me.Position.Z - (14.503)) ** 2) &lt; 400))">
 			<MoveTo QuestId="1" Name="Mission Terminal" XYZ="344.964,40.15,14.503" />
 			<Hook Name="TakeWeekly_B4EA8D_1" Operation="I" Index="0" Location="TreeStart" />
-			<WaitTimer QuestId="1" WaitTime="8" />
+			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly_B4EA8D_1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- Pick up [DAILY] Chopping Block -->

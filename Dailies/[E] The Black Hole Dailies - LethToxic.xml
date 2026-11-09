@@ -3,15 +3,37 @@
 	<Name>[E] The Black Hole Dailies - LethToxic</Name>
 	<CodeChunks>
 		<CodeChunk Name="TakeWeekly_A96C81_1State" Type="Definition"><![CDATA[
-			static System.DateTime _TakeWeekly_A96C81_1_click;
+			static System.DateTime _TakeWeekly_A96C81_1_click, _TakeWeekly_A96C81_1_start, _TakeWeekly_A96C81_1_last, _TakeWeekly_A96C81_1_open;
+			static bool _TakeWeekly_A96C81_1_done;
 		]]></CodeChunk>
 		<CodeChunk Name="TakeWeekly_A96C81_1" Type="Hook"><![CDATA[
 			ulong id = 0xE000499515A96C81UL;
 			var spot = new System.Numerics.Vector3(-21.7548f, -1.8982f, 44.7273f);
 			var me = BuddyCron.Core.Player;
-			if (System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
-			if (me.MissionBoardOpen) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); return false; }
-			if ((System.DateTime.Now - _TakeWeekly_A96C81_1_click).TotalSeconds < 3) return false;
+			var now = System.DateTime.Now;
+			if ((now - _TakeWeekly_A96C81_1_last).TotalSeconds > 30) { _TakeWeekly_A96C81_1_start = now; _TakeWeekly_A96C81_1_open = System.DateTime.MinValue; _TakeWeekly_A96C81_1_done = false; }
+			_TakeWeekly_A96C81_1_last = now;
+			if (_TakeWeekly_A96C81_1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) return false;
+			if ((now - _TakeWeekly_A96C81_1_start).TotalSeconds > 20) { _TakeWeekly_A96C81_1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_TakeWeekly_A96C81_1_open == System.DateTime.MinValue) _TakeWeekly_A96C81_1_open = now;
+			    if ((now - _TakeWeekly_A96C81_1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _TakeWeekly_A96C81_1_done = true; return false; }
+			    if ((now - _TakeWeekly_A96C81_1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _TakeWeekly_A96C81_1_click = now; }
+			    return true;
+			}
+			_TakeWeekly_A96C81_1_open = System.DateTime.MinValue;
+			if ((now - _TakeWeekly_A96C81_1_click).TotalSeconds < 3) return true;
 			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
 			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
 			{
@@ -19,8 +41,9 @@
 			    bool marked = o.QuestIndication.ToString() != "None";
 			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
 			}
-			if (best != null && best.IsWithinInteractRange) { best.Interact(); _TakeWeekly_A96C81_1_click = System.DateTime.Now; }
-			return false;
+			if (best == null || !best.IsWithinInteractRange) { if ((now - _TakeWeekly_A96C81_1_start).TotalSeconds > 6) { _TakeWeekly_A96C81_1_done = true; return false; } return true; }
+			best.Interact(); _TakeWeekly_A96C81_1_click = now;
+			return true;
 		]]></CodeChunk>
 		<CodeChunk Name="OffTableState" Type="Definition"><![CDATA[
 			static bool _offTableMoving;
@@ -150,10 +173,9 @@
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Black Hole -->
 		<If Condition="(not HasQuest(0xE000499515A96C81))">
-			<PickUpQuest QuestName="[WEEKLY] Daily Area: Black Hole" QuestId="0xE000499515A96C81" SearchRadius="0.02" UseRange="20" GiverName="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
 			<MoveTo QuestId="1" Name="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
 			<Hook Name="TakeWeekly_A96C81_1" Operation="I" Index="0" Location="TreeStart" />
-			<WaitTimer QuestId="1" WaitTime="8" />
+			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly_A96C81_1" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- [DAILY] No Trace Left: Identify Torvix's Spies (1/3) -->
