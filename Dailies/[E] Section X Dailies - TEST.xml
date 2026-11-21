@@ -377,7 +377,7 @@
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Section X -->
 		<If Condition="(not HasQuest(0xE00094C1F13C31A1))">
-			<MoveTo QuestId="1" Name="Mission Terminal" XYZ="63.721,15.347,-214.116" />
+			<MoveTo QuestId="1" Name="Mission Terminal" XYZ="63.552,15.349,-214.315" />
 			<Hook Name="TakeWeekly1" Operation="I" Index="0" Location="TreeStart" />
 			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly1" Operation="R" Location="TreeStart" />

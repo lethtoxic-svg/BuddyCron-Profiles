@@ -173,7 +173,7 @@
 		</If>
 		<!-- Pick up [WEEKLY] Daily Area: Black Hole -->
 		<If Condition="(not HasQuest(0xE000499515A96C81))">
-			<MoveTo QuestId="1" Name="Black Hole Mission Terminal" XYZ="-21.7548,-1.8982,44.7273" />
+			<MoveTo QuestId="1" Name="Black Hole Mission Terminal" XYZ="-21.939,-1.889,44.678" />
 			<Hook Name="TakeWeekly_A96C81_1" Operation="I" Index="0" Location="TreeStart" />
 			<WaitTimer QuestId="1" WaitTime="1" />
 			<Hook Name="TakeWeekly_A96C81_1" Operation="R" Location="TreeStart" />
@@ -185,7 +185,6 @@
 					<Npc>Imperial Soldier</Npc>
 					<Npc>Imperial Officer</Npc>
 					<Npc>Imperial Engineer</Npc>
-					<Npc>Imperial Agent</Npc>
 				</Npcs>
 				<Hotspots>
 					<Hotspot Name="Where you used it" XYZ="-27.316,-2.098,42.693" />
@@ -204,7 +203,6 @@
 					<Npc>Imperial Soldier</Npc>
 					<Npc>Imperial Officer</Npc>
 					<Npc>Imperial Engineer</Npc>
-					<Npc>Imperial Agent</Npc>
 				</Npcs>
 				<Hotspots>
 					<Hotspot Name="Where you used it" XYZ="-27.316,-2.098,42.693" />
@@ -223,7 +221,6 @@
 					<Npc>Imperial Soldier</Npc>
 					<Npc>Imperial Officer</Npc>
 					<Npc>Imperial Engineer</Npc>
-					<Npc>Imperial Agent</Npc>
 				</Npcs>
 				<Hotspots>
 					<Hotspot Name="Where you used it" XYZ="-27.316,-2.098,42.693" />
