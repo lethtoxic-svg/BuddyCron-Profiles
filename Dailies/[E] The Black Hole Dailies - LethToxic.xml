@@ -354,8 +354,7 @@
 		</If>
 		<!-- [DAILY] Glow: adds by the 2nd console -->
 		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 1)">
-			<MoveTo QuestId="1" Name="Adds by the 2nd console" XYZ="-2.15,-9.272,37.55" />
-			<WaitTimer QuestId="1" WaitTime="5" />
+			<NoCombatMoveTo QuestId="1" Name="Platform by the 2nd console" XYZ="-1.861,-9.2,36.228" Wait="0" />
 		</If>
 		<!-- [DAILY] Glow: Reroute Hypermatter Pipelines (3/4) - any Hypermatter Pipeline Controls (2 spots) -->
 		<If Condition="HasQuest(0xE000A7BF7FECDFDC) and not IsTaskValueGreaterThan(0xE000A7BF7FECDFDC, 4, 0, 2)">
