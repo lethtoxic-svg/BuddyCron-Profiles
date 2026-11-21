@@ -1,0 +1,109 @@
+<Profile>
+	<!-- Made by Quest Recorder 1.4 - LethToxic. Recording: Imperial Fleet-2026-11-21_22-45 -->
+	<Name>[E] Korriban Heroics - LethToxic</Name>
+	<GrindAreas>
+		<GrindArea Name="[HEROIC 2+] The Hate Machine: Slay the K'lor'slugs">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>K'lor'slug Bloodfeaster</Mob>
+				<Mob>K'lor'slug Broodripper</Mob>
+				<Mob>K'lor'slug Bloodqueen</Mob>
+				<Mob>Klorslug Bloodwurm</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="The Red Engine" XYZ="24.824,0.373,40.389" />
+				<Hotspot Name="Klorslug Bloodwurm" XYZ="23.202,0.2,43.025" />
+				<Hotspot Name="K'lor'slug Broodripper" XYZ="26.573,0.223,37.91" />
+				<Hotspot Name="K'lor'slug Bloodqueen" XYZ="27.714,0.2,42.043" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[HEROIC 2+] Armed and Dangerous: Defeat and Search Lord Sundar">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs>
+				<Mob>Lord Sundar</Mob>
+			</Mobs>
+			<Hotspots>
+				<Hotspot Name="Lord Sundar" XYZ="-4.79,-3.16,59.401" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+	<Questing>
+		<!-- Pick up [HEROIC 2+] Armed and Dangerous -->
+		<If Condition="(not HasQuest(0xE000727454048D27)) and (not IsQuestComplete(0xE000727454048D27)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<PickUpQuest QuestName="[HEROIC 2+] Armed and Dangerous" QuestId="0xE000727454048D27" SearchRadius="20" UseRange="20" GiverName="Heroic Missions" XYZ="478.351,69.89,460.989" />
+		</If>
+		<!-- Pick up [HEROIC 2+] The Hate Machine -->
+		<If Condition="(not HasQuest(0xE00076C68816ECE8)) and (not IsQuestComplete(0xE00076C68816ECE8)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<PickUpQuest QuestName="[HEROIC 2+] The Hate Machine" QuestId="0xE00076C68816ECE8" SearchRadius="20" UseRange="20" GiverName="Heroic Missions" XYZ="478.351,69.89,460.989" />
+		</If>
+		<!-- Heroic Transport from the fleet -->
+		<If Condition="(Core.Player.AreaId == 0x4000001CCBDD9A50) and ((HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27)))">
+			<MoveTo QuestId="1" Name="Where you used Heroic Transport" XYZ="478.148,69.892,460.528" />
+			<UseItem ItemName="Heroic Transport" Condition="Core.Player.AreaId == 0x4000001CCBDD9A50" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Where you used it" XYZ="478.148,69.892,460.528" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="10" />
+		</If>
+		<!-- Heroic Transport from the Korriban hub (after a restart there) -->
+		<If Condition="(Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.Z &lt; 30) and ((HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27)))">
+			<If Condition="Me.Position.X &gt; 8">
+				<MoveTo QuestId="1" Name="Heroic Transport spot" XYZ="15.723678,0.60693026,11.4295635" />
+			</If>
+			<UseItem ItemName="Heroic Transport" Condition="Me.Position.Z &lt; 30" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Heroic Transport spot" XYZ="15.723678,0.60693026,11.4295635" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="10" />
+		</If>
+		<!-- [HEROIC 2+] The Hate Machine (when the transport landed by the Red Engine) -->
+		<If Condition="HasQuest(0xE00076C68816ECE8) and (not IsQuestComplete(0xE00076C68816ECE8)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &gt; 8) and (Me.Position.Z &gt; 30)">
+			<!-- [HEROIC 2+] The Hate Machine: Activate the Red Engine -->
+			<If Condition="HasQuest(0xE00076C68816ECE8) and not IsBranchStepComplete(0xE00076C68816ECE8, 1, 2)">
+				<MoveTo QuestId="1" Name="Hate Machine doorway" QuickTravel="False" XYZ="18.632742,2.1781967,36.874283" />
+				<MoveTo QuestId="1" Name="Where you stood for The Red Engine" QuickTravel="False" XYZ="24.29,0.05,40.083" />
+				<UseObject ObjectName="The Red Engine" QuestId="0xE00076C68816ECE8" BranchId="1" StepId="2" UseRange="25" IgnoreLOS="True" IgnoreQuestRelation="True" WaitTime="3000" BlacklistDuration="5" Radius="30" XYZ="24.824,-0.165,40.383" />
+			</If>
+			<!-- [HEROIC 2+] The Hate Machine: Slay the K'lor'slugs -->
+			<If Condition="HasQuest(0xE00076C68816ECE8) and not IsBranchStepComplete(0xE00076C68816ECE8, 1, 3)">
+				<Grind GrindRef="[HEROIC 2+] The Hate Machine: Slay the K'lor'slugs" While="HasQuest(0xE00076C68816ECE8) and not IsBranchStepComplete(0xE00076C68816ECE8, 1, 3)" />
+			</If>
+			<!-- [HEROIC 2+] The Hate Machine: Retrieve the Tablet -->
+			<If Condition="HasQuest(0xE00076C68816ECE8) and not IsBranchStepComplete(0xE00076C68816ECE8, 1, 4)">
+				<UseObject ObjectName="Ancient Tablet" QuestId="0xE00076C68816ECE8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="30" XYZ="24.776,0.132,40.35" />
+			</If>
+		</If>
+		<!-- Reward: [HEROIC 2+] The Hate Machine -->
+		<If Condition="(HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or any(r.QuestId == 0xE00076C68816ECE8 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE00076C68816ECE8" />
+		</If>
+		<!-- Heroic Transport from the Red Engine to Lord Sundar (The Hate Machine done) -->
+		<If Condition="(not (HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8))) and HasQuest(0xE000727454048D27) and (not IsQuestComplete(0xE000727454048D27)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &gt; 8) and (Me.Position.Z &gt; 30)">
+			<UseItem ItemName="Heroic Transport" Condition="Me.Position.X &gt; 8" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Where you used it" XYZ="23.906,0.05,39.98" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="10" />
+		</If>
+		<!-- [HEROIC 2+] Armed and Dangerous: Defeat and Search Lord Sundar -->
+		<If Condition="HasQuest(0xE000727454048D27) and (not IsBranchStepComplete(0xE000727454048D27, 1, 2)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &lt; 8) and (Me.Position.Z &gt; 30)">
+			<Grind GrindRef="[HEROIC 2+] Armed and Dangerous: Defeat and Search Lord Sundar" While="HasQuest(0xE000727454048D27) and not IsBranchStepComplete(0xE000727454048D27, 1, 2)" />
+		</If>
+		<!-- Reward: [HEROIC 2+] Armed and Dangerous -->
+		<If Condition="(HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27)) or any(r.QuestId == 0xE000727454048D27 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000727454048D27" />
+		</If>
+		<!-- Heroic Transport from Lord Sundar to the Red Engine (Armed and Dangerous done) -->
+		<If Condition="(not (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27))) and HasQuest(0xE00076C68816ECE8) and (not IsQuestComplete(0xE00076C68816ECE8)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &lt; 8) and (Me.Position.Z &gt; 30)">
+			<UseItem ItemName="Heroic Transport" Condition="Me.Position.X &lt; 8" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Lord Sundar" XYZ="-4.79,-3.16,59.401" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="10" />
+		</If>
+
+		<!-- Grab any rewards still waiting -->
+		<WaitTimer QuestId="1" WaitTime="5" />
+		<CompleteQuest QuestId="0xE00076C68816ECE8" />
+		<CompleteQuest QuestId="0xE000727454048D27" />
+		<!-- Not finished? Go round again (done steps get skipped) -->
+		<If Condition="(HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27))">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<LoadProfile Path="[E] Korriban Heroics - LethToxic.xml" />
+		</If>
+
+		<UserDialog Title="I'm done!" Message="I'm done with the Korriban heroics!" />
+	</Questing>
+</Profile>
