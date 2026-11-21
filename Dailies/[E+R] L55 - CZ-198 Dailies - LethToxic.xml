@@ -299,7 +299,7 @@
 				</If>	
 			
 				<If Condition="(not IsStepComplete(0xE000746FA7B97065, 4))">
-					<MoveTo QuestId="0xE000746FA7B97065" XYZ="-30.98007,1.358648,2.834285" />
+					<MoveTo QuestId="0xE000746FA7B97065" XYZ="-30.976652,1.3552557,2.7191443" />
 					<UseObject QuestId="0xE000746FA7B97065" ObjectName="Power Junction Box" BranchId="1" StepId="4" Radius="20" WaitTime="5" XYZ="-30.98007,1.358648,2.834285" />
 				</If>
 			
@@ -482,7 +482,7 @@
 				</If>	
 			
 				<If Condition="(not IsStepComplete(0xE00009A5ADED8A3C, 4))">
-					<MoveTo QuestId="0xE00009A5ADED8A3C" XYZ="-30.98007,1.358648,2.834285" />
+					<MoveTo QuestId="0xE00009A5ADED8A3C" XYZ="-30.976652,1.3552557,2.7191443" />
 					<UseObject QuestId="0xE00009A5ADED8A3C" ObjectName="Power Junction Box" BranchId="1" StepId="4" Radius="20" WaitTime="5" XYZ="-30.98007,1.358648,2.834285" />
 				</If>	
 			
