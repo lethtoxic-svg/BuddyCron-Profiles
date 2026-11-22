@@ -1,0 +1,314 @@
+<Profile>
+	<!-- Made by Quest Recorder 1.4b - LethToxic. Recording: Republic Fleet-2026-11-22_16-37 -->
+	<Name>[R] Ord Mantell Heroics - LethToxic</Name>
+	<ForceAlignment Type="Neutral" AutoSkip="True" />
+	<CodeChunks>
+		<CodeChunk Name="TakeFromBoard1State" Type="Definition"><![CDATA[
+			static System.DateTime _w1_click, _w1_start, _w1_last, _w1_open;
+			static bool _w1_done, _w1_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard1" Type="Hook"><![CDATA[
+			ulong id = 0xE0005B6E536849DBUL;
+			var spot = new System.Numerics.Vector3(-478.438f, 69.89f, -461.041f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w1_last).TotalSeconds > 30) { _w1_start = now; _w1_open = System.DateTime.MinValue; _w1_done = false; _w1_mv = false; }
+			_w1_last = now;
+			if (_w1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } return false; }
+			if (me.InCombat) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } _w1_start = now; return false; }
+			if ((now - _w1_start).TotalSeconds > 20) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } _w1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; }
+			    if (_w1_open == System.DateTime.MinValue) _w1_open = now;
+			    if ((now - _w1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w1_done = true; return false; }
+			    if ((now - _w1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w1_click = now; }
+			    return true;
+			}
+			_w1_open = System.DateTime.MinValue;
+			if ((now - _w1_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } if ((now - _w1_start).TotalSeconds > 6) { _w1_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w1_mv = true; return true; }
+			if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; }
+			best.Interact(); _w1_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard2State" Type="Definition"><![CDATA[
+			static System.DateTime _w2_click, _w2_start, _w2_last, _w2_open;
+			static bool _w2_done, _w2_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard2" Type="Hook"><![CDATA[
+			ulong id = 0xE000D3B727D04CF9UL;
+			var spot = new System.Numerics.Vector3(-478.438f, 69.89f, -461.041f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w2_last).TotalSeconds > 30) { _w2_start = now; _w2_open = System.DateTime.MinValue; _w2_done = false; _w2_mv = false; }
+			_w2_last = now;
+			if (_w2_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } return false; }
+			if (me.InCombat) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } _w2_start = now; return false; }
+			if ((now - _w2_start).TotalSeconds > 20) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } _w2_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; }
+			    if (_w2_open == System.DateTime.MinValue) _w2_open = now;
+			    if ((now - _w2_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w2_done = true; return false; }
+			    if ((now - _w2_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w2_click = now; }
+			    return true;
+			}
+			_w2_open = System.DateTime.MinValue;
+			if ((now - _w2_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } if ((now - _w2_start).TotalSeconds > 6) { _w2_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w2_mv = true; return true; }
+			if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; }
+			best.Interact(); _w2_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard3State" Type="Definition"><![CDATA[
+			static System.DateTime _w3_click, _w3_start, _w3_last, _w3_open;
+			static bool _w3_done, _w3_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard3" Type="Hook"><![CDATA[
+			ulong id = 0xE000625E00F42468UL;
+			var spot = new System.Numerics.Vector3(-478.438f, 69.89f, -461.041f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w3_last).TotalSeconds > 30) { _w3_start = now; _w3_open = System.DateTime.MinValue; _w3_done = false; _w3_mv = false; }
+			_w3_last = now;
+			if (_w3_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } return false; }
+			if (me.InCombat) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } _w3_start = now; return false; }
+			if ((now - _w3_start).TotalSeconds > 20) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } _w3_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; }
+			    if (_w3_open == System.DateTime.MinValue) _w3_open = now;
+			    if ((now - _w3_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w3_done = true; return false; }
+			    if ((now - _w3_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w3_click = now; }
+			    return true;
+			}
+			_w3_open = System.DateTime.MinValue;
+			if ((now - _w3_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } if ((now - _w3_start).TotalSeconds > 6) { _w3_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w3_mv = true; return true; }
+			if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; }
+			best.Interact(); _w3_click = now;
+			return true;
+		]]></CodeChunk>
+	</CodeChunks>
+
+	<GrindAreas>
+		<GrindArea Name="Wild Savrip Hunting: Kill Savrips (10)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Mantellian Savrip</Mob><Mob>Savrip Champion</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-60.259,0.932,-68.104" Radius="3" />
+				<Hotspot XYZ="-61.227,1.649,-59.885" Radius="3" />
+				<Hotspot XYZ="-61.189,1.504,-56.242" Radius="3" />
+				<Hotspot XYZ="-66.232,1.214,-50.636" Radius="3" />
+				<Hotspot XYZ="-74.425,1.256,-51.586" Radius="3" />
+				<Hotspot XYZ="-76.141,0.941,-56.338" Radius="3" />
+				<Hotspot XYZ="-73.833,0.962,-59.8" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[HEROIC 2+] Cutting Off the Head: Kill Savrip Chieftains (5)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Savrip Chieftain</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-57.746,0.923,-66.082" Radius="3" />
+				<Hotspot XYZ="-61.083,1.525,-56.742" Radius="3" />
+				<Hotspot XYZ="-76.168,0.983,-56.683" Radius="3" />
+				<Hotspot XYZ="-73.991,0.924,-59.281" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Savrip Skullcaver: Defeat the Savrip Skullcaver">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Savrip Skullcaver</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-62.982,1.312,-49.427" Radius="3" />
+				<Hotspot XYZ="-62.219,1.685,-50.424" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+
+	<Questing>
+		<!-- Pick up [HEROIC 2+] Cutting Off the Head -->
+		<If Condition="(not HasQuest(0xE0005B6E536849DB)) and (Core.Player.AreaId == 0x40000029DB8F7920)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="-478.26,69.892,-460.636" />
+			<Hook Name="TakeFromBoard1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard1" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Buying Loyalty -->
+		<If Condition="(not HasQuest(0xE000D3B727D04CF9)) and (Core.Player.AreaId == 0x40000029DB8F7920)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="-478.26,69.892,-460.636" />
+			<Hook Name="TakeFromBoard2" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard2" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Destroy the Beacons -->
+		<If Condition="(not HasQuest(0xE000625E00F42468)) and (Core.Player.AreaId == 0x40000029DB8F7920)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="-478.26,69.892,-460.636" />
+			<Hook Name="TakeFromBoard3" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard3" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- 1. Use Heroic Transport: Buying Loyalty -->
+		<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-60.259)) ** 2 + (Me.Position.Y - (0.932)) ** 2 + (Me.Position.Z - (-68.104)) ** 2) &lt; 100 or ((Me.Position.X - (-61.227)) ** 2 + (Me.Position.Y - (1.649)) ** 2 + (Me.Position.Z - (-59.885)) ** 2) &lt; 100 or ((Me.Position.X - (-58.057)) ** 2 + (Me.Position.Y - (1.351)) ** 2 + (Me.Position.Z - (-54.901)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Buying Loyalty'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Buying Loyalty'])[:1] + [0]) &lt;= 300">
+			<If Condition="Core.Player.AreaId == 0x40000029DB8F7920">
+				<UseItem ItemName="Heroic Transport: Buying Loyalty" Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-60.259)) ** 2 + (Me.Position.Y - (0.932)) ** 2 + (Me.Position.Z - (-68.104)) ** 2) &lt; 100 or ((Me.Position.X - (-61.227)) ** 2 + (Me.Position.Y - (1.649)) ** 2 + (Me.Position.Z - (-59.885)) ** 2) &lt; 100 or ((Me.Position.X - (-58.057)) ** 2 + (Me.Position.Y - (1.351)) ** 2 + (Me.Position.Z - (-54.901)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-478.419,69.802,-459.296" />
+			</If>
+			<If Condition="Core.Player.AreaId == 0x4000000051FBCAB7">
+				<UseItem ItemName="Heroic Transport: Buying Loyalty" Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-60.259)) ** 2 + (Me.Position.Y - (0.932)) ** 2 + (Me.Position.Z - (-68.104)) ** 2) &lt; 100 or ((Me.Position.X - (-61.227)) ** 2 + (Me.Position.Y - (1.649)) ** 2 + (Me.Position.Z - (-59.885)) ** 2) &lt; 100 or ((Me.Position.X - (-58.057)) ** 2 + (Me.Position.Y - (1.351)) ** 2 + (Me.Position.Z - (-54.901)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-62.925,1.436,-48.213" />
+			</If>
+		</If>
+		<!-- Pick up Savrip Skullcaver -->
+		<If Condition="(not HasQuest(0xE0000FE1CDEE3016)) and (Core.Player.AreaId == 0x4000000051FBCAB7)">
+			<MoveTo QuestId="1" Name="Savrip Skullcaver" XYZ="-62.925,1.436,-48.213" />
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<If Condition="not HasQuest(0xE0000FE1CDEE3016)"><WaitTimer QuestId="1" WaitTime="5" /></If>
+		</If>
+		<!-- 2. Destroy the Southwest Beacon -->
+		<If Condition="not IsTaskComplete(0xE000625E00F42468, 2, 3) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<MoveTo QuestId="1" Name="Stand for Southwest Jamming Beacon" QuickTravel="False" XYZ="-78.734,0.887,-51.54" />
+			<UseObject QuestId="0xE000625E00F42468" StepId="2" TaskId="3" ObjectName="Southwest Jamming Beacon" XYZ="-78.814,1.053,-51.461" Radius="10" UseRange="4" WaitTime="500"></UseObject>
+		</If>
+		<!-- 3. Destroy the Northwest Beacon -->
+		<If Condition="not IsTaskComplete(0xE000625E00F42468, 2, 2) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<MoveTo QuestId="1" Name="Stand for Northwest Jamming Beacon" QuickTravel="False" XYZ="-78.38,1.021,-66.664" />
+			<UseObject QuestId="0xE000625E00F42468" StepId="2" TaskId="2" ObjectName="Northwest Jamming Beacon" XYZ="-78.407,1.114,-66.727" Radius="10" UseRange="4" WaitTime="500"></UseObject>
+		</If>
+		<!-- 4. Kill Savrips (10) -->
+		<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsStepComplete(0xE0000D4AB32171EB, 2) and (not IsStepComplete(0xE0000D4AB32171EB, 1) or not IsTaskComplete(0xE0000D4AB32171EB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<Grind GrindRef="Wild Savrip Hunting: Kill Savrips (10)" While="HasQuest(0xE0000D4AB32171EB) and not IsStepComplete(0xE0000D4AB32171EB, 2) and (not IsStepComplete(0xE0000D4AB32171EB, 1) or not IsTaskComplete(0xE0000D4AB32171EB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7" />
+		</If>
+		<!-- 5. Kill Savrip Chieftains (5) -->
+		<If Condition="HasQuest(0xE0005B6E536849DB) and not IsStepComplete(0xE0005B6E536849DB, 2) and (not IsStepComplete(0xE0005B6E536849DB, 1) or not IsTaskComplete(0xE0005B6E536849DB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<Grind GrindRef="[HEROIC 2+] Cutting Off the Head: Kill Savrip Chieftains (5)" While="HasQuest(0xE0005B6E536849DB) and not IsStepComplete(0xE0005B6E536849DB, 2) and (not IsStepComplete(0xE0005B6E536849DB, 1) or not IsTaskComplete(0xE0005B6E536849DB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7" />
+		</If>
+		<!-- 6. Destroy the Northeast Beacon -->
+		<If Condition="not IsTaskComplete(0xE000625E00F42468, 2, 1) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<MoveTo QuestId="1" Name="Stand for Northeast Jamming Beacon" QuickTravel="False" XYZ="-57.721,1.012,-65.897" />
+			<UseObject QuestId="0xE000625E00F42468" StepId="2" TaskId="1" ObjectName="Northeast Jamming Beacon" XYZ="-57.766,1.234,-65.839" Radius="10" UseRange="4" WaitTime="500"></UseObject>
+		</If>
+		<!-- 7. Destroy the Southeast Beacon (Southeast Jamming Beacon) -->
+		<If Condition="HasQuest(0xE000625E00F42468) and not IsStepComplete(0xE000625E00F42468, 2) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<MoveTo QuestId="1" Name="Stand for Southeast Jamming Beacon" QuickTravel="False" XYZ="-58.116,1.193,-55.059" />
+			<UseObject QuestId="0xE000625E00F42468" StepId="2" ObjectName="Southeast Jamming Beacon" XYZ="-58.057,1.351,-54.901" Radius="10" UseRange="4" WaitTime="500"></UseObject>
+		</If>
+		<!-- Reward: [HEROIC 2+] Destroy the Beacons -->
+		<If Condition="(HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or any(r.QuestId == 0xE000625E00F42468 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468) and not any(r.QuestId == 0xE000625E00F42468 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468) and not any(r.QuestId == 0xE000625E00F42468 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468) and not any(r.QuestId == 0xE000625E00F42468 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468) and not any(r.QuestId == 0xE000625E00F42468 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE000625E00F42468" />
+		</If>
+		<!-- 8. Defeat the Savrip Skullcaver -->
+		<If Condition="HasQuest(0xE0000FE1CDEE3016) and not IsStepComplete(0xE0000FE1CDEE3016, 2) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<Grind GrindRef="Savrip Skullcaver: Defeat the Savrip Skullcaver" While="HasQuest(0xE0000FE1CDEE3016) and not IsStepComplete(0xE0000FE1CDEE3016, 2) and Core.Player.AreaId == 0x4000000051FBCAB7" />
+		</If>
+		<!-- Reward: Savrip Skullcaver -->
+		<If Condition="(HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016)) or any(r.QuestId == 0xE0000FE1CDEE3016 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016) and not any(r.QuestId == 0xE0000FE1CDEE3016 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016) and not any(r.QuestId == 0xE0000FE1CDEE3016 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016) and not any(r.QuestId == 0xE0000FE1CDEE3016 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016) and not any(r.QuestId == 0xE0000FE1CDEE3016 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE0000FE1CDEE3016" />
+		</If>
+		<!-- Reward: Wild Savrip Hunting -->
+		<If Condition="(HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB)) or any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE0000D4AB32171EB" />
+		</If>
+		<!-- Reward: [HEROIC 2+] Cutting Off the Head -->
+		<If Condition="(HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or any(r.QuestId == 0xE0005B6E536849DB for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB) and not any(r.QuestId == 0xE0005B6E536849DB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB) and not any(r.QuestId == 0xE0005B6E536849DB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB) and not any(r.QuestId == 0xE0005B6E536849DB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB) and not any(r.QuestId == 0xE0005B6E536849DB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE0005B6E536849DB" />
+		</If>
+		<!-- 9. Locate the Shipment and its Droid Escort (DK-9) -->
+		<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsBranchStepComplete(0xE000D3B727D04CF9, 1, 2) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<MoveTo QuestId="1" Name="Stand for DK-9" QuickTravel="False" XYZ="-72.705,1.118,-55.289" />
+			<TalkTo QuestId="0xE000D3B727D04CF9" Name="DK-9" UseRange="4" WaitTime="5" XYZ="-72.555,1.123,-55.112" />
+		</If>
+		<!-- Reward: [HEROIC 2+] Buying Loyalty -->
+		<If Condition="(HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or any(r.QuestId == 0xE000D3B727D04CF9 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9) and not any(r.QuestId == 0xE000D3B727D04CF9 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9) and not any(r.QuestId == 0xE000D3B727D04CF9 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9) and not any(r.QuestId == 0xE000D3B727D04CF9 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9) and not any(r.QuestId == 0xE000D3B727D04CF9 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE000D3B727D04CF9" />
+		</If>
+		<!-- Grab any rewards still waiting -->
+		<WaitTimer QuestId="1" WaitTime="5" />
+		<CompleteQuest QuestId="0xE000625E00F42468" />
+		<CompleteQuest QuestId="0xE0000FE1CDEE3016" />
+		<CompleteQuest QuestId="0xE0000D4AB32171EB" />
+		<CompleteQuest QuestId="0xE0005B6E536849DB" />
+		<CompleteQuest QuestId="0xE000D3B727D04CF9" />
+		<If Condition="(HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or (HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or (HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or (HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016)) or (HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB))">
+			<UserDialog Title="Quest Recorder" Message="A quest from this profile isn't finished. Finish it by hand, or start the profile again." />
+		</If>
+		<If Condition="not ((HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or (HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or (HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or (HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016)) or (HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB)))">
+			<UserDialog Title="Done!" Message="This profile is done." />
+		</If>
+	</Questing>
+</Profile>
