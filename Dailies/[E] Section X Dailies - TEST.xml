@@ -80,26 +80,6 @@
 				<Hotspot Name="Hyperbeast" XYZ="102.979,14.68,-224.618" />
 			</Hotspots>
 		</GrindArea>
-		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (12/26)">
-			<MinLevel>1</MinLevel>
-			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Republic Infiltration Droid</Mob><Mob>Republic Commando</Mob><Mob>Jedi Special Operative</Mob><Mob>Republic Assault Droid</Mob><Mob>Republic Bladesman</Mob></Mobs>
-			<Hotspots>
-				<Hotspot Name="Republic Assault Droid" XYZ="95.958,13.697,-199.638" />
-				<Hotspot Name="Republic Bladesman" XYZ="98.288,14.294,-196.974" />
-				<Hotspot Name="Republic Bladesman" XYZ="124.078,12.502,-194.254" />
-				<Hotspot Name="Republic Infiltration Droid" XYZ="99.892,14.074,-192.097" />
-				<Hotspot Name="Republic Commando" XYZ="103.457,13.481,-193.099" />
-				<Hotspot Name="Jedi Special Operative" XYZ="105.55,13.126,-195.496" />
-				<Hotspot Name="Republic Commando" XYZ="107.97,12.691,-195.123" />
-				<Hotspot Name="Jedi Special Operative" XYZ="110.886,12.512,-194.324" />
-				<Hotspot Name="Republic Assault Droid" XYZ="106.727,12.897,-190.059" />
-				<Hotspot Name="Jedi Special Operative" XYZ="96.314,15.406,-191.468" />
-				<Hotspot Name="Republic Infiltration Droid" XYZ="93.078,14.537,-197.023" />
-				<Hotspot Name="Republic Bladesman" XYZ="88.712,14.412,-197.525" />
-				<Hotspot Name="Republic Assault Droid" XYZ="84.311,14.407,-197.4" />
-			</Hotspots>
-		</GrindArea>
 		<GrindArea Name="[DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot)">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
@@ -112,14 +92,6 @@
 				<Hotspot Name="Jedi Special Operative" XYZ="130.454,14.102,-185.757" />
 				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
 				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
-			</Hotspots>
-		</GrindArea>
-		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (16/26)">
-			<MinLevel>1</MinLevel>
-			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Republic Commando</Mob></Mobs>
-			<Hotspots>
-				<Hotspot Name="Republic Bladesman" XYZ="132.527,14.091,-194.321" />
 			</Hotspots>
 		</GrindArea>
 		<GrindArea Name="[DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot)">
@@ -136,28 +108,6 @@
 				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
 			</Hotspots>
 		</GrindArea>
-		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (20/26)">
-			<MinLevel>1</MinLevel>
-			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Republic Bladesman</Mob><Mob>Republic Infiltration Droid</Mob><Mob>Jedi Protector</Mob><Mob>Republic Marksman</Mob><Mob>Jedi Special Operative</Mob><Mob>Republic Assault Droid</Mob></Mobs>
-			<Hotspots>
-				<Hotspot Name="Jedi Special Operative" XYZ="133.885,14.102,-191.69" />
-				<Hotspot Name="Republic Assault Droid" XYZ="135.14,14.119,-186.87" />
-				<Hotspot Name="Republic Bladesman" XYZ="138.542,14.102,-186.922" />
-				<Hotspot Name="Republic Infiltration Droid" XYZ="141.77,14.102,-187.939" />
-				<Hotspot Name="Jedi Protector" XYZ="141.278,14.112,-183.893" />
-				<Hotspot Name="Republic Infiltration Droid" XYZ="139.56,14.112,-182.537" />
-				<Hotspot Name="Republic Infiltration Droid" XYZ="140.069,14.112,-180.378" />
-				<Hotspot Name="Republic Infiltration Droid" XYZ="135.94,14.112,-182.225" />
-				<Hotspot Name="Republic Marksman" XYZ="133.84,14.085,-181.212" />
-				<Hotspot Name="Jedi Special Operative" XYZ="130.454,14.102,-185.757" />
-				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
-				<Hotspot Name="Republic Assault Droid" XYZ="125.55,14.102,-187.2" />
-				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
-				<Hotspot Name="Republic Bladesman" XYZ="133.277,14.102,-194.428" />
-				<Hotspot Name="Jedi Protector" XYZ="141.655,14.102,-192.523" />
-			</Hotspots>
-		</GrindArea>
 		<GrindArea Name="[DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and lo">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
@@ -169,7 +119,7 @@
 		<GrindArea Name="Stage 1 - Research Cancellation: Defeat Republic Forces (23/26)">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Republic Infiltration Droid</Mob><Mob>Jedi Protector</Mob><Mob>Republic Bladesman</Mob><Mob>Jedi Special Operative</Mob><Mob>Republic Assault Droid</Mob></Mobs>
+			<Mobs><Mob>Republic Assault Droid</Mob><Mob>Republic Bladesman</Mob><Mob>Republic Infiltration Droid</Mob><Mob>Republic Marksman</Mob><Mob>Republic Commando</Mob><Mob>Jedi Special Operative</Mob><Mob>Jedi Protector</Mob><Mob>Jedi Escort</Mob><Mob>Republic Engineer</Mob><Mob>Republic Field Tech</Mob></Mobs>
 			<Hotspots>
 				<Hotspot Name="Jedi Special Operative" XYZ="134.406,14.102,-185.962" />
 				<Hotspot Name="Republic Infiltration Droid" XYZ="134.688,14.085,-181.725" />
@@ -185,6 +135,11 @@
 				<Hotspot Name="Republic Bladesman" XYZ="128.156,14.118,-184.891" />
 				<Hotspot Name="Republic Assault Droid" XYZ="125.55,14.102,-187.2" />
 				<Hotspot Name="Jedi Protector" XYZ="128.544,14.112,-188.551" />
+				<Hotspot Name="Republic Bladesman" XYZ="132.527,14.091,-194.321" />
+				<Hotspot Name="Jedi Special Operative" XYZ="133.885,14.102,-191.69" />
+				<Hotspot Name="Republic Assault Droid" XYZ="135.14,14.119,-186.87" />
+				<Hotspot Name="Republic Infiltration Droid" XYZ="135.94,14.112,-182.225" />
+				<Hotspot Name="Republic Marksman" XYZ="133.84,14.085,-181.212" />
 			</Hotspots>
 		</GrindArea>
 		<GrindArea Name="Stage 2 - Research Cancellation: step 2 done">
@@ -222,7 +177,7 @@
 		<GrindArea Name="Dread Guard Elimination: Defeat Dread Guard Forces (16/18)">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Dread Host Subordinate</Mob><Mob>Dread Guard Disciple</Mob></Mobs>
+			<Mobs><Mob>Dread Guard Shocktrooper</Mob><Mob>Dread Host Subordinate</Mob><Mob>Dread Host Minion</Mob><Mob>Dread Host Mauler</Mob><Mob>Dread Guard Disciple</Mob></Mobs>
 			<Hotspots>
 				<Hotspot Name="Dread Guard Shocktrooper" XYZ="104.588,13.79,-172.794" />
 				<Hotspot Name="Dread Guard Shocktrooper" XYZ="110.359,13.746,-171.578" />
@@ -241,22 +196,6 @@
 				<Hotspot Name="Dread Host Minion" XYZ="110.174,12.829,-150.839" />
 			</Hotspots>
 		</GrindArea>
-		<GrindArea Name="Prison Break: Defeat Dread Guard Forces (3/24)">
-			<MinLevel>1</MinLevel>
-			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Dread Guard Converter</Mob><Mob>Dread Host Soldier</Mob><Mob>Dread Guard Enforcer</Mob><Mob>Dread Host Scout</Mob><Mob>Dread Host Guardian</Mob></Mobs>
-			<Hotspots>
-				<Hotspot Name="Dread Host Watchman" XYZ="92.373,17.275,-153.985" />
-				<Hotspot Name="Dread Guard Converter" XYZ="89.003,17.092,-155.818" />
-				<Hotspot Name="Dread Guard Converter" XYZ="86.208,17.144,-155.831" />
-				<Hotspot Name="Dread Guard Converter" XYZ="85.538,17.599,-152.404" />
-				<Hotspot Name="Dread Host Soldier" XYZ="83.655,17.599,-153.098" />
-				<Hotspot Name="Dread Guard Enforcer" XYZ="81.013,17.378,-151.053" />
-				<Hotspot Name="Dread Host Soldier" XYZ="79.686,17.38,-149.544" />
-				<Hotspot Name="Dread Host Scout" XYZ="88.141,16.853,-151.52" />
-				<Hotspot Name="Dread Host Guardian" XYZ="84.48,16.808,-158.975" />
-			</Hotspots>
-		</GrindArea>
 		<GrindArea Name="[DAILY] March of the Dread Guard: step 2 done (next: Free the Prisoners)">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
@@ -270,7 +209,7 @@
 		<GrindArea Name="Prison Break: Defeat Dread Guard Forces (23/24)">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Dread Guard Assassin</Mob><Mob>Dread Guard Converter</Mob><Mob>Dread Host Guardian</Mob></Mobs>
+			<Mobs><Mob>Dread Guard Assassin</Mob><Mob>Dread Guard Converter</Mob><Mob>Dread Host Scout</Mob><Mob>Dread Host Soldier</Mob><Mob>Dread Guard Enforcer</Mob><Mob>Dread Host Guardian</Mob></Mobs>
 			<Hotspots>
 				<Hotspot Name="Dread Host Watchman" XYZ="97.168,17.692,-151.127" />
 				<Hotspot Name="Dread Guard Attacker" XYZ="98.231,17.388,-152.893" />
@@ -283,6 +222,11 @@
 				<Hotspot Name="Dread Guard Converter" XYZ="89.003,17.092,-155.818" />
 				<Hotspot Name="Dread Guard Assassin" XYZ="93.142,17.449,-152.849" />
 				<Hotspot Name="Dread Host Guardian" XYZ="84.48,16.808,-158.975" />
+				<Hotspot Name="Dread Host Watchman" XYZ="92.373,17.275,-153.985" />
+				<Hotspot Name="Dread Guard Converter" XYZ="85.538,17.599,-152.404" />
+				<Hotspot Name="Dread Host Soldier" XYZ="83.655,17.599,-153.098" />
+				<Hotspot Name="Dread Guard Enforcer" XYZ="81.013,17.378,-151.053" />
+				<Hotspot Name="Dread Host Soldier" XYZ="79.686,17.38,-149.544" />
 			</Hotspots>
 		</GrindArea>
 		<GrindArea Name="Prison Break: last fight">
@@ -407,29 +351,29 @@
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE00061A2FB4BB40A" />
 		</If>
-		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (12/26) -->
-		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 11)">
-			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (12/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 11)" />
-		</If>
 		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot) -->
 		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)">
 			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)" />
-		</If>
-		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (16/26) -->
-		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 15)">
-			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (16/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 15)" />
 		</If>
 		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot) -->
 		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)">
 			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)" />
 		</If>
-		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (20/26) -->
-		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 19)">
-			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (20/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 19)" />
-		</If>
 		<!-- [DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and loot) -->
 		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)">
 			<Grind GrindRef="[DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and lo" While="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 3 done (next: Disable the Second Rakata Device) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 3)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="153.849,14.05,-173.102" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 4 done (next: Disable the Third Rakata Device) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 4)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="150.201,14.042,-168.207" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 5 done (next: Plant the Targeting Beacon) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 5)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="5" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="146.55,14.05,-173.098" />
 		</If>
 		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (23/26) -->
 		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 25)">
@@ -444,13 +388,13 @@
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE0008A8BC5025C87" />
 		</If>
+		<!-- Stage 2 - Research Cancellation: wait for the stations to open (the game waits 7 s after Stage 1) -->
+		<If Condition="HasQuest(0xE000898BC502A34A) and IsBranchStepComplete(0xE000898BC502A34A, 1, 2) and not IsBranchStepComplete(0xE000898BC502A34A, 1, 3)">
+			<WaitTimer QuestId="1" WaitTime="8" />
+		</If>
 		<!-- Stage 2 - Research Cancellation: Destroy the Research Stations (2/3) - any Research Station (2 spots) -->
 		<If Condition="HasQuest(0xE000898BC502A34A) and not IsTaskValueGreaterThan(0xE000898BC502A34A, 4, 0, 2)">
 			<UseObject ObjectName="Research Station" QuestId="0xE000898BC502A34A" BranchId="1" StepId="4" TaskId="0" TaskValue="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="135.3,14.11,-187.133" Radius="2"><Hotspots><Hotspot Name="Research Station" XYZ="133.966,14.11,-195.4" /><Hotspot Name="Research Station" XYZ="135.3,14.11,-187.133" /><Hotspot Name="Research Station" XYZ="134.217,14.11,-180.315" /></Hotspots></UseObject>
-		</If>
-		<!-- Final Stage - Research Cancellation: step 2 done -->
-		<If Condition="HasQuest(0xE000888BC502A139) and not IsBranchStepComplete(0xE000888BC502A139, 1, 2)">
-			<UseObject ObjectName="Research Station" QuestId="0xE000888BC502A139" BranchId="1" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="134.217,14.11,-180.315" />
 		</If>
 		<!-- Reward: Stage 2 - Research Cancellation -->
 		<If Condition="(HasQuest(0xE000898BC502A34A) and not IsQuestComplete(0xE000898BC502A34A)) or any(r.QuestId == 0xE000898BC502A34A for r in Me.Quests.PendingQuestRewards)">
@@ -487,18 +431,6 @@
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE00024E47D19104F" />
 		</If>
-		<!-- [DAILY] Targeted Misfire: step 3 done (next: Disable the Second Rakata Device) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 3)">
-			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="153.849,14.05,-173.102" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: step 4 done (next: Disable the Third Rakata Device) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 4)">
-			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="150.201,14.042,-168.207" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: step 5 done (next: Plant the Targeting Beacon) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 5)">
-			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="5" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="146.55,14.05,-173.098" />
-		</If>
 		<!-- [DAILY] Targeted Misfire: step 6 done (next: Open the Facility Roof) (not sure: you targeted Rakata War Droid and held Targeting Beacon - the game gave no signal for the use) -->
 		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 6)">
 			<UseItem QuestId="0xE00065051B12D9B8" BranchId="1" StepId="6" ItemName="Targeting Beacon" WaitTime="3000" XYZ="150.229,14.497,-172.686" Range="22" Radius="200" InCombat="True"><Npcs><Npc>Rakata War Droid</Npc></Npcs><Hotspots><Hotspot Name="Rakata War Droid" XYZ="150.229,14.497,-172.686" /></Hotspots></UseItem>
@@ -515,19 +447,6 @@
 		<If Condition="(HasQuest(0xE00065051B12D9B8) and not IsQuestComplete(0xE00065051B12D9B8)) or any(r.QuestId == 0xE00065051B12D9B8 for r in Me.Quests.PendingQuestRewards)">
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE00065051B12D9B8" />
-		</If>
-		<!-- Dread Guard Elimination: Defeat Dread Guard Forces (16/18) -->
-		<If Condition="HasQuest(0xE000E356EB39D698) and not IsTaskValueGreaterThan(0xE000E356EB39D698, 2, 0, 17)">
-			<Grind GrindRef="Dread Guard Elimination: Defeat Dread Guard Forces (16/18)" While="HasQuest(0xE000E356EB39D698) and not IsTaskValueGreaterThan(0xE000E356EB39D698, 2, 0, 17)" />
-		</If>
-		<!-- Dread Guard Elimination: last fight -->
-		<If Condition="HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)">
-			<Grind GrindRef="Dread Guard Elimination: last fight" While="HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)" />
-		</If>
-		<!-- Reward: Dread Guard Elimination -->
-		<If Condition="(HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)) or any(r.QuestId == 0xE000E356EB39D698 for r in Me.Quests.PendingQuestRewards)">
-			<WaitTimer QuestId="1" WaitTime="3" />
-			<CompleteQuest QuestId="0xE000E356EB39D698" />
 		</If>
 		<!-- [DAILY] Data Raid: Scan and Disable the Energy Tubes (1/4) -->
 		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsTaskValueGreaterThan(0xE00058B9BB51079F, 2, 0, 0)">
@@ -547,6 +466,19 @@
 		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsTaskValueGreaterThan(0xE00058B9BB51079F, 2, 0, 3)">
 			<UseObject ObjectName="Energy Tube" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="2" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="111.153,12.929,-142.443" />
 		</If>
+		<!-- Dread Guard Elimination: Defeat Dread Guard Forces (16/18) -->
+		<If Condition="HasQuest(0xE000E356EB39D698) and not IsTaskValueGreaterThan(0xE000E356EB39D698, 2, 0, 17)">
+			<Grind GrindRef="Dread Guard Elimination: Defeat Dread Guard Forces (16/18)" While="HasQuest(0xE000E356EB39D698) and not IsTaskValueGreaterThan(0xE000E356EB39D698, 2, 0, 17)" />
+		</If>
+		<!-- Dread Guard Elimination: last fight -->
+		<If Condition="HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)">
+			<Grind GrindRef="Dread Guard Elimination: last fight" While="HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)" />
+		</If>
+		<!-- Reward: Dread Guard Elimination -->
+		<If Condition="(HasQuest(0xE000E356EB39D698) and not IsQuestComplete(0xE000E356EB39D698)) or any(r.QuestId == 0xE000E356EB39D698 for r in Me.Quests.PendingQuestRewards)">
+			<WaitTimer QuestId="1" WaitTime="3" />
+			<CompleteQuest QuestId="0xE000E356EB39D698" />
+		</If>
 		<!-- [DAILY] Data Raid: step 3 done (next: Return to the Mission Dropbox) - any Ancient Rakatan Pylon (2 spots) -->
 		<If Condition="HasQuest(0xE00058B9BB51079F) and not IsBranchStepComplete(0xE00058B9BB51079F, 2, 3)">
 			<UseObject ObjectName="Ancient Rakatan Pylon" QuestId="0xE00058B9BB51079F" BranchId="2" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" XYZ="120.27,14.617,-153.781" Radius="2"><Hotspots><Hotspot Name="Ancient Rakatan Pylon" XYZ="109.014,13.037,-152.414" /><Hotspot Name="Ancient Rakatan Pylon" XYZ="120.27,14.617,-153.781" /></Hotspots></UseObject>
@@ -555,10 +487,6 @@
 		<If Condition="(HasQuest(0xE00058B9BB51079F) and not IsQuestComplete(0xE00058B9BB51079F)) or any(r.QuestId == 0xE00058B9BB51079F for r in Me.Quests.PendingQuestRewards)">
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE00058B9BB51079F" />
-		</If>
-		<!-- Prison Break: Defeat Dread Guard Forces (3/24) -->
-		<If Condition="HasQuest(0xE0008CEE8EAD24B9) and not IsTaskValueGreaterThan(0xE0008CEE8EAD24B9, 2, 0, 2)">
-			<Grind GrindRef="Prison Break: Defeat Dread Guard Forces (3/24)" While="HasQuest(0xE0008CEE8EAD24B9) and not IsTaskValueGreaterThan(0xE0008CEE8EAD24B9, 2, 0, 2)" />
 		</If>
 		<!-- [DAILY] March of the Dread Guard: step 2 done (next: Free the Prisoners) -->
 		<If Condition="HasQuest(0xE0003DF54538C83F) and not IsBranchStepComplete(0xE0003DF54538C83F, 1, 2)">
