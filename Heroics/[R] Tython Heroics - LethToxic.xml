@@ -1,0 +1,184 @@
+<Profile>
+	<!-- Made by Quest Recorder 1.4b - LethToxic. Recording: Republic Fleet-2026-11-22_15-15 -->
+	<Name>[R] Tython Heroics - LethToxic</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<CodeChunks>
+		<CodeChunk Name="TakeFromBoard1State" Type="Definition"><![CDATA[
+			static System.DateTime _w1_click, _w1_start, _w1_last, _w1_open;
+			static bool _w1_done, _w1_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard1" Type="Hook"><![CDATA[
+			ulong id = 0xE00045F2A71AAFAAUL;
+			var spot = new System.Numerics.Vector3(-478.438f, 69.89f, -461.041f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w1_last).TotalSeconds > 30) { _w1_start = now; _w1_open = System.DateTime.MinValue; _w1_done = false; _w1_mv = false; }
+			_w1_last = now;
+			if (_w1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } return false; }
+			if (me.InCombat) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } _w1_start = now; return false; }
+			if ((now - _w1_start).TotalSeconds > 20) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } _w1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; }
+			    if (_w1_open == System.DateTime.MinValue) _w1_open = now;
+			    if ((now - _w1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w1_done = true; return false; }
+			    if ((now - _w1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w1_click = now; }
+			    return true;
+			}
+			_w1_open = System.DateTime.MinValue;
+			if ((now - _w1_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } if ((now - _w1_start).TotalSeconds > 6) { _w1_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w1_mv = true; return true; }
+			if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; }
+			best.Interact(); _w1_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="LootFullBags2State" Type="Definition"><![CDATA[
+			static System.DateTime _l2_click, _l2_take, _l2_open, _l2_since;
+			static ulong _l2_node;
+			static bool _l2_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="LootFullBags2" Type="Hook"><![CDATA[
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if (me == null || me.InCombat || me.IsDead || me.FreeBackpackSlots > 1) { if (_l2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l2_mv = false; } _l2_open = System.DateTime.MinValue; _l2_node = 0; return false; }
+			bool open = false;
+			try { open = BuddyCron.Objects.HeroGuiApiGfx.Instance.IsLootWindowOpen; } catch { }
+			if (open)
+			{
+			    if (_l2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l2_mv = false; }
+			    if (_l2_open == System.DateTime.MinValue) _l2_open = now;
+			    double w = (now - _l2_open).TotalSeconds;
+			    if (w > 4) return false;
+			    if (w >= 0.4 && (now - _l2_take).TotalSeconds >= 1) { try { BuddyCron.HeroScrpt.Automaton.PlayerTakeAllLoot(); } catch { } _l2_take = now; }
+			    return true;
+			}
+			_l2_open = System.DateTime.MinValue;
+			if ((now - _l2_click).TotalSeconds < 2) return true;
+			BuddyCron.Objects.HeroNPC best = null;
+			foreach (var n in BuddyCron.Managers.HeroObjectManager.GetObjectsOfType<BuddyCron.Objects.HeroNPC>())
+			{
+			    if (n == null || !n.IsValid || !n.IsDead || n.Distance > 4f || !(n.Name == "Tythonian Chamber Sentinel")) continue;
+			    if (BuddyCron.Helpers.Blacklist.Contains(n.NodeId, BuddyCron.Helpers.BlacklistFlags.Loot) || !n.IsLootable) continue;
+			    if (best == null || n.Distance < best.Distance) best = n;
+			}
+			if (best == null) { if (_l2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l2_mv = false; } _l2_node = 0; return false; }
+			if (best.NodeId != _l2_node) { _l2_node = best.NodeId; _l2_since = now; }
+			if ((now - _l2_since).TotalSeconds > 15) { if (_l2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l2_mv = false; } BuddyCron.Helpers.Blacklist.Add(best.NodeId, BuddyCron.Helpers.BlacklistFlags.Loot, System.TimeSpan.FromMinutes(5)); return false; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _l2_mv = true; return true; }
+			if (_l2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l2_mv = false; }
+			best.Interact(); _l2_click = now;
+			BuddyCron.Helpers.Blacklist.Add(best.NodeId, BuddyCron.Helpers.BlacklistFlags.Loot, System.TimeSpan.FromMinutes(5));
+			try { Reborn.Utilities.Logging.Write("[Loot] Bags full: opening " + best.Name + " for the mission's item"); } catch { }
+			return true;
+		]]></CodeChunk>
+	</CodeChunks>
+
+	<GrindAreas>
+		<GrindArea Name="Speechless: Defeat Droids (30)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Tythonian Chamber Guard</Mob><Mob>Tythonian Droid Tender</Mob><Mob>Tythonian Chamber Sentinel</Mob><Mob>Tythonian Lore Guardian</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-75.041,3.452,9.753" Radius="3" />
+				<Hotspot XYZ="-77.605,3.559,9.259" Radius="3" />
+				<Hotspot XYZ="-78.028,3.538,10.33" Radius="3" />
+				<Hotspot XYZ="-80.137,3.022,13.334" Radius="3" />
+				<Hotspot XYZ="-85.462,2.458,15.486" Radius="3" />
+				<Hotspot XYZ="-86.477,2.461,15.445" Radius="3" />
+				<Hotspot XYZ="-88.956,2.462,17.158" Radius="3" />
+				<Hotspot XYZ="-88.914,2.465,14.068" Radius="3" />
+				<Hotspot XYZ="-92.48,2.462,12.868" Radius="3" />
+				<Hotspot XYZ="-92.802,2.457,15.16" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="[HEROIC 2+] The Chamber of Speech: Recover Power Cells from Tythonian Chamber Sentinels (4)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Tythonian Chamber Sentinel</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-88.914,2.465,14.068" Radius="3" />
+				<Hotspot XYZ="-93.012,2.462,15.229" Radius="3" />
+				<Hotspot XYZ="-100.357,1.318,4.787" Radius="3" />
+				<Hotspot XYZ="-100.382,0.731,7.224" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+
+	<Questing>
+		<!-- Pick up [HEROIC 2+] The Chamber of Speech -->
+		<If Condition="(not HasQuest(0xE00045F2A71AAFAA)) and (Core.Player.AreaId == 0x40000029DB8F7920)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="-478.191,69.892,-460.805" />
+			<Hook Name="TakeFromBoard1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard1" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- 1. Use Heroic Transport -->
+		<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsStepComplete(0xE00045F2A71AAFAA, 2) and not (Core.Player.AreaId == 0x4000000055F4C611 and (((Me.Position.X - (-69.951)) ** 2 + (Me.Position.Y - (0.012)) ** 2 + (Me.Position.Z - (3.624)) ** 2) &lt; 100 or ((Me.Position.X - (-88.914)) ** 2 + (Me.Position.Y - (2.465)) ** 2 + (Me.Position.Z - (14.068)) ** 2) &lt; 100 or ((Me.Position.X - (-100.357)) ** 2 + (Me.Position.Y - (1.318)) ** 2 + (Me.Position.Z - (4.787)) ** 2) &lt; 100 or ((Me.Position.X - (-102.598)) ** 2 + (Me.Position.Y - (-0.001)) ** 2 + (Me.Position.Z - (9.244)) ** 2) &lt; 100 or ((Me.Position.X - (-75.041)) ** 2 + (Me.Position.Y - (3.452)) ** 2 + (Me.Position.Z - (9.753)) ** 2) &lt; 100 or ((Me.Position.X - (-80.137)) ** 2 + (Me.Position.Y - (3.022)) ** 2 + (Me.Position.Z - (13.334)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport'])[:1] + [0]) &lt;= 300">
+			<If Condition="Core.Player.AreaId == 0x40000029DB8F7920">
+				<UseItem ItemName="Heroic Transport" Condition="HasQuest(0xE00045F2A71AAFAA) and not IsStepComplete(0xE00045F2A71AAFAA, 2) and not (Core.Player.AreaId == 0x4000000055F4C611 and (((Me.Position.X - (-69.951)) ** 2 + (Me.Position.Y - (0.012)) ** 2 + (Me.Position.Z - (3.624)) ** 2) &lt; 100 or ((Me.Position.X - (-88.914)) ** 2 + (Me.Position.Y - (2.465)) ** 2 + (Me.Position.Z - (14.068)) ** 2) &lt; 100 or ((Me.Position.X - (-100.357)) ** 2 + (Me.Position.Y - (1.318)) ** 2 + (Me.Position.Z - (4.787)) ** 2) &lt; 100 or ((Me.Position.X - (-102.598)) ** 2 + (Me.Position.Y - (-0.001)) ** 2 + (Me.Position.Z - (9.244)) ** 2) &lt; 100 or ((Me.Position.X - (-75.041)) ** 2 + (Me.Position.Y - (3.452)) ** 2 + (Me.Position.Z - (9.753)) ** 2) &lt; 100 or ((Me.Position.X - (-80.137)) ** 2 + (Me.Position.Y - (3.022)) ** 2 + (Me.Position.Z - (13.334)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-478.543,69.802,-459.814" />
+			</If>
+			<If Condition="Core.Player.AreaId == 0x4000000055F4C611">
+				<UseItem ItemName="Heroic Transport" Condition="HasQuest(0xE00045F2A71AAFAA) and not IsStepComplete(0xE00045F2A71AAFAA, 2) and not (Core.Player.AreaId == 0x4000000055F4C611 and (((Me.Position.X - (-69.951)) ** 2 + (Me.Position.Y - (0.012)) ** 2 + (Me.Position.Z - (3.624)) ** 2) &lt; 100 or ((Me.Position.X - (-88.914)) ** 2 + (Me.Position.Y - (2.465)) ** 2 + (Me.Position.Z - (14.068)) ** 2) &lt; 100 or ((Me.Position.X - (-100.357)) ** 2 + (Me.Position.Y - (1.318)) ** 2 + (Me.Position.Z - (4.787)) ** 2) &lt; 100 or ((Me.Position.X - (-102.598)) ** 2 + (Me.Position.Y - (-0.001)) ** 2 + (Me.Position.Z - (9.244)) ** 2) &lt; 100 or ((Me.Position.X - (-75.041)) ** 2 + (Me.Position.Y - (3.452)) ** 2 + (Me.Position.Z - (9.753)) ** 2) &lt; 100 or ((Me.Position.X - (-80.137)) ** 2 + (Me.Position.Y - (3.022)) ** 2 + (Me.Position.Z - (13.334)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-69.951,0.012,3.624" />
+			</If>
+		</If>
+		<!-- 2. Defeat Droids (30) -->
+		<If Condition="HasQuest(0xE0005E9DA975AD95) and not IsStepComplete(0xE0005E9DA975AD95, 2) and (not IsStepComplete(0xE0005E9DA975AD95, 1) or not IsTaskComplete(0xE0005E9DA975AD95, 2, 0)) and Core.Player.AreaId == 0x4000000055F4C611">
+			<Grind GrindRef="Speechless: Defeat Droids (30)" While="HasQuest(0xE0005E9DA975AD95) and not IsStepComplete(0xE0005E9DA975AD95, 2) and (not IsStepComplete(0xE0005E9DA975AD95, 1) or not IsTaskComplete(0xE0005E9DA975AD95, 2, 0)) and Core.Player.AreaId == 0x4000000055F4C611" />
+		</If>
+		<!-- 3. Recover Power Cells from Tythonian Chamber Sentinels (4) -->
+		<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsStepComplete(0xE00045F2A71AAFAA, 2) and (not IsStepComplete(0xE00045F2A71AAFAA, 1) or not IsTaskComplete(0xE00045F2A71AAFAA, 2, 0)) and Core.Player.AreaId == 0x4000000055F4C611">
+			<Hook Name="LootFullBags2" Operation="I" Index="0" Location="TreeStart" />
+			<Grind GrindRef="[HEROIC 2+] The Chamber of Speech: Recover Power Cells from Tythonian Chamber Sentinels (4)" While="HasQuest(0xE00045F2A71AAFAA) and not IsStepComplete(0xE00045F2A71AAFAA, 2) and (not IsStepComplete(0xE00045F2A71AAFAA, 1) or not IsTaskComplete(0xE00045F2A71AAFAA, 2, 0)) and Core.Player.AreaId == 0x4000000055F4C611" />
+			<Hook Name="LootFullBags2" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Reward: Speechless -->
+		<If Condition="(HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95)) or any(r.QuestId == 0xE0005E9DA975AD95 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95) and not any(r.QuestId == 0xE0005E9DA975AD95 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95) and not any(r.QuestId == 0xE0005E9DA975AD95 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95) and not any(r.QuestId == 0xE0005E9DA975AD95 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95) and not any(r.QuestId == 0xE0005E9DA975AD95 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE0005E9DA975AD95" />
+		</If>
+		<!-- 4. Activate the Ancient Computer -->
+		<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsStepComplete(0xE00045F2A71AAFAA, 3) and Core.Player.AreaId == 0x4000000055F4C611">
+			<MoveTo QuestId="1" Name="Stand for Ancient Computer" QuickTravel="False" XYZ="-102.978,0.011,9.097" />
+			<UseObject QuestId="0xE00045F2A71AAFAA" StepId="3" ObjectName="Ancient Computer" XYZ="-102.598,-0.001,9.244" Radius="10" UseRange="4" WaitTime="500" IgnoreQuestRelation="True"></UseObject>
+		</If>
+		<!-- Reward: [HEROIC 2+] The Chamber of Speech -->
+		<If Condition="(HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA)) or any(r.QuestId == 0xE00045F2A71AAFAA for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA) and not any(r.QuestId == 0xE00045F2A71AAFAA for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA) and not any(r.QuestId == 0xE00045F2A71AAFAA for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA) and not any(r.QuestId == 0xE00045F2A71AAFAA for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<If Condition="HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA) and not any(r.QuestId == 0xE00045F2A71AAFAA for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+			<CompleteQuest QuestId="0xE00045F2A71AAFAA" />
+		</If>
+		<!-- Grab any rewards still waiting -->
+		<WaitTimer QuestId="1" WaitTime="5" />
+		<CompleteQuest QuestId="0xE0005E9DA975AD95" />
+		<CompleteQuest QuestId="0xE00045F2A71AAFAA" />
+		<If Condition="(HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA)) or (HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95))">
+			<UserDialog Title="Quest Recorder" Message="A quest from this profile isn't finished. Finish it by hand, or start the profile again." />
+		</If>
+		<If Condition="not ((HasQuest(0xE00045F2A71AAFAA) and not IsQuestComplete(0xE00045F2A71AAFAA)) or (HasQuest(0xE0005E9DA975AD95) and not IsQuestComplete(0xE0005E9DA975AD95)))">
+			<UserDialog Title="Done!" Message="This profile is done." />
+		</If>
+	</Questing>
+</Profile>
