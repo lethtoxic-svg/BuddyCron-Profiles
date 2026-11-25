@@ -144,21 +144,53 @@
 			best.Interact(); _w3_click = now;
 			return true;
 		]]></CodeChunk>
+		<CodeChunk Name="TransportHere4State" Type="Definition"><![CDATA[
+			static System.DateTime _t4_start, _t4_last, _t4_next;
+			static int _t4_tries;
+			static bool _t4_done;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportHere4" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Buying Loyalty";
+			ulong[] known = { 0x40000029DB8F7920UL, 0x4000000051FBCAB7UL };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t4_last).TotalSeconds > 30) { _t4_start = now; _t4_next = System.DateTime.MinValue; _t4_tries = 0; _t4_done = false; }
+			_t4_last = now;
+			if (me == null || _t4_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area != 0 && System.Array.IndexOf(known, area) >= 0) { _t4_done = true; return false; }
+			if ((now - _t4_start).TotalSeconds > 360) { _t4_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (area == 0) return true;
+			if (me.InCombat || me.IsDead) { _t4_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t4_next) return true;
+			if (_t4_tries >= 3) { _t4_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t4_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t4_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t4_tries++; _t4_next = now.AddSeconds(15);
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
 	</CodeChunks>
 
 	<GrindAreas>
-		<GrindArea Name="Wild Savrip Hunting: Kill Savrips (10)">
+		<GrindArea Name="[HEROIC 2+] Cutting Off the Head: Kill Savrip Chieftains (4)">
 			<MinLevel>1</MinLevel>
 			<MaxLevel>100</MaxLevel>
-			<Mobs><Mob>Mantellian Savrip</Mob><Mob>Savrip Champion</Mob></Mobs>
+			<Mobs><Mob>Savrip Chieftain</Mob></Mobs>
 			<Hotspots>
-				<Hotspot XYZ="-60.259,0.932,-68.104" Radius="3" />
-				<Hotspot XYZ="-61.227,1.649,-59.885" Radius="3" />
-				<Hotspot XYZ="-61.189,1.504,-56.242" Radius="3" />
-				<Hotspot XYZ="-66.232,1.214,-50.636" Radius="3" />
-				<Hotspot XYZ="-74.425,1.256,-51.586" Radius="3" />
-				<Hotspot XYZ="-76.141,0.941,-56.338" Radius="3" />
-				<Hotspot XYZ="-73.833,0.962,-59.8" Radius="3" />
+				<Hotspot XYZ="-57.746,0.923,-66.082" Radius="3" />
+				<Hotspot XYZ="-61.083,1.525,-56.742" Radius="3" />
+				<Hotspot XYZ="-76.168,0.983,-56.683" Radius="3" />
+				<Hotspot XYZ="-73.991,0.924,-59.281" Radius="3" />
 			</Hotspots>
 		</GrindArea>
 		<GrindArea Name="[HEROIC 2+] Cutting Off the Head: Kill Savrip Chieftains (5)">
@@ -206,12 +238,17 @@
 			<Hook Name="TakeFromBoard3" Operation="R" Location="TreeStart" />
 		</If>
 		<!-- 1. Use Heroic Transport: Buying Loyalty -->
-		<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-60.259)) ** 2 + (Me.Position.Y - (0.932)) ** 2 + (Me.Position.Z - (-68.104)) ** 2) &lt; 100 or ((Me.Position.X - (-61.227)) ** 2 + (Me.Position.Y - (1.649)) ** 2 + (Me.Position.Z - (-59.885)) ** 2) &lt; 100 or ((Me.Position.X - (-58.057)) ** 2 + (Me.Position.Y - (1.351)) ** 2 + (Me.Position.Z - (-54.901)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Buying Loyalty'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Buying Loyalty'])[:1] + [0]) &lt;= 300">
+		<If Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-57.746)) ** 2 + (Me.Position.Y - (0.923)) ** 2 + (Me.Position.Z - (-66.082)) ** 2) &lt; 100 or ((Me.Position.X - (-61.083)) ** 2 + (Me.Position.Y - (1.525)) ** 2 + (Me.Position.Z - (-56.742)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Buying Loyalty'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Buying Loyalty'])[:1] + [0]) &lt;= 300">
 			<If Condition="Core.Player.AreaId == 0x40000029DB8F7920">
-				<UseItem ItemName="Heroic Transport: Buying Loyalty" Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-60.259)) ** 2 + (Me.Position.Y - (0.932)) ** 2 + (Me.Position.Z - (-68.104)) ** 2) &lt; 100 or ((Me.Position.X - (-61.227)) ** 2 + (Me.Position.Y - (1.649)) ** 2 + (Me.Position.Z - (-59.885)) ** 2) &lt; 100 or ((Me.Position.X - (-58.057)) ** 2 + (Me.Position.Y - (1.351)) ** 2 + (Me.Position.Z - (-54.901)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-478.419,69.802,-459.296" />
+				<UseItem ItemName="Heroic Transport: Buying Loyalty" Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-57.746)) ** 2 + (Me.Position.Y - (0.923)) ** 2 + (Me.Position.Z - (-66.082)) ** 2) &lt; 100 or ((Me.Position.X - (-61.083)) ** 2 + (Me.Position.Y - (1.525)) ** 2 + (Me.Position.Z - (-56.742)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-478.419,69.802,-459.296" />
 			</If>
 			<If Condition="Core.Player.AreaId == 0x4000000051FBCAB7">
-				<UseItem ItemName="Heroic Transport: Buying Loyalty" Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-60.259)) ** 2 + (Me.Position.Y - (0.932)) ** 2 + (Me.Position.Z - (-68.104)) ** 2) &lt; 100 or ((Me.Position.X - (-61.227)) ** 2 + (Me.Position.Y - (1.649)) ** 2 + (Me.Position.Z - (-59.885)) ** 2) &lt; 100 or ((Me.Position.X - (-58.057)) ** 2 + (Me.Position.Y - (1.351)) ** 2 + (Me.Position.Z - (-54.901)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-62.925,1.436,-48.213" />
+				<UseItem ItemName="Heroic Transport: Buying Loyalty" Condition="HasQuest(0xE000D3B727D04CF9) and not IsStepComplete(0xE000D3B727D04CF9, 2) and not (Core.Player.AreaId == 0x4000000051FBCAB7 and (((Me.Position.X - (-62.925)) ** 2 + (Me.Position.Y - (1.436)) ** 2 + (Me.Position.Z - (-48.213)) ** 2) &lt; 100 or ((Me.Position.X - (-72.555)) ** 2 + (Me.Position.Y - (1.123)) ** 2 + (Me.Position.Z - (-55.112)) ** 2) &lt; 100 or ((Me.Position.X - (-78.814)) ** 2 + (Me.Position.Y - (1.053)) ** 2 + (Me.Position.Z - (-51.461)) ** 2) &lt; 100 or ((Me.Position.X - (-78.407)) ** 2 + (Me.Position.Y - (1.114)) ** 2 + (Me.Position.Z - (-66.727)) ** 2) &lt; 100 or ((Me.Position.X - (-57.746)) ** 2 + (Me.Position.Y - (0.923)) ** 2 + (Me.Position.Z - (-66.082)) ** 2) &lt; 100 or ((Me.Position.X - (-61.083)) ** 2 + (Me.Position.Y - (1.525)) ** 2 + (Me.Position.Z - (-56.742)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Buying Loyalty' for i in Me.Backpack))" Range="100000" WaitTime="3000" XYZ="-62.925,1.436,-48.213" />
+			</If>
+			<If Condition="not (Core.Player.AreaId == 0x40000029DB8F7920 or Core.Player.AreaId == 0x4000000051FBCAB7)">
+				<Hook Name="TransportHere4" Operation="I" Index="0" Location="TreeStart" />
+				<WaitTimer QuestId="1" WaitTime="1" />
+				<Hook Name="TransportHere4" Operation="R" Location="TreeStart" />
 			</If>
 		</If>
 		<!-- Pick up Savrip Skullcaver -->
@@ -230,9 +267,9 @@
 			<MoveTo QuestId="1" Name="Stand for Northwest Jamming Beacon" QuickTravel="False" XYZ="-78.38,1.021,-66.664" />
 			<UseObject QuestId="0xE000625E00F42468" StepId="2" TaskId="2" ObjectName="Northwest Jamming Beacon" XYZ="-78.407,1.114,-66.727" Radius="10" UseRange="4" WaitTime="500"></UseObject>
 		</If>
-		<!-- 4. Kill Savrips (10) -->
-		<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsStepComplete(0xE0000D4AB32171EB, 2) and (not IsStepComplete(0xE0000D4AB32171EB, 1) or not IsTaskComplete(0xE0000D4AB32171EB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7">
-			<Grind GrindRef="Wild Savrip Hunting: Kill Savrips (10)" While="HasQuest(0xE0000D4AB32171EB) and not IsStepComplete(0xE0000D4AB32171EB, 2) and (not IsStepComplete(0xE0000D4AB32171EB, 1) or not IsTaskComplete(0xE0000D4AB32171EB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7" />
+		<!-- 4. Kill Savrip Chieftains (4) -->
+		<If Condition="HasQuest(0xE0005B6E536849DB) and not IsStepComplete(0xE0005B6E536849DB, 2) and (not IsStepComplete(0xE0005B6E536849DB, 1) or not IsTaskValueGreaterThan(0xE0005B6E536849DB, 2, 0, 3)) and Core.Player.AreaId == 0x4000000051FBCAB7">
+			<Grind GrindRef="[HEROIC 2+] Cutting Off the Head: Kill Savrip Chieftains (4)" While="HasQuest(0xE0005B6E536849DB) and not IsStepComplete(0xE0005B6E536849DB, 2) and (not IsStepComplete(0xE0005B6E536849DB, 1) or not IsTaskValueGreaterThan(0xE0005B6E536849DB, 2, 0, 3)) and Core.Player.AreaId == 0x4000000051FBCAB7" />
 		</If>
 		<!-- 5. Kill Savrip Chieftains (5) -->
 		<If Condition="HasQuest(0xE0005B6E536849DB) and not IsStepComplete(0xE0005B6E536849DB, 2) and (not IsStepComplete(0xE0005B6E536849DB, 1) or not IsTaskComplete(0xE0005B6E536849DB, 2, 0)) and Core.Player.AreaId == 0x4000000051FBCAB7">
@@ -269,11 +306,7 @@
 			<CompleteQuest QuestId="0xE0000FE1CDEE3016" />
 		</If>
 		<!-- Reward: Wild Savrip Hunting -->
-		<If Condition="(HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB)) or any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)">
-			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
-			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
-			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
-			<If Condition="HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB) and not any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="4" /></If>
+		<If Condition="any(r.QuestId == 0xE0000D4AB32171EB for r in Me.Quests.PendingQuestRewards)">
 			<CompleteQuest QuestId="0xE0000D4AB32171EB" />
 		</If>
 		<!-- Reward: [HEROIC 2+] Cutting Off the Head -->
@@ -304,10 +337,10 @@
 		<CompleteQuest QuestId="0xE0000D4AB32171EB" />
 		<CompleteQuest QuestId="0xE0005B6E536849DB" />
 		<CompleteQuest QuestId="0xE000D3B727D04CF9" />
-		<If Condition="(HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or (HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or (HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or (HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016)) or (HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB))">
+		<If Condition="(HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or (HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or (HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or (HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016))">
 			<UserDialog Title="Quest Recorder" Message="A quest from this profile isn't finished. Finish it by hand, or start the profile again." />
 		</If>
-		<If Condition="not ((HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or (HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or (HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or (HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016)) or (HasQuest(0xE0000D4AB32171EB) and not IsQuestComplete(0xE0000D4AB32171EB)))">
+		<If Condition="not ((HasQuest(0xE0005B6E536849DB) and not IsQuestComplete(0xE0005B6E536849DB)) or (HasQuest(0xE000D3B727D04CF9) and not IsQuestComplete(0xE000D3B727D04CF9)) or (HasQuest(0xE000625E00F42468) and not IsQuestComplete(0xE000625E00F42468)) or (HasQuest(0xE0000FE1CDEE3016) and not IsQuestComplete(0xE0000FE1CDEE3016)))">
 			<UserDialog Title="Done!" Message="This profile is done." />
 		</If>
 	</Questing>
