@@ -1,0 +1,1579 @@
+<Profile>
+	<!-- Tatooine Heroics (Imperial) - LethToxic -->
+	<Name>[E] Tatooine Heroics - LethToxic</Name>
+	<ForceAlignment Type="Dark" AutoSkip="True" />
+	<CodeChunks>
+		<CodeChunk Name="TakeFromBoard1State" Type="Definition"><![CDATA[
+			static System.DateTime _w1_click, _w1_start, _w1_last, _w1_open;
+			static bool _w1_done, _w1_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard1" Type="Hook"><![CDATA[
+			ulong id = 0xE0009C4809065A10UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w1_last).TotalSeconds > 30) { _w1_start = now; _w1_open = System.DateTime.MinValue; _w1_done = false; _w1_mv = false; }
+			_w1_last = now;
+			if (_w1_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } return false; }
+			if (me.InCombat) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } _w1_start = now; return false; }
+			if ((now - _w1_start).TotalSeconds > 20) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } _w1_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; }
+			    if (_w1_open == System.DateTime.MinValue) _w1_open = now;
+			    if ((now - _w1_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w1_done = true; return false; }
+			    if ((now - _w1_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w1_click = now; }
+			    return true;
+			}
+			_w1_open = System.DateTime.MinValue;
+			if ((now - _w1_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; } if ((now - _w1_start).TotalSeconds > 6) { _w1_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w1_mv = true; return true; }
+			if (_w1_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w1_mv = false; }
+			best.Interact(); _w1_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard2State" Type="Definition"><![CDATA[
+			static System.DateTime _w2_click, _w2_start, _w2_last, _w2_open;
+			static bool _w2_done, _w2_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard2" Type="Hook"><![CDATA[
+			ulong id = 0xE000E3C5CE197D55UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w2_last).TotalSeconds > 30) { _w2_start = now; _w2_open = System.DateTime.MinValue; _w2_done = false; _w2_mv = false; }
+			_w2_last = now;
+			if (_w2_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } return false; }
+			if (me.InCombat) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } _w2_start = now; return false; }
+			if ((now - _w2_start).TotalSeconds > 20) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } _w2_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; }
+			    if (_w2_open == System.DateTime.MinValue) _w2_open = now;
+			    if ((now - _w2_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w2_done = true; return false; }
+			    if ((now - _w2_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w2_click = now; }
+			    return true;
+			}
+			_w2_open = System.DateTime.MinValue;
+			if ((now - _w2_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; } if ((now - _w2_start).TotalSeconds > 6) { _w2_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w2_mv = true; return true; }
+			if (_w2_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w2_mv = false; }
+			best.Interact(); _w2_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard3State" Type="Definition"><![CDATA[
+			static System.DateTime _w3_click, _w3_start, _w3_last, _w3_open;
+			static bool _w3_done, _w3_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard3" Type="Hook"><![CDATA[
+			ulong id = 0xE000AF91C15EDBECUL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w3_last).TotalSeconds > 30) { _w3_start = now; _w3_open = System.DateTime.MinValue; _w3_done = false; _w3_mv = false; }
+			_w3_last = now;
+			if (_w3_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } return false; }
+			if (me.InCombat) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } _w3_start = now; return false; }
+			if ((now - _w3_start).TotalSeconds > 20) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } _w3_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; }
+			    if (_w3_open == System.DateTime.MinValue) _w3_open = now;
+			    if ((now - _w3_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w3_done = true; return false; }
+			    if ((now - _w3_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w3_click = now; }
+			    return true;
+			}
+			_w3_open = System.DateTime.MinValue;
+			if ((now - _w3_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; } if ((now - _w3_start).TotalSeconds > 6) { _w3_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w3_mv = true; return true; }
+			if (_w3_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w3_mv = false; }
+			best.Interact(); _w3_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard4State" Type="Definition"><![CDATA[
+			static System.DateTime _w4_click, _w4_start, _w4_last, _w4_open;
+			static bool _w4_done, _w4_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard4" Type="Hook"><![CDATA[
+			ulong id = 0xE00011FA49AF8257UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w4_last).TotalSeconds > 30) { _w4_start = now; _w4_open = System.DateTime.MinValue; _w4_done = false; _w4_mv = false; }
+			_w4_last = now;
+			if (_w4_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w4_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w4_mv = false; } return false; }
+			if (me.InCombat) { if (_w4_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w4_mv = false; } _w4_start = now; return false; }
+			if ((now - _w4_start).TotalSeconds > 20) { if (_w4_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w4_mv = false; } _w4_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w4_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w4_mv = false; }
+			    if (_w4_open == System.DateTime.MinValue) _w4_open = now;
+			    if ((now - _w4_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w4_done = true; return false; }
+			    if ((now - _w4_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w4_click = now; }
+			    return true;
+			}
+			_w4_open = System.DateTime.MinValue;
+			if ((now - _w4_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w4_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w4_mv = false; } if ((now - _w4_start).TotalSeconds > 6) { _w4_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w4_mv = true; return true; }
+			if (_w4_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w4_mv = false; }
+			best.Interact(); _w4_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard5State" Type="Definition"><![CDATA[
+			static System.DateTime _w5_click, _w5_start, _w5_last, _w5_open;
+			static bool _w5_done, _w5_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard5" Type="Hook"><![CDATA[
+			ulong id = 0xE0003CAD9958E927UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w5_last).TotalSeconds > 30) { _w5_start = now; _w5_open = System.DateTime.MinValue; _w5_done = false; _w5_mv = false; }
+			_w5_last = now;
+			if (_w5_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w5_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w5_mv = false; } return false; }
+			if (me.InCombat) { if (_w5_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w5_mv = false; } _w5_start = now; return false; }
+			if ((now - _w5_start).TotalSeconds > 20) { if (_w5_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w5_mv = false; } _w5_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w5_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w5_mv = false; }
+			    if (_w5_open == System.DateTime.MinValue) _w5_open = now;
+			    if ((now - _w5_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w5_done = true; return false; }
+			    if ((now - _w5_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w5_click = now; }
+			    return true;
+			}
+			_w5_open = System.DateTime.MinValue;
+			if ((now - _w5_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w5_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w5_mv = false; } if ((now - _w5_start).TotalSeconds > 6) { _w5_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w5_mv = true; return true; }
+			if (_w5_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w5_mv = false; }
+			best.Interact(); _w5_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard6State" Type="Definition"><![CDATA[
+			static System.DateTime _w6_click, _w6_start, _w6_last, _w6_open;
+			static bool _w6_done, _w6_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard6" Type="Hook"><![CDATA[
+			ulong id = 0xE000108CCB759181UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w6_last).TotalSeconds > 30) { _w6_start = now; _w6_open = System.DateTime.MinValue; _w6_done = false; _w6_mv = false; }
+			_w6_last = now;
+			if (_w6_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w6_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w6_mv = false; } return false; }
+			if (me.InCombat) { if (_w6_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w6_mv = false; } _w6_start = now; return false; }
+			if ((now - _w6_start).TotalSeconds > 20) { if (_w6_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w6_mv = false; } _w6_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w6_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w6_mv = false; }
+			    if (_w6_open == System.DateTime.MinValue) _w6_open = now;
+			    if ((now - _w6_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w6_done = true; return false; }
+			    if ((now - _w6_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w6_click = now; }
+			    return true;
+			}
+			_w6_open = System.DateTime.MinValue;
+			if ((now - _w6_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w6_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w6_mv = false; } if ((now - _w6_start).TotalSeconds > 6) { _w6_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w6_mv = true; return true; }
+			if (_w6_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w6_mv = false; }
+			best.Interact(); _w6_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard7State" Type="Definition"><![CDATA[
+			static System.DateTime _w7_click, _w7_start, _w7_last, _w7_open;
+			static bool _w7_done, _w7_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard7" Type="Hook"><![CDATA[
+			ulong id = 0xE0000E32B9F6BF90UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w7_last).TotalSeconds > 30) { _w7_start = now; _w7_open = System.DateTime.MinValue; _w7_done = false; _w7_mv = false; }
+			_w7_last = now;
+			if (_w7_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w7_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w7_mv = false; } return false; }
+			if (me.InCombat) { if (_w7_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w7_mv = false; } _w7_start = now; return false; }
+			if ((now - _w7_start).TotalSeconds > 20) { if (_w7_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w7_mv = false; } _w7_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w7_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w7_mv = false; }
+			    if (_w7_open == System.DateTime.MinValue) _w7_open = now;
+			    if ((now - _w7_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w7_done = true; return false; }
+			    if ((now - _w7_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w7_click = now; }
+			    return true;
+			}
+			_w7_open = System.DateTime.MinValue;
+			if ((now - _w7_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w7_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w7_mv = false; } if ((now - _w7_start).TotalSeconds > 6) { _w7_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w7_mv = true; return true; }
+			if (_w7_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w7_mv = false; }
+			best.Interact(); _w7_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard8State" Type="Definition"><![CDATA[
+			static System.DateTime _w8_click, _w8_start, _w8_last, _w8_open;
+			static bool _w8_done, _w8_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="TakeFromBoard8" Type="Hook"><![CDATA[
+			ulong id = 0xE000AB0EEF32FF67UL;
+			var spot = new System.Numerics.Vector3(478.351f, 69.89f, 460.989f);
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _w8_last).TotalSeconds > 30) { _w8_start = now; _w8_open = System.DateTime.MinValue; _w8_done = false; _w8_mv = false; }
+			_w8_last = now;
+			if (_w8_done || System.Linq.Enumerable.Contains(BuddyCron.Core.Me.Quests.ActiveQuestIds, id)) { if (_w8_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w8_mv = false; } return false; }
+			if (me.InCombat) { if (_w8_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w8_mv = false; } _w8_start = now; return false; }
+			if ((now - _w8_start).TotalSeconds > 20) { if (_w8_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w8_mv = false; } _w8_done = true; return false; }
+			if (me.MissionBoardOpen)
+			{
+			    if (_w8_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w8_mv = false; }
+			    if (_w8_open == System.DateTime.MinValue) _w8_open = now;
+			    if ((now - _w8_open).TotalSeconds < 1) return true;
+			    bool listed = false, onBoard = false, unknown = false;
+			    foreach (var mq in me.MissionBoardQuests)
+			    {
+			        if (mq == null) continue;
+			        ulong q = mq.QuestId;
+			        if ((q >> 48) != 0xE000UL) { unknown = true; continue; }
+			        listed = true;
+			        if (q == id) onBoard = true;
+			    }
+			    if (listed && !onBoard && !unknown) { _w8_done = true; return false; }
+			    if ((now - _w8_click).TotalSeconds >= 2) { BuddyCron.Objects.HeroGuiApiGfx.Instance.AcceptMission(id); _w8_click = now; }
+			    return true;
+			}
+			_w8_open = System.DateTime.MinValue;
+			if ((now - _w8_click).TotalSeconds < 3) return true;
+			BuddyCron.Objects.HeroObject best = null; bool bestMarked = false;
+			foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroObject>())
+			{
+			    if (o == null || !o.IsValid || o.Name != "Heroic Missions" || System.Numerics.Vector3.DistanceSquared(o.Location, spot) > 9f) continue;
+			    bool marked = o.QuestIndication.ToString() != "None";
+			    if (best == null || (marked && !bestMarked) || (marked == bestMarked && System.Numerics.Vector3.DistanceSquared(o.Location, spot) < System.Numerics.Vector3.DistanceSquared(best.Location, spot))) { best = o; bestMarked = marked; }
+			}
+			if (best == null) { if (_w8_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w8_mv = false; } if ((now - _w8_start).TotalSeconds > 6) { _w8_done = true; return false; } return true; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _w8_mv = true; return true; }
+			if (_w8_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _w8_mv = false; }
+			best.Interact(); _w8_click = now;
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportWarOnSpiceState" Type="Definition"><![CDATA[
+			static System.DateTime _t9_start, _t9_last, _t9_next;
+			static int _t9_tries;
+			static bool _t9_done;
+			static ulong _t9_area;
+			static System.Numerics.Vector3 _t9_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportWarOnSpice" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: War on Spice";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { 92.05f, 74.975f, 80.299f, 74.511f, 78.634f, 64.919f, 66.777f, 68.312f };
+			float[] ly = { 44.127f, 44.499f, 44.498f, 44.947f, 44.596f, 44.78f, 44.78f, 45.082f };
+			float[] lz = { -31.586f, -34.608f, -34.606f, -25.408f, -28.905f, -28.562f, -28.462f, -28f };
+			float[] lr = { 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+			bool[] lo = { false, false, false, false, false, false, false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t9_last).TotalSeconds > 30) { _t9_start = now; _t9_next = System.DateTime.MinValue; _t9_tries = 0; _t9_done = false; _t9_area = 0UL; }
+			_t9_last = now;
+			if (me == null || _t9_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_t9_area == 0UL) _t9_area = area;
+			if (area != _t9_area) { _t9_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _t9_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _t9_done = true; return false; }
+			if ((now - _t9_start).TotalSeconds > 360) { _t9_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _t9_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t9_next) return true;
+			if (_t9_tries >= 3) { _t9_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t9_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t9_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t9_tries++; _t9_next = now.AddSeconds(15); _t9_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportBlackBoxState" Type="Definition"><![CDATA[
+			static System.DateTime _t14_start, _t14_last, _t14_next;
+			static int _t14_tries;
+			static bool _t14_done;
+			static ulong _t14_area;
+			static System.Numerics.Vector3 _t14_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportBlackBox" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Black Box";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { -35.04f, -52.042f };
+			float[] ly = { 51.061f, 49.96f };
+			float[] lz = { 10.675f, -27.669f };
+			float[] lr = { 100f, 100f };
+			bool[] lo = { false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t14_last).TotalSeconds > 30) { _t14_start = now; _t14_next = System.DateTime.MinValue; _t14_tries = 0; _t14_done = false; _t14_area = 0UL; }
+			_t14_last = now;
+			if (me == null || _t14_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_t14_area == 0UL) _t14_area = area;
+			if (area != _t14_area) { _t14_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _t14_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _t14_done = true; return false; }
+			if ((now - _t14_start).TotalSeconds > 360) { _t14_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _t14_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t14_next) return true;
+			if (_t14_tries >= 3) { _t14_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t14_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t14_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t14_tries++; _t14_next = now.AddSeconds(15); _t14_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportBloodAndSandState" Type="Definition"><![CDATA[
+			static System.DateTime _t15_start, _t15_last, _t15_next;
+			static int _t15_tries;
+			static bool _t15_done;
+			static ulong _t15_area;
+			static System.Numerics.Vector3 _t15_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportBloodAndSand" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Blood and Sand";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { 228.127f, 232.83f, 232.266f, 222.618f, 221.333f, 223.154f };
+			float[] ly = { 47.411f, 46.721f, 46.394f, 46.085f, 45.642f, 43.946f };
+			float[] lz = { 25.036f, 30.95f, 36.278f, 38.119f, 48.59f, 53.205f };
+			float[] lr = { 100f, 100f, 100f, 100f, 100f, 100f };
+			bool[] lo = { false, false, false, false, false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t15_last).TotalSeconds > 30) { _t15_start = now; _t15_next = System.DateTime.MinValue; _t15_tries = 0; _t15_done = false; _t15_area = 0UL; }
+			_t15_last = now;
+			if (me == null || _t15_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_t15_area == 0UL) _t15_area = area;
+			if (area != _t15_area) { _t15_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _t15_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _t15_done = true; return false; }
+			if ((now - _t15_start).TotalSeconds > 360) { _t15_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _t15_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t15_next) return true;
+			if (_t15_tries >= 3) { _t15_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t15_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t15_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t15_tries++; _t15_next = now.AddSeconds(15); _t15_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportJawaTradeState" Type="Definition"><![CDATA[
+			static System.DateTime _t16_start, _t16_last, _t16_next;
+			static int _t16_tries;
+			static bool _t16_done;
+			static ulong _t16_area;
+			static System.Numerics.Vector3 _t16_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportJawaTrade" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Jawa Trade";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { 123.776f, 116.972f, 110.864f };
+			float[] ly = { 50.502f, 52.235f, 52.162f };
+			float[] lz = { 329.037f, 332.203f, 339.086f };
+			float[] lr = { 100f, 100f, 100f };
+			bool[] lo = { false, false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t16_last).TotalSeconds > 30) { _t16_start = now; _t16_next = System.DateTime.MinValue; _t16_tries = 0; _t16_done = false; _t16_area = 0UL; }
+			_t16_last = now;
+			if (me == null || _t16_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_t16_area == 0UL) _t16_area = area;
+			if (area != _t16_area) { _t16_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _t16_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _t16_done = true; return false; }
+			if ((now - _t16_start).TotalSeconds > 360) { _t16_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _t16_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t16_next) return true;
+			if (_t16_tries >= 3) { _t16_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t16_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t16_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t16_tries++; _t16_next = now.AddSeconds(15); _t16_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportPrisonLaborState" Type="Definition"><![CDATA[
+			static System.DateTime _t18_start, _t18_last, _t18_next;
+			static int _t18_tries;
+			static bool _t18_done;
+			static ulong _t18_area;
+			static System.Numerics.Vector3 _t18_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportPrisonLabor" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Prison Labor";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { -191.479f, -182.166f, -180.876f };
+			float[] ly = { 42.134f, 43.764f, 43.57f };
+			float[] lz = { -35.716f, -38.026f, -31.297f };
+			float[] lr = { 100f, 100f, 100f };
+			bool[] lo = { false, false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t18_last).TotalSeconds > 30) { _t18_start = now; _t18_next = System.DateTime.MinValue; _t18_tries = 0; _t18_done = false; _t18_area = 0UL; }
+			_t18_last = now;
+			if (me == null || _t18_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_t18_area == 0UL) _t18_area = area;
+			if (area != _t18_area) { _t18_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _t18_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _t18_done = true; return false; }
+			if ((now - _t18_start).TotalSeconds > 360) { _t18_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _t18_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t18_next) return true;
+			if (_t18_tries >= 3) { _t18_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t18_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t18_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t18_tries++; _t18_next = now.AddSeconds(15); _t18_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportSupplyLinesState" Type="Definition"><![CDATA[
+			static System.DateTime _t19_start, _t19_last, _t19_next;
+			static int _t19_tries;
+			static bool _t19_done;
+			static ulong _t19_area;
+			static System.Numerics.Vector3 _t19_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportSupplyLines" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Supply Lines";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { 91.864f, 91.931f, 85.171f, 86.818f };
+			float[] ly = { 44.856f, 45.872f, 46.124f, 45.391f };
+			float[] lz = { 42.486f, 30.325f, 28.755f, 34.708f };
+			float[] lr = { 100f, 100f, 100f, 100f };
+			bool[] lo = { false, false, false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _t19_last).TotalSeconds > 30) { _t19_start = now; _t19_next = System.DateTime.MinValue; _t19_tries = 0; _t19_done = false; _t19_area = 0UL; }
+			_t19_last = now;
+			if (me == null || _t19_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_t19_area == 0UL) _t19_area = area;
+			if (area != _t19_area) { _t19_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _t19_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _t19_done = true; return false; }
+			if ((now - _t19_start).TotalSeconds > 360) { _t19_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _t19_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _t19_next) return true;
+			if (_t19_tries >= 3) { _t19_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _t19_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _t19_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _t19_tries++; _t19_next = now.AddSeconds(15); _t19_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportThunderState" Type="Definition"><![CDATA[
+			static System.DateTime _tc_start, _tc_last, _tc_next;
+			static int _tc_tries;
+			static bool _tc_done;
+			static ulong _tc_area;
+			static System.Numerics.Vector3 _tc_from;
+		]]></CodeChunk>
+		<CodeChunk Name="TransportThunder" Type="Hook"><![CDATA[
+			string name = "Heroic Transport: Call Down the Thunder";
+			ulong[] la = { 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL, 0x400000000003FFE4UL };
+			float[] lx = { 92.05f, 74.975f, 80.299f, 74.511f, 78.634f, 64.919f, 66.777f, 68.312f };
+			float[] ly = { 44.127f, 44.499f, 44.498f, 44.947f, 44.596f, 44.78f, 44.78f, 45.082f };
+			float[] lz = { -31.586f, -34.608f, -34.606f, -25.408f, -28.905f, -28.562f, -28.462f, -28f };
+			float[] lr = { 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+			bool[] lo = { false, false, false, false, false, false, false, false };
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if ((now - _tc_last).TotalSeconds > 30) { _tc_start = now; _tc_next = System.DateTime.MinValue; _tc_tries = 0; _tc_done = false; _tc_area = 0UL; }
+			_tc_last = now;
+			if (me == null || _tc_done) return false;
+			ulong area = 0;
+			try { area = me.AreaId; } catch { }
+			if (area == 0) return true;
+			if (_tc_area == 0UL) _tc_area = area;
+			if (area != _tc_area) { _tc_done = true; return false; }
+			var p = me.Location;
+			for (int k = 0; k < la.Length; k++)
+			    if ((!lo[k] || _tc_tries > 0) && (la[k] == 0UL || la[k] == area) && (p.X - lx[k]) * (p.X - lx[k]) + (p.Y - ly[k]) * (p.Y - ly[k]) + (p.Z - lz[k]) * (p.Z - lz[k]) < lr[k]) { _tc_done = true; return false; }
+			if ((now - _tc_start).TotalSeconds > 360) { _tc_done = true; try { Reborn.Utilities.Logging.Write("[Transport] Gave up on " + name + " here"); } catch { } return false; }
+			if (me.InCombat || me.IsDead) { _tc_start = now; return false; }
+			if (me.IsCasting) return true;
+			if (now < _tc_next) return true;
+			if (_tc_tries >= 3) { _tc_done = true; try { Reborn.Utilities.Logging.Write("[Transport] " + name + " didn't take you anywhere from here"); } catch { } return false; }
+			BuddyCron.Objects.HeroItem it = null;
+			foreach (var list in new System.Collections.Generic.IEnumerable<BuddyCron.Objects.HeroItem>[] { BuddyCron.Core.Me.QuestItems, BuddyCron.Core.Me.Backpack })
+			    foreach (var i in list)
+			        if (it == null && i != null && i.IsValid && i.Name == name) it = i;
+			if (it == null) { _tc_done = true; return false; }
+			float cd = 0f;
+			try { var a = it.Ability; if (a != null) cd = a.CooldownRemaining; } catch { }
+			if (cd > 0f) { _tc_next = now.AddSeconds(System.Math.Min(cd, 5f)); return true; }
+			BuddyCron.Navigation.Navigator.PlayerMover.MoveStop();
+			it.Use(); _tc_tries++; _tc_next = now.AddSeconds(15); _tc_from = p;
+			try { Reborn.Utilities.Logging.Write("[Transport] Using " + name + " where you are"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="LootPowerCoresState" Type="Definition"><![CDATA[
+			static System.DateTime _l17_click, _l17_take, _l17_open, _l17_since;
+			static ulong _l17_node;
+			static bool _l17_mv;
+		]]></CodeChunk>
+		<CodeChunk Name="LootPowerCores" Type="Hook"><![CDATA[
+			var me = BuddyCron.Core.Player;
+			var now = System.DateTime.Now;
+			if (me == null || me.InCombat || me.IsDead || me.FreeBackpackSlots > 1) { if (_l17_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l17_mv = false; } _l17_open = System.DateTime.MinValue; _l17_node = 0; return false; }
+			bool open = false;
+			try { open = BuddyCron.Objects.HeroGuiApiGfx.Instance.IsLootWindowOpen; } catch { }
+			if (open)
+			{
+			    if (_l17_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l17_mv = false; }
+			    if (_l17_open == System.DateTime.MinValue) _l17_open = now;
+			    double w = (now - _l17_open).TotalSeconds;
+			    if (w > 4) return false;
+			    if (w >= 0.4 && (now - _l17_take).TotalSeconds >= 1) { try { BuddyCron.HeroScrpt.Automaton.PlayerTakeAllLoot(); } catch { } _l17_take = now; }
+			    return true;
+			}
+			_l17_open = System.DateTime.MinValue;
+			if ((now - _l17_click).TotalSeconds < 2) return true;
+			BuddyCron.Objects.HeroNPC best = null;
+			foreach (var n in BuddyCron.Managers.HeroObjectManager.GetObjectsOfType<BuddyCron.Objects.HeroNPC>())
+			{
+			    if (n == null || !n.IsValid || !n.IsDead || n.Distance > 4f || !(n.Name == "Jawa Protection Droid" || n.Name == "Reprogrammed Battledroid")) continue;
+			    if (BuddyCron.Helpers.Blacklist.Contains(n.NodeId, BuddyCron.Helpers.BlacklistFlags.Loot) || !n.IsLootable) continue;
+			    if (best == null || n.Distance < best.Distance) best = n;
+			}
+			if (best == null) { if (_l17_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l17_mv = false; } _l17_node = 0; return false; }
+			if (best.NodeId != _l17_node) { _l17_node = best.NodeId; _l17_since = now; }
+			if ((now - _l17_since).TotalSeconds > 15) { if (_l17_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l17_mv = false; } BuddyCron.Helpers.Blacklist.Add(best.NodeId, BuddyCron.Helpers.BlacklistFlags.Loot, System.TimeSpan.FromMinutes(5)); return false; }
+			if (!best.IsWithinInteractRange) { BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(best.Location); _l17_mv = true; return true; }
+			if (_l17_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _l17_mv = false; }
+			best.Interact(); _l17_click = now;
+			BuddyCron.Helpers.Blacklist.Add(best.NodeId, BuddyCron.Helpers.BlacklistFlags.Loot, System.TimeSpan.FromMinutes(5));
+			try { Reborn.Utilities.Logging.Write("[Loot] Bags full: opening " + best.Name + " for the mission's item"); } catch { }
+			return true;
+		]]></CodeChunk>
+		<CodeChunk Name="ClickConsolesState" Type="Definition"><![CDATA[
+			static System.DateTime _cc_last, _cc_click, _cc_lockAt, _cc_idle, _cc_said, _cc_steer, _cc_err;
+			static ulong _cc_lock;
+			static int _cc_lockN, _cc_cnt;
+			static bool _cc_mv, _cc_over, _cc_fought;
+			static System.Collections.Generic.HashSet<ulong> _cc_spent = new System.Collections.Generic.HashSet<ulong>();
+			static System.DateTime _cc_lootAt;
+			static bool _cc_loot()
+			{
+			    bool want = false;
+			    try { var c = BuddyCron.Helpers.Poi.Current; if (c != null && c.Type == BuddyCron.Helpers.PoiType.Loot) want = true; } catch { }
+			    try { if (!want && BuddyCron.Profiles.LootTargeting.Instance.FirstEntity != null) want = true; } catch { }
+			    var now = System.DateTime.Now;
+			    if (!want) { _cc_lootAt = System.DateTime.MinValue; return false; }
+			    if (_cc_lootAt == System.DateTime.MinValue) _cc_lootAt = now;
+			    return (now - _cc_lootAt).TotalSeconds < 20;
+			}
+			static bool _cc_walk(System.Numerics.Vector3 to, string name)
+			{
+			    var mp = new BuddyCron.Navigation.MoveToParameters(to, name) { DistanceTolerance = 0.15f, UseMount = false };
+			    _cc_mv = true;
+			    return BuddyCron.Navigation.Navigator.MoveTo(mp) == BuddyCron.Navigation.MoveResult.ReachedDestination;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickConsoles" Type="Hook"><![CDATA[
+			try
+			{
+			    string name = "Anti-Aircraft Console";
+			    float[] ox = { 74.975f, 80.299f, 74.027f, 79.712f }, oy = { 44.499f, 44.498f, 45.697f, 45.698f }, oz = { -34.608f, -34.606f, -33.13f, -34.668f };
+			    float[] sx = { 75.132f, 80.328f, 74.383f, 79.553f }, sy = { 44.502f, 44.502f, 45.702f, 45.702f }, sz = { -34.307f, -34.392f, -33.118f, -34.406f };
+			    var center = new System.Numerics.Vector3(77.2533f, 45.098f, -34.253f);
+			    float range = 4f;
+			    var me = BuddyCron.Core.Player;
+			    var now = System.DateTime.Now;
+			    if ((now - _cc_last).TotalSeconds > 120) { _cc_click = System.DateTime.MinValue; _cc_idle = System.DateTime.MinValue; _cc_said = System.DateTime.MinValue; _cc_steer = System.DateTime.MinValue; _cc_lock = 0; _cc_lockN = 0; _cc_mv = false; _cc_over = false; _cc_fought = false; _cc_spent.Clear(); }
+			    _cc_last = now;
+			    if (me == null) return false;
+			    if (!BuddyCron.Scripting.ConditionParser.HasQuest(0xE0000E32B9F6BF90UL) || BuddyCron.Scripting.ConditionParser.IsStepComplete(0xE0000E32B9F6BF90UL, 2)) { if (!_cc_over) { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } _cc_over = true; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game says this step is done"); } return false; }
+			    _cc_over = false;
+			    if (me.IsDead) { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } return false; }
+			    if (me.InCombat) { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } _cc_fought = true; return false; }
+			    if (me.IsCasting) { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } return true; }
+			    if (_cc_loot()) { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } _cc_fought = true; return false; }
+			    if (_cc_fought) { _cc_fought = false; _cc_lockN = 0; _cc_lockAt = now; _cc_steer = System.DateTime.MinValue; }
+			    if ((now - _cc_click).TotalSeconds < 1.5) return true;
+			    int cnt = 0;
+			    for (uint v = 0; v < 4; v++) { if (BuddyCron.Scripting.ConditionParser.IsTaskValueGreaterThan(0xE0000E32B9F6BF90UL, 2, 0, v)) cnt++; else break; }
+			    if (_cc_lock != 0 && _cc_lockN > 0)
+			    {
+			        if (cnt > _cc_cnt) { _cc_spent.Add(_cc_lock); _cc_lock = 0; _cc_lockN = 0; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game counted it (" + cnt + " of 4)"); }
+			        else if ((now - _cc_click).TotalSeconds < 3) return true;
+			    }
+			    var p = me.Location;
+			    BuddyCron.Objects.HeroPlaceable cur = null, best = null;
+			    float bestD = float.MaxValue;
+			    foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroPlaceable>())
+			    {
+			        if (o == null || !o.IsValid || o.Name != name) continue;
+			        if (_cc_lock != 0 && o.NodeId == _cc_lock) { cur = o; continue; }
+			        if (!o.IsUsable || _cc_spent.Contains(o.NodeId)) continue;
+			        if (System.Numerics.Vector3.DistanceSquared(o.Location, center) > range * range) continue;
+			        float d = System.Numerics.Vector3.DistanceSquared(o.Location, p);
+			        if (d < bestD) { bestD = d; best = o; }
+			    }
+			    if (_cc_lock != 0 && (cur == null || !cur.IsUsable || _cc_lockN >= 3 || (_cc_lockN == 0 && (now - _cc_lockAt).TotalSeconds > 45)))
+			    {
+			        if (cur != null && cur.IsUsable) Reborn.Utilities.Logging.Write("[Click] " + name + ": left one it could not use");
+			        _cc_spent.Add(_cc_lock); _cc_lock = 0; cur = null; _cc_steer = System.DateTime.MinValue;
+			    }
+			    if (cur == null)
+			    {
+			        if (best == null)
+			        {
+			            if (_cc_idle == System.DateTime.MinValue) _cc_idle = now;
+			            if ((now - _cc_idle).TotalSeconds > 60) { _cc_spent.Clear(); _cc_idle = now; }
+			            if ((now - _cc_said).TotalSeconds > 30) { _cc_said = now; Reborn.Utilities.Logging.Write("[Click] " + name + ": none can be used right now, waiting here (" + cnt + " of 4 done)"); }
+			            int nk = 0; float nd = float.MaxValue;
+			            for (int k = 0; k < sx.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(p, new System.Numerics.Vector3(sx[k], sy[k], sz[k])); if (d < nd) { nd = d; nk = k; } }
+			            if (nd > 0.0625f) { if (_cc_walk(new System.Numerics.Vector3(sx[nk], sy[nk], sz[nk]), name)) { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } } }
+			            else { if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; } }
+			            return true;
+			        }
+			        _cc_idle = System.DateTime.MinValue;
+			        cur = best; _cc_lock = best.NodeId; _cc_lockN = 0; _cc_lockAt = now; _cc_steer = System.DateTime.MinValue;
+			    }
+			    var ol = cur.Location;
+			    if (!cur.IsWithinInteractRange)
+			    {
+			        int gk = 0; float gd = float.MaxValue;
+			        for (int k = 0; k < ox.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(ol, new System.Numerics.Vector3(ox[k], oy[k], oz[k])); if (d < gd) { gd = d; gk = k; } }
+			        var goal = new System.Numerics.Vector3(sx[gk], sy[gk], sz[gk]);
+			        bool there = System.Numerics.Vector3.DistanceSquared(p, goal) < 0.0625f;
+			        if (!there && _cc_steer == System.DateTime.MinValue) { if (!_cc_walk(goal, name)) return true; }
+			        if (_cc_steer == System.DateTime.MinValue) _cc_steer = now;
+			        if ((now - _cc_steer).TotalSeconds > 8)
+			        {
+			            if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; }
+			            Reborn.Utilities.Logging.Write("[Click] " + name + ": could not get in reach of one, trying another");
+			            _cc_spent.Add(_cc_lock); _cc_lock = 0; _cc_steer = System.DateTime.MinValue;
+			            return true;
+			        }
+			        BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(ol); _cc_mv = true;
+			        return true;
+			    }
+			    _cc_steer = System.DateTime.MinValue;
+			    if (_cc_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cc_mv = false; }
+			    cur.Interact(); _cc_click = now; _cc_lockN++; _cc_cnt = cnt;
+			    Reborn.Utilities.Logging.Write("[Click] " + name + " (" + cnt + " of 4 done so far)");
+			    return true;
+			}
+			catch (System.Exception e)
+			{
+			    try { if ((System.DateTime.Now - _cc_err).TotalSeconds > 30) { _cc_err = System.DateTime.Now; Reborn.Utilities.Logging.Write("[Click] Anti-Aircraft Console: " + e.Message); } } catch { }
+			    return false;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="RestToFullState" Type="Definition"><![CDATA[
+			static System.DateTime _tu_start, _tu_fail, _tu_err;
+			static bool _tu_on;
+			static string _tu_name;
+			static string[] _tu_names = { "Introspection", "Meditation", "Recuperate", "Recharge and Reload", "Channel Hatred", "Seethe" };
+			static bool _tu_rest(string where)
+			{
+			    var me = BuddyCron.Core.Player;
+			    var now = System.DateTime.Now;
+			    if (me == null || me.IsDead || me.InCombat || me.IsLooting) { _tu_on = false; return false; }
+			    var comp = me.Companion;
+			    if (comp != null && comp.IsDead) { _tu_on = false; return false; }
+			    if (!_tu_on)
+			    {
+			        bool need = me.HealthPercent < 95f || (comp != null && comp.HealthPercent < 90f);
+			        if (!need || (now - _tu_fail).TotalSeconds < 20) return false;
+			        _tu_on = true; _tu_start = now;
+			        Reborn.Utilities.Logging.Write("[Rest] Resting to full before " + where);
+			    }
+			    bool full = me.HealthPercent >= 99f && (comp == null || comp.HealthPercent >= 98f);
+			    if (full || (now - _tu_start).TotalSeconds > 20)
+			    {
+			        if (!full) _tu_fail = now;
+			        _tu_on = false;
+			        if (me.IsCasting) BuddyCron.Managers.AbilityManager.StopCasting();
+			        return false;
+			    }
+			    if (me.IsMoving) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); return true; }
+			    if (me.IsCasting) return true;
+			    if (_tu_name == null)
+			        foreach (var n in _tu_names) { if (BuddyCron.Managers.AbilityManager.CanCast(n, me).Success) { _tu_name = n; break; } }
+			    if (_tu_name != null && BuddyCron.Managers.AbilityManager.Cast(_tu_name, me).Success) return true;
+			    if ((now - _tu_start).TotalSeconds < 4) return true;
+			    _tu_on = false; _tu_fail = now;
+			    Reborn.Utilities.Logging.Write("[Rest] Could not start resting, going on");
+			    return false;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="RestBeforeCamp" Type="Hook"><![CDATA[
+			try { return _tu_rest("walking into the Spice Crates camp"); }
+			catch (System.Exception e)
+			{
+			    try { if ((System.DateTime.Now - _tu_err).TotalSeconds > 30) { _tu_err = System.DateTime.Now; Reborn.Utilities.Logging.Write("[Rest] " + e.Message); } } catch { }
+			    return false;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickSpiceCratesState" Type="Definition"><![CDATA[
+			static System.DateTime _cs_last, _cs_click, _cs_lockAt, _cs_idle, _cs_said, _cs_steer, _cs_err, _cs_rest;
+			static ulong _cs_lock;
+			static int _cs_lockN, _cs_cnt;
+			static bool _cs_mv, _cs_over, _cs_fought;
+			static System.Collections.Generic.HashSet<ulong> _cs_spent = new System.Collections.Generic.HashSet<ulong>();
+			static System.DateTime _cs_lootAt;
+			static bool _cs_loot()
+			{
+			    bool want = false;
+			    try { var c = BuddyCron.Helpers.Poi.Current; if (c != null && c.Type == BuddyCron.Helpers.PoiType.Loot) want = true; } catch { }
+			    try { if (!want && BuddyCron.Profiles.LootTargeting.Instance.FirstEntity != null) want = true; } catch { }
+			    var now = System.DateTime.Now;
+			    if (!want) { _cs_lootAt = System.DateTime.MinValue; return false; }
+			    if (_cs_lootAt == System.DateTime.MinValue) _cs_lootAt = now;
+			    return (now - _cs_lootAt).TotalSeconds < 20;
+			}
+			static bool _cs_walk(System.Numerics.Vector3 to, string name)
+			{
+			    var mp = new BuddyCron.Navigation.MoveToParameters(to, name) { DistanceTolerance = 0.15f, UseMount = false };
+			    _cs_mv = true;
+			    return BuddyCron.Navigation.Navigator.MoveTo(mp) == BuddyCron.Navigation.MoveResult.ReachedDestination;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickSpiceCrates" Type="Hook"><![CDATA[
+			try
+			{
+			    string name = "Spice Crate";
+			    float[] ox = { 64.919f, 66.201f, 67.411f, 68.116f, 66.777f, 68.575f, 68.219f, 66.418f }, oy = { 44.78f, 44.78f, 44.78f, 44.78f, 44.78f, 45.081f, 45.381f, 45.381f }, oz = { -28.562f, -26.352f, -30.295f, -29.534f, -28.462f, -28.875f, -29.372f, -29.636f };
+			    float[] sx = { 64.996f, 66.155f, 67.29f, 67.812f, 66.841f, 68.38f, 68.186f, 66.628f }, sy = { 44.782f, 44.781f, 44.782f, 44.782f, 44.782f, 45.082f, 45.082f, 45.386f }, sz = { -28.374f, -26.591f, -30.018f, -29.644f, -28.781f, -28.693f, -28.945f, -29.391f };
+			    var center = new System.Numerics.Vector3(67.0795f, 44.9679f, -28.886f);
+			    float range = 3.5f;
+			    var me = BuddyCron.Core.Player;
+			    var now = System.DateTime.Now;
+			    if ((now - _cs_last).TotalSeconds > 120) { _cs_click = System.DateTime.MinValue; _cs_idle = System.DateTime.MinValue; _cs_said = System.DateTime.MinValue; _cs_steer = System.DateTime.MinValue; _cs_rest = System.DateTime.MinValue; _cs_lock = 0; _cs_lockN = 0; _cs_mv = false; _cs_over = false; _cs_fought = false; _cs_spent.Clear(); }
+			    _cs_last = now;
+			    if (me == null) return false;
+			    if (!BuddyCron.Scripting.ConditionParser.HasQuest(0xE000AB0EEF32FF67UL) || BuddyCron.Scripting.ConditionParser.IsStepComplete(0xE000AB0EEF32FF67UL, 2)) { if (!_cs_over) { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } _cs_over = true; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game says this step is done"); } return false; }
+			    _cs_over = false;
+			    if (me.IsDead) { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } return false; }
+			    if (me.InCombat) { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } _cs_fought = true; return false; }
+			    if (_tu_rest("the next crate")) { _cs_mv = false; return true; }
+			    var comp = me.Companion;
+			    bool low = me.HealthPercent < 77f || (comp != null && (comp.IsDead || comp.HealthPercent < 77f));
+			    if (low && _cs_rest == System.DateTime.MinValue) { _cs_rest = now; Reborn.Utilities.Logging.Write("[Click] " + name + ": resting before the next one"); }
+			    if (_cs_rest != System.DateTime.MinValue)
+			    {
+			        if ((!low && !me.IsCasting && (now - _cs_rest).TotalSeconds > 3) || (now - _cs_rest).TotalSeconds > 45) _cs_rest = System.DateTime.MinValue;
+			        else { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } return false; }
+			    }
+			    if (me.IsCasting) { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } return true; }
+			    if (_cs_loot()) { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } _cs_fought = true; return false; }
+			    if (_cs_fought) { _cs_fought = false; _cs_lockN = 0; _cs_lockAt = now; _cs_steer = System.DateTime.MinValue; }
+			    if ((now - _cs_click).TotalSeconds < 1.5) return true;
+			    int cnt = 0;
+			    for (uint v = 0; v < 8; v++) { if (BuddyCron.Scripting.ConditionParser.IsTaskValueGreaterThan(0xE000AB0EEF32FF67UL, 2, 0, v)) cnt++; else break; }
+			    if (_cs_lock != 0 && _cs_lockN > 0)
+			    {
+			        if (cnt > _cs_cnt) { _cs_spent.Add(_cs_lock); _cs_lock = 0; _cs_lockN = 0; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game counted it (" + cnt + " of 8)"); }
+			        else if ((now - _cs_click).TotalSeconds < 3) return true;
+			    }
+			    var p = me.Location;
+			    BuddyCron.Objects.HeroPlaceable cur = null, best = null;
+			    float bestD = float.MaxValue;
+			    foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroPlaceable>())
+			    {
+			        if (o == null || !o.IsValid || o.Name != name) continue;
+			        if (_cs_lock != 0 && o.NodeId == _cs_lock) { cur = o; continue; }
+			        if (!o.IsUsable || _cs_spent.Contains(o.NodeId)) continue;
+			        if (System.Numerics.Vector3.DistanceSquared(o.Location, center) > range * range) continue;
+			        int rk = 99; float rd = 0.25f;
+			        for (int k = 0; k < ox.Length; k++) { float dk = System.Numerics.Vector3.DistanceSquared(o.Location, new System.Numerics.Vector3(ox[k], oy[k], oz[k])); if (dk < rd) { rd = dk; rk = k; } }
+			        float d = rk * 10000f + System.Numerics.Vector3.DistanceSquared(o.Location, p);
+			        if (d < bestD) { bestD = d; best = o; }
+			    }
+			    if (_cs_lock != 0 && (cur == null || !cur.IsUsable || _cs_lockN >= 3 || (_cs_lockN == 0 && (now - _cs_lockAt).TotalSeconds > 45)))
+			    {
+			        if (cur != null && cur.IsUsable) Reborn.Utilities.Logging.Write("[Click] " + name + ": left one it could not use");
+			        _cs_spent.Add(_cs_lock); _cs_lock = 0; cur = null; _cs_steer = System.DateTime.MinValue;
+			    }
+			    if (cur == null)
+			    {
+			        if (best == null)
+			        {
+			            if (_cs_idle == System.DateTime.MinValue) _cs_idle = now;
+			            if ((now - _cs_idle).TotalSeconds > 60) { _cs_spent.Clear(); _cs_idle = now; }
+			            if ((now - _cs_said).TotalSeconds > 30) { _cs_said = now; Reborn.Utilities.Logging.Write("[Click] " + name + ": none can be used right now, waiting here (" + cnt + " of 8 done)"); }
+			            int nk = 0; float nd = float.MaxValue;
+			            for (int k = 0; k < sx.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(p, new System.Numerics.Vector3(sx[k], sy[k], sz[k])); if (d < nd) { nd = d; nk = k; } }
+			            if (nd > 0.0625f) { if (_cs_walk(new System.Numerics.Vector3(sx[nk], sy[nk], sz[nk]), name)) { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } } }
+			            else { if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; } }
+			            return true;
+			        }
+			        _cs_idle = System.DateTime.MinValue;
+			        cur = best; _cs_lock = best.NodeId; _cs_lockN = 0; _cs_lockAt = now; _cs_steer = System.DateTime.MinValue;
+			    }
+			    var ol = cur.Location;
+			    if (!cur.IsWithinInteractRange)
+			    {
+			        int gk = 0; float gd = float.MaxValue;
+			        for (int k = 0; k < ox.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(ol, new System.Numerics.Vector3(ox[k], oy[k], oz[k])); if (d < gd) { gd = d; gk = k; } }
+			        var goal = new System.Numerics.Vector3(sx[gk], sy[gk], sz[gk]);
+			        bool there = System.Numerics.Vector3.DistanceSquared(p, goal) < 0.0625f;
+			        if (!there && _cs_steer == System.DateTime.MinValue) { if (!_cs_walk(goal, name)) return true; }
+			        if (_cs_steer == System.DateTime.MinValue) _cs_steer = now;
+			        if ((now - _cs_steer).TotalSeconds > 8)
+			        {
+			            if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; }
+			            Reborn.Utilities.Logging.Write("[Click] " + name + ": could not get in reach of one, trying another");
+			            _cs_spent.Add(_cs_lock); _cs_lock = 0; _cs_steer = System.DateTime.MinValue;
+			            return true;
+			        }
+			        BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(ol); _cs_mv = true;
+			        return true;
+			    }
+			    _cs_steer = System.DateTime.MinValue;
+			    if (_cs_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cs_mv = false; }
+			    cur.Interact(); _cs_click = now; _cs_lockN++; _cs_cnt = cnt;
+			    Reborn.Utilities.Logging.Write("[Click] " + name + " (" + cnt + " of 8 done so far)");
+			    return true;
+			}
+			catch (System.Exception e)
+			{
+			    try { if ((System.DateTime.Now - _cs_err).TotalSeconds > 30) { _cs_err = System.DateTime.Now; Reborn.Utilities.Logging.Write("[Click] Spice Crate: " + e.Message); } } catch { }
+			    return false;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickCaravanSuppliesState" Type="Definition"><![CDATA[
+			static System.DateTime _cu_last, _cu_click, _cu_lockAt, _cu_idle, _cu_said, _cu_steer, _cu_err;
+			static ulong _cu_lock;
+			static int _cu_lockN, _cu_cnt;
+			static bool _cu_mv, _cu_over, _cu_fought;
+			static System.Collections.Generic.HashSet<ulong> _cu_spent = new System.Collections.Generic.HashSet<ulong>();
+			static System.DateTime _cu_lootAt;
+			static bool _cu_loot()
+			{
+			    bool want = false;
+			    try { var c = BuddyCron.Helpers.Poi.Current; if (c != null && c.Type == BuddyCron.Helpers.PoiType.Loot) want = true; } catch { }
+			    try { if (!want && BuddyCron.Profiles.LootTargeting.Instance.FirstEntity != null) want = true; } catch { }
+			    var now = System.DateTime.Now;
+			    if (!want) { _cu_lootAt = System.DateTime.MinValue; return false; }
+			    if (_cu_lootAt == System.DateTime.MinValue) _cu_lootAt = now;
+			    return (now - _cu_lootAt).TotalSeconds < 20;
+			}
+			static bool _cu_walk(System.Numerics.Vector3 to, string name)
+			{
+			    var mp = new BuddyCron.Navigation.MoveToParameters(to, name) { DistanceTolerance = 0.15f, UseMount = false };
+			    _cu_mv = true;
+			    return BuddyCron.Navigation.Navigator.MoveTo(mp) == BuddyCron.Navigation.MoveResult.ReachedDestination;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickCaravanSupplies" Type="Hook"><![CDATA[
+			try
+			{
+			    string name = "Caravan Supply Crate";
+			    float[] ox = { 92.492f, 91.474f, 91.27f, 90.81f, 90.328f }, oy = { 45.932f, 45.857f, 45.871f, 45.821f, 45.852f }, oz = { 30.572f, 31.991f, 31.586f, 30.664f, 29.189f };
+			    float[] sx = { 92.224f, 91.802f, 91.503f, 91.158f, 90.61f }, sy = { 45.931f, 45.914f, 45.904f, 45.868f, 45.852f }, sz = { 30.63f, 31.967f, 31.619f, 30.819f, 29.475f };
+			    var center = new System.Numerics.Vector3(91.2748f, 45.8666f, 30.8004f);
+			    float range = 3f;
+			    var me = BuddyCron.Core.Player;
+			    var now = System.DateTime.Now;
+			    if ((now - _cu_last).TotalSeconds > 120) { _cu_click = System.DateTime.MinValue; _cu_idle = System.DateTime.MinValue; _cu_said = System.DateTime.MinValue; _cu_steer = System.DateTime.MinValue; _cu_lock = 0; _cu_lockN = 0; _cu_mv = false; _cu_over = false; _cu_fought = false; _cu_spent.Clear(); }
+			    _cu_last = now;
+			    if (me == null) return false;
+			    if (!BuddyCron.Scripting.ConditionParser.HasQuest(0xE00011FA49AF8257UL) || BuddyCron.Scripting.ConditionParser.IsStepComplete(0xE00011FA49AF8257UL, 3) || BuddyCron.Scripting.ConditionParser.IsTaskComplete(0xE00011FA49AF8257UL, 3, 1)) { if (!_cu_over) { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } _cu_over = true; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game says this step is done"); } return false; }
+			    _cu_over = false;
+			    if (me.IsDead) { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } return false; }
+			    if (me.InCombat) { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } _cu_fought = true; return false; }
+			    if (me.IsCasting) { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } return true; }
+			    if (_cu_loot()) { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } _cu_fought = true; return false; }
+			    if (_cu_fought) { _cu_fought = false; _cu_lockN = 0; _cu_lockAt = now; _cu_steer = System.DateTime.MinValue; }
+			    if ((now - _cu_click).TotalSeconds < 1.5) return true;
+			    int cnt = 0;
+			    for (uint v = 0; v < 5; v++) { if (BuddyCron.Scripting.ConditionParser.IsTaskValueGreaterThan(0xE00011FA49AF8257UL, 3, 1, v)) cnt++; else break; }
+			    if (_cu_lock != 0 && _cu_lockN > 0)
+			    {
+			        if (cnt > _cu_cnt) { _cu_spent.Add(_cu_lock); _cu_lock = 0; _cu_lockN = 0; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game counted it (" + cnt + " of 5)"); }
+			        else if ((now - _cu_click).TotalSeconds < 3) return true;
+			    }
+			    var p = me.Location;
+			    BuddyCron.Objects.HeroPlaceable cur = null, best = null;
+			    float bestD = float.MaxValue;
+			    foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroPlaceable>())
+			    {
+			        if (o == null || !o.IsValid || o.Name != name) continue;
+			        if (_cu_lock != 0 && o.NodeId == _cu_lock) { cur = o; continue; }
+			        if (!o.IsUsable || _cu_spent.Contains(o.NodeId)) continue;
+			        if (System.Numerics.Vector3.DistanceSquared(o.Location, center) > range * range) continue;
+			        float d = System.Numerics.Vector3.DistanceSquared(o.Location, p);
+			        if (d < bestD) { bestD = d; best = o; }
+			    }
+			    if (_cu_lock != 0 && (cur == null || !cur.IsUsable || _cu_lockN >= 3 || (_cu_lockN == 0 && (now - _cu_lockAt).TotalSeconds > 45)))
+			    {
+			        if (cur != null && cur.IsUsable) Reborn.Utilities.Logging.Write("[Click] " + name + ": left one it could not use");
+			        _cu_spent.Add(_cu_lock); _cu_lock = 0; cur = null; _cu_steer = System.DateTime.MinValue;
+			    }
+			    if (cur == null)
+			    {
+			        if (best == null)
+			        {
+			            if (_cu_idle == System.DateTime.MinValue) _cu_idle = now;
+			            if ((now - _cu_idle).TotalSeconds > 60) { _cu_spent.Clear(); _cu_idle = now; }
+			            if ((now - _cu_said).TotalSeconds > 30) { _cu_said = now; Reborn.Utilities.Logging.Write("[Click] " + name + ": none can be used right now, waiting here (" + cnt + " of 5 done)"); }
+			            int nk = 0; float nd = float.MaxValue;
+			            for (int k = 0; k < sx.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(p, new System.Numerics.Vector3(sx[k], sy[k], sz[k])); if (d < nd) { nd = d; nk = k; } }
+			            if (nd > 0.0625f) { if (_cu_walk(new System.Numerics.Vector3(sx[nk], sy[nk], sz[nk]), name)) { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } } }
+			            else { if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; } }
+			            return true;
+			        }
+			        _cu_idle = System.DateTime.MinValue;
+			        cur = best; _cu_lock = best.NodeId; _cu_lockN = 0; _cu_lockAt = now; _cu_steer = System.DateTime.MinValue;
+			    }
+			    var ol = cur.Location;
+			    if (!cur.IsWithinInteractRange)
+			    {
+			        int gk = 0; float gd = float.MaxValue;
+			        for (int k = 0; k < ox.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(ol, new System.Numerics.Vector3(ox[k], oy[k], oz[k])); if (d < gd) { gd = d; gk = k; } }
+			        var goal = new System.Numerics.Vector3(sx[gk], sy[gk], sz[gk]);
+			        bool there = System.Numerics.Vector3.DistanceSquared(p, goal) < 0.0625f;
+			        if (!there && _cu_steer == System.DateTime.MinValue) { if (!_cu_walk(goal, name)) return true; }
+			        if (_cu_steer == System.DateTime.MinValue) _cu_steer = now;
+			        if ((now - _cu_steer).TotalSeconds > 8)
+			        {
+			            if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; }
+			            Reborn.Utilities.Logging.Write("[Click] " + name + ": could not get in reach of one, trying another");
+			            _cu_spent.Add(_cu_lock); _cu_lock = 0; _cu_steer = System.DateTime.MinValue;
+			            return true;
+			        }
+			        BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(ol); _cu_mv = true;
+			        return true;
+			    }
+			    _cu_steer = System.DateTime.MinValue;
+			    if (_cu_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cu_mv = false; }
+			    cur.Interact(); _cu_click = now; _cu_lockN++; _cu_cnt = cnt;
+			    Reborn.Utilities.Logging.Write("[Click] " + name + " (" + cnt + " of 5 done so far)");
+			    return true;
+			}
+			catch (System.Exception e)
+			{
+			    try { if ((System.DateTime.Now - _cu_err).TotalSeconds > 30) { _cu_err = System.DateTime.Now; Reborn.Utilities.Logging.Write("[Click] Caravan Supply Crate: " + e.Message); } } catch { }
+			    return false;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickCaravanSpeedersState" Type="Definition"><![CDATA[
+			static System.DateTime _cv_last, _cv_click, _cv_lockAt, _cv_idle, _cv_said, _cv_steer, _cv_err;
+			static ulong _cv_lock;
+			static int _cv_lockN, _cv_cnt;
+			static bool _cv_mv, _cv_over, _cv_fought;
+			static System.Collections.Generic.HashSet<ulong> _cv_spent = new System.Collections.Generic.HashSet<ulong>();
+			static System.DateTime _cv_lootAt;
+			static bool _cv_loot()
+			{
+			    bool want = false;
+			    try { var c = BuddyCron.Helpers.Poi.Current; if (c != null && c.Type == BuddyCron.Helpers.PoiType.Loot) want = true; } catch { }
+			    try { if (!want && BuddyCron.Profiles.LootTargeting.Instance.FirstEntity != null) want = true; } catch { }
+			    var now = System.DateTime.Now;
+			    if (!want) { _cv_lootAt = System.DateTime.MinValue; return false; }
+			    if (_cv_lootAt == System.DateTime.MinValue) _cv_lootAt = now;
+			    return (now - _cv_lootAt).TotalSeconds < 20;
+			}
+			static bool _cv_walk(System.Numerics.Vector3 to, string name)
+			{
+			    var mp = new BuddyCron.Navigation.MoveToParameters(to, name) { DistanceTolerance = 0.15f, UseMount = false };
+			    _cv_mv = true;
+			    return BuddyCron.Navigation.Navigator.MoveTo(mp) == BuddyCron.Navigation.MoveResult.ReachedDestination;
+			}
+		]]></CodeChunk>
+		<CodeChunk Name="ClickCaravanSpeeders" Type="Hook"><![CDATA[
+			try
+			{
+			    string name = "Caravan Speeder";
+			    float[] ox = { 92.705f, 92.761f, 92.205f, 90.514f }, oy = { 45.925f, 45.958f, 45.89f, 45.833f }, oz = { 30.489f, 30.73f, 32.753f, 29.498f };
+			    float[] sx = { 92.42f, 92.42f, 92.216f, 90.675f }, sy = { 45.938f, 45.938f, 45.946f, 45.804f }, sz = { 30.592f, 30.592f, 32.327f, 29.796f };
+			    var center = new System.Numerics.Vector3(92.0463f, 45.9015f, 30.8675f);
+			    float range = 3.5f;
+			    var me = BuddyCron.Core.Player;
+			    var now = System.DateTime.Now;
+			    if ((now - _cv_last).TotalSeconds > 120) { _cv_click = System.DateTime.MinValue; _cv_idle = System.DateTime.MinValue; _cv_said = System.DateTime.MinValue; _cv_steer = System.DateTime.MinValue; _cv_lock = 0; _cv_lockN = 0; _cv_mv = false; _cv_over = false; _cv_fought = false; _cv_spent.Clear(); }
+			    _cv_last = now;
+			    if (me == null) return false;
+			    if (!BuddyCron.Scripting.ConditionParser.HasQuest(0xE00011FA49AF8257UL) || BuddyCron.Scripting.ConditionParser.IsStepComplete(0xE00011FA49AF8257UL, 3) || BuddyCron.Scripting.ConditionParser.IsTaskComplete(0xE00011FA49AF8257UL, 3, 0)) { if (!_cv_over) { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } _cv_over = true; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game says this step is done"); } return false; }
+			    _cv_over = false;
+			    if (me.IsDead) { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } return false; }
+			    if (me.InCombat) { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } _cv_fought = true; return false; }
+			    if (me.IsCasting) { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } return true; }
+			    if (_cv_loot()) { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } _cv_fought = true; return false; }
+			    if (_cv_fought) { _cv_fought = false; _cv_lockN = 0; _cv_lockAt = now; _cv_steer = System.DateTime.MinValue; }
+			    if ((now - _cv_click).TotalSeconds < 1.5) return true;
+			    int cnt = 0;
+			    for (uint v = 0; v < 4; v++) { if (BuddyCron.Scripting.ConditionParser.IsTaskValueGreaterThan(0xE00011FA49AF8257UL, 3, 0, v)) cnt++; else break; }
+			    if (_cv_lock != 0 && _cv_lockN > 0)
+			    {
+			        if (cnt > _cv_cnt) { _cv_spent.Add(_cv_lock); _cv_lock = 0; _cv_lockN = 0; Reborn.Utilities.Logging.Write("[Click] " + name + ": the game counted it (" + cnt + " of 4)"); }
+			        else if ((now - _cv_click).TotalSeconds < 3) return true;
+			    }
+			    var p = me.Location;
+			    BuddyCron.Objects.HeroPlaceable cur = null, best = null;
+			    float bestD = float.MaxValue;
+			    foreach (var o in BuddyCron.Managers.HeroObjectManager.GetObjects<BuddyCron.Objects.HeroPlaceable>())
+			    {
+			        if (o == null || !o.IsValid || o.Name != name) continue;
+			        if (_cv_lock != 0 && o.NodeId == _cv_lock) { cur = o; continue; }
+			        if (!o.IsUsable || _cv_spent.Contains(o.NodeId)) continue;
+			        if (System.Numerics.Vector3.DistanceSquared(o.Location, center) > range * range) continue;
+			        float d = System.Numerics.Vector3.DistanceSquared(o.Location, p);
+			        if (d < bestD) { bestD = d; best = o; }
+			    }
+			    if (_cv_lock != 0 && (cur == null || !cur.IsUsable || _cv_lockN >= 3 || (_cv_lockN == 0 && (now - _cv_lockAt).TotalSeconds > 45)))
+			    {
+			        if (cur != null && cur.IsUsable) Reborn.Utilities.Logging.Write("[Click] " + name + ": left one it could not use");
+			        _cv_spent.Add(_cv_lock); _cv_lock = 0; cur = null; _cv_steer = System.DateTime.MinValue;
+			    }
+			    if (cur == null)
+			    {
+			        if (best == null)
+			        {
+			            if (_cv_idle == System.DateTime.MinValue) _cv_idle = now;
+			            if ((now - _cv_idle).TotalSeconds > 60) { _cv_spent.Clear(); _cv_idle = now; }
+			            if ((now - _cv_said).TotalSeconds > 30) { _cv_said = now; Reborn.Utilities.Logging.Write("[Click] " + name + ": none can be used right now, waiting here (" + cnt + " of 4 done)"); }
+			            int nk = 0; float nd = float.MaxValue;
+			            for (int k = 0; k < sx.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(p, new System.Numerics.Vector3(sx[k], sy[k], sz[k])); if (d < nd) { nd = d; nk = k; } }
+			            if (nd > 0.0625f) { if (_cv_walk(new System.Numerics.Vector3(sx[nk], sy[nk], sz[nk]), name)) { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } } }
+			            else { if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; } }
+			            return true;
+			        }
+			        _cv_idle = System.DateTime.MinValue;
+			        cur = best; _cv_lock = best.NodeId; _cv_lockN = 0; _cv_lockAt = now; _cv_steer = System.DateTime.MinValue;
+			    }
+			    var ol = cur.Location;
+			    if (!cur.IsWithinInteractRange)
+			    {
+			        int gk = 0; float gd = float.MaxValue;
+			        for (int k = 0; k < ox.Length; k++) { float d = System.Numerics.Vector3.DistanceSquared(ol, new System.Numerics.Vector3(ox[k], oy[k], oz[k])); if (d < gd) { gd = d; gk = k; } }
+			        var goal = new System.Numerics.Vector3(sx[gk], sy[gk], sz[gk]);
+			        bool there = System.Numerics.Vector3.DistanceSquared(p, goal) < 0.0625f;
+			        if (!there && _cv_steer == System.DateTime.MinValue) { if (!_cv_walk(goal, name)) return true; }
+			        if (_cv_steer == System.DateTime.MinValue) _cv_steer = now;
+			        if ((now - _cv_steer).TotalSeconds > 8)
+			        {
+			            if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; }
+			            Reborn.Utilities.Logging.Write("[Click] " + name + ": could not get in reach of one, trying another");
+			            _cv_spent.Add(_cv_lock); _cv_lock = 0; _cv_steer = System.DateTime.MinValue;
+			            return true;
+			        }
+			        BuddyCron.Navigation.Navigator.PlayerMover.MoveTowards(ol); _cv_mv = true;
+			        return true;
+			    }
+			    _cv_steer = System.DateTime.MinValue;
+			    if (_cv_mv) { BuddyCron.Navigation.Navigator.PlayerMover.MoveStop(); _cv_mv = false; }
+			    cur.Interact(); _cv_click = now; _cv_lockN++; _cv_cnt = cnt;
+			    Reborn.Utilities.Logging.Write("[Click] " + name + " (" + cnt + " of 4 done so far)");
+			    return true;
+			}
+			catch (System.Exception e)
+			{
+			    try { if ((System.DateTime.Now - _cv_err).TotalSeconds > 30) { _cv_err = System.DateTime.Now; Reborn.Utilities.Logging.Write("[Click] Caravan Speeder: " + e.Message); } } catch { }
+			    return false;
+			}
+		]]></CodeChunk>
+	</CodeChunks>
+
+	<GrindAreas>
+		<GrindArea Name="Call Down the Thunder: Kiregan Freem">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Kiregan Freem</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="77.639,44.942,-25" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Black Box: the ambush">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Sand People Roamer</Mob><Mob>Sand People Savage</Mob><Mob>Sand People Clansman</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-51.639,50.002,-26.385" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Blood and Sand: Sand People Forces (30)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Sand People Stoneshaper</Mob><Mob>Sand People Pummeler</Mob><Mob>Sand People Savage</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="232.83,46.721,30.95" Radius="3" />
+				<Hotspot XYZ="232.982,46.356,32.578" Radius="3" />
+				<Hotspot XYZ="232.341,46.376,35.726" Radius="3" />
+				<Hotspot XYZ="228.345,46.321,37.554" Radius="3" />
+				<Hotspot XYZ="222.618,46.085,38.119" Radius="3" />
+				<Hotspot XYZ="223.693,46.278,37.993" Radius="3" />
+				<Hotspot XYZ="222.284,46.037,34.45" Radius="3" />
+				<Hotspot XYZ="218.824,46.046,39.955" Radius="3" />
+				<Hotspot XYZ="221.333,45.642,48.59" Radius="3" />
+				<Hotspot XYZ="222.363,45.317,50.703" Radius="3" />
+				<Hotspot XYZ="220.389,45.335,52.032" Radius="3" />
+				<Hotspot XYZ="223.154,43.946,53.205" Radius="3" />
+				<Hotspot XYZ="224.447,43.863,55.928" Radius="3" />
+				<Hotspot XYZ="225.689,43.904,56.151" Radius="3" />
+				<Hotspot XYZ="226.695,43.916,56.726" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Jawa Trade: droids for Power Cores (3)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Jawa Protection Droid</Mob><Mob>Reprogrammed Battledroid</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="116.972,52.235,332.203" Radius="3" />
+				<Hotspot XYZ="110.864,52.162,339.086" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Prison Labor: Escaped Prisoners (5)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Escaped Prisoner</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="-182.166,43.764,-38.026" Radius="3" />
+				<Hotspot XYZ="-183.037,42.99,-33.543" Radius="3" />
+				<Hotspot XYZ="-180.876,43.57,-31.297" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+		<GrindArea Name="Supply Lines: Exchange Forces (8)">
+			<MinLevel>1</MinLevel>
+			<MaxLevel>100</MaxLevel>
+			<Mobs><Mob>Exchange Sentinel</Mob><Mob>Exchange Guard</Mob></Mobs>
+			<Hotspots>
+				<Hotspot XYZ="88.689,46.118,27.174" Radius="3" />
+				<Hotspot XYZ="85.171,46.124,28.755" Radius="3" />
+				<Hotspot XYZ="95.717,46.058,28.861" Radius="3" />
+				<Hotspot XYZ="86.818,45.391,34.708" Radius="3" />
+				<Hotspot XYZ="88.177,45.359,35.053" Radius="3" />
+				<Hotspot XYZ="93.891,46.195,32.037" Radius="3" />
+			</Hotspots>
+		</GrindArea>
+	</GrindAreas>
+
+	<Questing>
+		<!-- Pick up [WEEKLY] Heroic Missions: Tatooine -->
+		<If Condition="(not HasQuest(0xE0009C4809065A10)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard1" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard1" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Prison Labor -->
+		<If Condition="(not HasQuest(0xE000E3C5CE197D55)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard2" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard2" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Black Box -->
+		<If Condition="(not HasQuest(0xE000AF91C15EDBEC)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard3" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard3" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Supply Lines -->
+		<If Condition="(not HasQuest(0xE00011FA49AF8257)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard4" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard4" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Jawa Trade -->
+		<If Condition="(not HasQuest(0xE0003CAD9958E927)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard5" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard5" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Blood and Sand -->
+		<If Condition="(not HasQuest(0xE000108CCB759181)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard6" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard6" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] Call Down the Thunder -->
+		<If Condition="(not HasQuest(0xE0000E32B9F6BF90)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard7" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard7" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Pick up [HEROIC 2+] War on Spice -->
+		<If Condition="(not HasQuest(0xE000AB0EEF32FF67)) and (Core.Player.AreaId == 0x4000001CCBDD9A50)">
+			<MoveTo QuestId="1" Name="Heroic Missions" XYZ="478.109,69.892,460.802" />
+			<Hook Name="TakeFromBoard8" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TakeFromBoard8" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- War on Spice: Heroic Transport -->
+		<If Condition="HasQuest(0xE000AB0EEF32FF67) and not IsStepComplete(0xE000AB0EEF32FF67, 2) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (92.050)) ** 2 + (Me.Position.Y - (44.127)) ** 2 + (Me.Position.Z - (-31.586)) ** 2) &lt; 100 or ((Me.Position.X - (74.975)) ** 2 + (Me.Position.Y - (44.499)) ** 2 + (Me.Position.Z - (-34.608)) ** 2) &lt; 100 or ((Me.Position.X - (80.299)) ** 2 + (Me.Position.Y - (44.498)) ** 2 + (Me.Position.Z - (-34.606)) ** 2) &lt; 100 or ((Me.Position.X - (74.511)) ** 2 + (Me.Position.Y - (44.947)) ** 2 + (Me.Position.Z - (-25.408)) ** 2) &lt; 100 or ((Me.Position.X - (78.634)) ** 2 + (Me.Position.Y - (44.596)) ** 2 + (Me.Position.Z - (-28.905)) ** 2) &lt; 100 or ((Me.Position.X - (64.919)) ** 2 + (Me.Position.Y - (44.780)) ** 2 + (Me.Position.Z - (-28.562)) ** 2) &lt; 100 or ((Me.Position.X - (66.777)) ** 2 + (Me.Position.Y - (44.780)) ** 2 + (Me.Position.Z - (-28.462)) ** 2) &lt; 100 or ((Me.Position.X - (68.312)) ** 2 + (Me.Position.Y - (45.082)) ** 2 + (Me.Position.Z - (-28.000)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: War on Spice' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: War on Spice' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: War on Spice'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: War on Spice'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportWarOnSpice" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportWarOnSpice" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Call Down the Thunder: Heroic Transport -->
+		<If Condition="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 5) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (92.050)) ** 2 + (Me.Position.Y - (44.127)) ** 2 + (Me.Position.Z - (-31.586)) ** 2) &lt; 100 or ((Me.Position.X - (74.975)) ** 2 + (Me.Position.Y - (44.499)) ** 2 + (Me.Position.Z - (-34.608)) ** 2) &lt; 100 or ((Me.Position.X - (80.299)) ** 2 + (Me.Position.Y - (44.498)) ** 2 + (Me.Position.Z - (-34.606)) ** 2) &lt; 100 or ((Me.Position.X - (74.511)) ** 2 + (Me.Position.Y - (44.947)) ** 2 + (Me.Position.Z - (-25.408)) ** 2) &lt; 100 or ((Me.Position.X - (78.634)) ** 2 + (Me.Position.Y - (44.596)) ** 2 + (Me.Position.Z - (-28.905)) ** 2) &lt; 100 or ((Me.Position.X - (64.919)) ** 2 + (Me.Position.Y - (44.780)) ** 2 + (Me.Position.Z - (-28.562)) ** 2) &lt; 100 or ((Me.Position.X - (66.777)) ** 2 + (Me.Position.Y - (44.780)) ** 2 + (Me.Position.Z - (-28.462)) ** 2) &lt; 100 or ((Me.Position.X - (68.312)) ** 2 + (Me.Position.Y - (45.082)) ** 2 + (Me.Position.Z - (-28.000)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Call Down the Thunder' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Call Down the Thunder' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Call Down the Thunder'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Call Down the Thunder'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportThunder" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportThunder" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Call Down the Thunder: Destroy Anti-aircraft Targeting Consoles (4) -->
+		<If Condition="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Anti-Aircraft Console" QuickTravel="False" XYZ="75.132,44.502,-34.307" />
+			<Hook Name="ClickConsoles" Operation="I" Index="0" Location="TreeStart" />
+			<While Condition="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 2) and Core.Player.AreaId == 0x400000000003FFE4"><WaitTimer QuestId="1" WaitTime="2" /></While>
+			<Hook Name="ClickConsoles" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Call Down the Thunder: Destroy the Signal Jammer -->
+		<If Condition="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 3) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Stand for Signal Jammer" QuickTravel="False" XYZ="74.48,44.947,-25.874" />
+			<UseObject QuestId="0xE0000E32B9F6BF90" StepId="3" ObjectName="Signal Jammer" XYZ="74.072,44.949,-26.101" Radius="10" UseRange="4" WaitTime="500"></UseObject>
+		</If>
+		<!-- Call Down the Thunder: Talk to the Imperial Shocktrooper -->
+		<If Condition="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 4) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Stand for Imperial Shocktrooper" QuickTravel="False" XYZ="77.643,44.942,-24.204" />
+			<TalkTo QuestId="0xE0000E32B9F6BF90" Name="Imperial Shocktrooper" UseRange="4" WaitTime="5" XYZ="77.7,44.942,-24.385" />
+		</If>
+		<!-- Call Down the Thunder: Defeat Kiregan Freem and his thugs -->
+		<If Condition="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 5) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Grind GrindRef="Call Down the Thunder: Kiregan Freem" While="HasQuest(0xE0000E32B9F6BF90) and not IsStepComplete(0xE0000E32B9F6BF90, 5) and Core.Player.AreaId == 0x400000000003FFE4" />
+		</If>
+		<!-- Call Down the Thunder: reward -->
+		<If Condition="HasQuest(0xE0000E32B9F6BF90) or any(r.QuestId == 0xE0000E32B9F6BF90 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE0000E32B9F6BF90 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE0000E32B9F6BF90" />
+		</If>
+		<If Condition="any(r.QuestId == 0xE0007FB4BE318E56 for r in Me.Quests.PendingQuestRewards)"><CompleteQuest QuestId="0xE0007FB4BE318E56" /></If>
+		<!-- War on Spice: Destroy Spice Crates (8) -->
+		<If Condition="HasQuest(0xE000AB0EEF32FF67) and not IsStepComplete(0xE000AB0EEF32FF67, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Hook Name="RestBeforeCamp" Operation="I" Index="0" Location="TreeStart" />
+			<MoveTo QuestId="1" Name="Spice Crates: north side" QuickTravel="False" XYZ="64.741,44.76,-23.745" />
+			<MoveTo QuestId="1" Name="Spice Crates: west side" QuickTravel="False" XYZ="64.996,44.782,-28.374" />
+			<Hook Name="RestBeforeCamp" Operation="R" Location="TreeStart" />
+			<Hook Name="ClickSpiceCrates" Operation="I" Index="0" Location="TreeStart" />
+			<While Condition="HasQuest(0xE000AB0EEF32FF67) and not IsStepComplete(0xE000AB0EEF32FF67, 2) and Core.Player.AreaId == 0x400000000003FFE4"><WaitTimer QuestId="1" WaitTime="2" /></While>
+			<Hook Name="ClickSpiceCrates" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- War on Spice: reward -->
+		<If Condition="HasQuest(0xE000AB0EEF32FF67) or any(r.QuestId == 0xE000AB0EEF32FF67 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE000AB0EEF32FF67 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE000AB0EEF32FF67" />
+		</If>
+		<If Condition="any(r.QuestId == 0xE000A1D9CBD5F509 for r in Me.Quests.PendingQuestRewards)"><CompleteQuest QuestId="0xE000A1D9CBD5F509" /></If>
+		<!-- Black Box: Heroic Transport -->
+		<If Condition="HasQuest(0xE000AF91C15EDBEC) and not IsStepComplete(0xE000AF91C15EDBEC, 3) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (-35.040)) ** 2 + (Me.Position.Y - (51.061)) ** 2 + (Me.Position.Z - (10.675)) ** 2) &lt; 100 or ((Me.Position.X - (-52.042)) ** 2 + (Me.Position.Y - (49.960)) ** 2 + (Me.Position.Z - (-27.669)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Black Box' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Black Box' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Black Box'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Black Box'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportBlackBox" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportBlackBox" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Black Box: Recover the Imperial Black Box Recorder -->
+		<If Condition="HasQuest(0xE000AF91C15EDBEC) and not IsStepComplete(0xE000AF91C15EDBEC, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Stand for Imperial Black Box" QuickTravel="False" XYZ="-51.878,49.978,-27.455" />
+			<UseObject QuestId="0xE000AF91C15EDBEC" StepId="2" ObjectName="Imperial Black Box" XYZ="-52.042,49.96,-27.669" Radius="10" UseRange="4" WaitTime="500"></UseObject>
+		</If>
+		<!-- Black Box: Defeat the Ambush -->
+		<If Condition="HasQuest(0xE000AF91C15EDBEC) and not IsStepComplete(0xE000AF91C15EDBEC, 3) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Grind GrindRef="Black Box: the ambush" While="HasQuest(0xE000AF91C15EDBEC) and not IsStepComplete(0xE000AF91C15EDBEC, 3) and Core.Player.AreaId == 0x400000000003FFE4" />
+		</If>
+		<!-- Black Box: reward -->
+		<If Condition="HasQuest(0xE000AF91C15EDBEC) or any(r.QuestId == 0xE000AF91C15EDBEC for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE000AF91C15EDBEC for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE000AF91C15EDBEC" />
+		</If>
+		<!-- Blood and Sand: Heroic Transport -->
+		<If Condition="HasQuest(0xE000108CCB759181) and not IsStepComplete(0xE000108CCB759181, 2) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (228.127)) ** 2 + (Me.Position.Y - (47.411)) ** 2 + (Me.Position.Z - (25.036)) ** 2) &lt; 100 or ((Me.Position.X - (232.830)) ** 2 + (Me.Position.Y - (46.721)) ** 2 + (Me.Position.Z - (30.950)) ** 2) &lt; 100 or ((Me.Position.X - (232.266)) ** 2 + (Me.Position.Y - (46.394)) ** 2 + (Me.Position.Z - (36.278)) ** 2) &lt; 100 or ((Me.Position.X - (222.618)) ** 2 + (Me.Position.Y - (46.085)) ** 2 + (Me.Position.Z - (38.119)) ** 2) &lt; 100 or ((Me.Position.X - (221.333)) ** 2 + (Me.Position.Y - (45.642)) ** 2 + (Me.Position.Z - (48.590)) ** 2) &lt; 100 or ((Me.Position.X - (223.154)) ** 2 + (Me.Position.Y - (43.946)) ** 2 + (Me.Position.Z - (53.205)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Blood and Sand' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Blood and Sand' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Blood and Sand'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Blood and Sand'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportBloodAndSand" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportBloodAndSand" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Blood and Sand: Dispatch the Sand People Forces (30) -->
+		<If Condition="HasQuest(0xE000108CCB759181) and not IsStepComplete(0xE000108CCB759181, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Grind GrindRef="Blood and Sand: Sand People Forces (30)" While="HasQuest(0xE000108CCB759181) and not IsStepComplete(0xE000108CCB759181, 2) and Core.Player.AreaId == 0x400000000003FFE4" />
+		</If>
+		<!-- Blood and Sand: reward -->
+		<If Condition="HasQuest(0xE000108CCB759181) or any(r.QuestId == 0xE000108CCB759181 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE000108CCB759181 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE000108CCB759181" />
+		</If>
+		<!-- Jawa Trade: Heroic Transport -->
+		<If Condition="HasQuest(0xE0003CAD9958E927) and not IsStepComplete(0xE0003CAD9958E927, 2) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (123.776)) ** 2 + (Me.Position.Y - (50.502)) ** 2 + (Me.Position.Z - (329.037)) ** 2) &lt; 100 or ((Me.Position.X - (116.972)) ** 2 + (Me.Position.Y - (52.235)) ** 2 + (Me.Position.Z - (332.203)) ** 2) &lt; 100 or ((Me.Position.X - (110.864)) ** 2 + (Me.Position.Y - (52.162)) ** 2 + (Me.Position.Z - (339.086)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Jawa Trade' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Jawa Trade' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Jawa Trade'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Jawa Trade'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportJawaTrade" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportJawaTrade" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Jawa Trade: Loot Power Cores (3) -->
+		<If Condition="HasQuest(0xE0003CAD9958E927) and not IsStepComplete(0xE0003CAD9958E927, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Hook Name="LootPowerCores" Operation="I" Index="0" Location="TreeStart" />
+			<Grind GrindRef="Jawa Trade: droids for Power Cores (3)" While="HasQuest(0xE0003CAD9958E927) and not IsStepComplete(0xE0003CAD9958E927, 2) and Core.Player.AreaId == 0x400000000003FFE4" />
+			<Hook Name="LootPowerCores" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Jawa Trade: reward -->
+		<If Condition="HasQuest(0xE0003CAD9958E927) or any(r.QuestId == 0xE0003CAD9958E927 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE0003CAD9958E927 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE0003CAD9958E927" />
+		</If>
+		<!-- Prison Labor: Heroic Transport -->
+		<If Condition="HasQuest(0xE000E3C5CE197D55) and not IsStepComplete(0xE000E3C5CE197D55, 2) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (-191.479)) ** 2 + (Me.Position.Y - (42.134)) ** 2 + (Me.Position.Z - (-35.716)) ** 2) &lt; 100 or ((Me.Position.X - (-182.166)) ** 2 + (Me.Position.Y - (43.764)) ** 2 + (Me.Position.Z - (-38.026)) ** 2) &lt; 100 or ((Me.Position.X - (-180.876)) ** 2 + (Me.Position.Y - (43.570)) ** 2 + (Me.Position.Z - (-31.297)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Prison Labor' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Prison Labor' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Prison Labor'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Prison Labor'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportPrisonLabor" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportPrisonLabor" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Prison Labor: Defeat the Escaped Prisoners (5) -->
+		<If Condition="HasQuest(0xE000E3C5CE197D55) and not IsStepComplete(0xE000E3C5CE197D55, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Grind GrindRef="Prison Labor: Escaped Prisoners (5)" While="HasQuest(0xE000E3C5CE197D55) and not IsStepComplete(0xE000E3C5CE197D55, 2) and Core.Player.AreaId == 0x400000000003FFE4" />
+		</If>
+		<!-- Prison Labor: reward -->
+		<If Condition="HasQuest(0xE000E3C5CE197D55) or any(r.QuestId == 0xE000E3C5CE197D55 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE000E3C5CE197D55 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE000E3C5CE197D55" />
+		</If>
+		<If Condition="any(r.QuestId == 0xE000341875E3D242 for r in Me.Quests.PendingQuestRewards)"><CompleteQuest QuestId="0xE000341875E3D242" /></If>
+		<!-- Supply Lines: Heroic Transport -->
+		<If Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 4) and not (Core.Player.AreaId == 0x400000000003FFE4 and (((Me.Position.X - (91.864)) ** 2 + (Me.Position.Y - (44.856)) ** 2 + (Me.Position.Z - (42.486)) ** 2) &lt; 100 or ((Me.Position.X - (91.931)) ** 2 + (Me.Position.Y - (45.872)) ** 2 + (Me.Position.Z - (30.325)) ** 2) &lt; 100 or ((Me.Position.X - (85.171)) ** 2 + (Me.Position.Y - (46.124)) ** 2 + (Me.Position.Z - (28.755)) ** 2) &lt; 100 or ((Me.Position.X - (86.818)) ** 2 + (Me.Position.Y - (45.391)) ** 2 + (Me.Position.Z - (34.708)) ** 2) &lt; 100)) and (any(i.Name == 'Heroic Transport: Supply Lines' for i in Me.QuestItems) or any(i.Name == 'Heroic Transport: Supply Lines' for i in Me.Backpack)) and max(([(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.QuestItems if i.Name == 'Heroic Transport: Supply Lines'] + [(i.Ability.CooldownRemaining if i.Ability is not None else 0) for i in Me.Backpack if i.Name == 'Heroic Transport: Supply Lines'])[:1] + [0]) &lt;= 300">
+			<Hook Name="TransportSupplyLines" Operation="I" Index="0" Location="TreeStart" />
+			<WaitTimer QuestId="1" WaitTime="1" />
+			<Hook Name="TransportSupplyLines" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Supply Lines: Destroy Exchange Caravan Ammunition Stockpile -->
+		<If Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 2) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Stand for Exchange Ammunition Stockpile" QuickTravel="False" XYZ="92.151,45.928,30.636" />
+			<UseObject QuestId="0xE00011FA49AF8257" StepId="2" ObjectName="Exchange Ammunition Stockpile" XYZ="91.931,45.872,30.325" Radius="10" UseRange="4" WaitTime="500" IgnoreQuestRelation="True" IgnoreLOS="True"></UseObject>
+		</If>
+		<!-- Supply Lines: Destroy Exchange Caravan Supplies (5) -->
+		<If Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 3) and not IsTaskComplete(0xE00011FA49AF8257, 3, 1) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Caravan Supply Crate" QuickTravel="False" XYZ="91.503,45.904,31.619" />
+			<Hook Name="ClickCaravanSupplies" Operation="I" Index="0" Location="TreeStart" />
+			<While Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 3) and not IsTaskComplete(0xE00011FA49AF8257, 3, 1) and Core.Player.AreaId == 0x400000000003FFE4"><WaitTimer QuestId="1" WaitTime="2" /></While>
+			<Hook Name="ClickCaravanSupplies" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Supply Lines: Wreck Caravan Speeders (4) -->
+		<If Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 3) and not IsTaskComplete(0xE00011FA49AF8257, 3, 0) and Core.Player.AreaId == 0x400000000003FFE4">
+			<MoveTo QuestId="1" Name="Caravan Speeder" QuickTravel="False" XYZ="92.42,45.938,30.592" />
+			<Hook Name="ClickCaravanSpeeders" Operation="I" Index="0" Location="TreeStart" />
+			<While Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 3) and not IsTaskComplete(0xE00011FA49AF8257, 3, 0) and Core.Player.AreaId == 0x400000000003FFE4"><WaitTimer QuestId="1" WaitTime="2" /></While>
+			<Hook Name="ClickCaravanSpeeders" Operation="R" Location="TreeStart" />
+		</If>
+		<!-- Supply Lines: Defeat Exchange Forces (8) -->
+		<If Condition="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 4) and Core.Player.AreaId == 0x400000000003FFE4">
+			<Grind GrindRef="Supply Lines: Exchange Forces (8)" While="HasQuest(0xE00011FA49AF8257) and not IsStepComplete(0xE00011FA49AF8257, 4) and Core.Player.AreaId == 0x400000000003FFE4" />
+		</If>
+		<!-- Supply Lines: reward -->
+		<If Condition="HasQuest(0xE00011FA49AF8257) or any(r.QuestId == 0xE00011FA49AF8257 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE00011FA49AF8257 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE00011FA49AF8257" />
+		</If>
+		<If Condition="any(r.QuestId == 0xE000FAAD06338B49 for r in Me.Quests.PendingQuestRewards)"><CompleteQuest QuestId="0xE000FAAD06338B49" /></If>
+		<!-- [WEEKLY] Heroic Missions: Tatooine: reward -->
+		<If Condition="HasQuest(0xE0009C4809065A10) or any(r.QuestId == 0xE0009C4809065A10 for r in Me.Quests.PendingQuestRewards)">
+			<If Condition="not any(r.QuestId == 0xE0009C4809065A10 for r in Me.Quests.PendingQuestRewards)"><WaitTimer QuestId="1" WaitTime="3" /></If>
+			<CompleteQuest QuestId="0xE0009C4809065A10" />
+		</If>
+		<!-- Rewards still waiting -->
+		<CompleteQuest QuestId="0xE0000E32B9F6BF90" />
+		<CompleteQuest QuestId="0xE000AB0EEF32FF67" />
+		<CompleteQuest QuestId="0xE000AF91C15EDBEC" />
+		<CompleteQuest QuestId="0xE000108CCB759181" />
+		<CompleteQuest QuestId="0xE0003CAD9958E927" />
+		<CompleteQuest QuestId="0xE000E3C5CE197D55" />
+		<CompleteQuest QuestId="0xE00011FA49AF8257" />
+		<CompleteQuest QuestId="0xE0009C4809065A10" />
+		<CompleteQuest QuestId="0xE0007FB4BE318E56" />
+		<CompleteQuest QuestId="0xE000A1D9CBD5F509" />
+		<CompleteQuest QuestId="0xE000341875E3D242" />
+		<CompleteQuest QuestId="0xE000FAAD06338B49" />
+		<If Condition="(HasQuest(0xE0000E32B9F6BF90) and not IsQuestComplete(0xE0000E32B9F6BF90)) or (HasQuest(0xE000AB0EEF32FF67) and not IsQuestComplete(0xE000AB0EEF32FF67)) or (HasQuest(0xE000AF91C15EDBEC) and not IsQuestComplete(0xE000AF91C15EDBEC)) or (HasQuest(0xE000108CCB759181) and not IsQuestComplete(0xE000108CCB759181)) or (HasQuest(0xE0003CAD9958E927) and not IsQuestComplete(0xE0003CAD9958E927)) or (HasQuest(0xE000E3C5CE197D55) and not IsQuestComplete(0xE000E3C5CE197D55)) or (HasQuest(0xE00011FA49AF8257) and not IsQuestComplete(0xE00011FA49AF8257)) or (HasQuest(0xE0009C4809065A10) and not IsQuestComplete(0xE0009C4809065A10))">
+			<UserDialog Title="Tatooine Heroics" Message="A Tatooine heroic isn't finished. Finish it by hand, or start the profile again." />
+		</If>
+		<If Condition="not ((HasQuest(0xE0000E32B9F6BF90) and not IsQuestComplete(0xE0000E32B9F6BF90)) or (HasQuest(0xE000AB0EEF32FF67) and not IsQuestComplete(0xE000AB0EEF32FF67)) or (HasQuest(0xE000AF91C15EDBEC) and not IsQuestComplete(0xE000AF91C15EDBEC)) or (HasQuest(0xE000108CCB759181) and not IsQuestComplete(0xE000108CCB759181)) or (HasQuest(0xE0003CAD9958E927) and not IsQuestComplete(0xE0003CAD9958E927)) or (HasQuest(0xE000E3C5CE197D55) and not IsQuestComplete(0xE000E3C5CE197D55)) or (HasQuest(0xE00011FA49AF8257) and not IsQuestComplete(0xE00011FA49AF8257)) or (HasQuest(0xE0009C4809065A10) and not IsQuestComplete(0xE0009C4809065A10)))">
+			<UserDialog Title="Done!" Message="This profile is done." />
+		</If>
+	</Questing>
+</Profile>
