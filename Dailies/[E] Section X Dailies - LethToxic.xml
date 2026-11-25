@@ -1,6 +1,6 @@
 <Profile>
 	<!-- Made by Quest Recorder 1.3 - LethToxic. Recording: Section X-2026-11-07_14-33 -->
-	<Name>[E] Section X Dailies - TEST</Name>
+	<Name>[E] Section X Dailies - LethToxic</Name>
 	<CodeChunks>
 		<CodeChunk Name="TakeWeekly1State" Type="Definition"><![CDATA[
 			static System.DateTime _w1_click, _w1_start, _w1_last, _w1_open;
@@ -351,30 +351,6 @@
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE00061A2FB4BB40A" />
 		</If>
-		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)">
-			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)">
-			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and loot) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)">
-			<Grind GrindRef="[DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and lo" While="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: step 3 done (next: Disable the Second Rakata Device) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 3)">
-			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="153.849,14.05,-173.102" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: step 4 done (next: Disable the Third Rakata Device) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 4)">
-			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="150.201,14.042,-168.207" />
-		</If>
-		<!-- [DAILY] Targeted Misfire: step 5 done (next: Plant the Targeting Beacon) -->
-		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 5)">
-			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="5" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="146.55,14.05,-173.098" />
-		</If>
 		<!-- Stage 1 - Research Cancellation: Defeat Republic Forces (23/26) -->
 		<If Condition="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 25)">
 			<Grind GrindRef="Stage 1 - Research Cancellation: Defeat Republic Forces (23/26)" While="HasQuest(0xE0008A8BC5025C87) and not IsTaskValueGreaterThan(0xE0008A8BC5025C87, 2, 0, 25)" />
@@ -430,6 +406,30 @@
 		<If Condition="(HasQuest(0xE00024E47D19104F) and not IsQuestComplete(0xE00024E47D19104F)) or any(r.QuestId == 0xE00024E47D19104F for r in Me.Quests.PendingQuestRewards)">
 			<WaitTimer QuestId="1" WaitTime="3" />
 			<CompleteQuest QuestId="0xE00024E47D19104F" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (2/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 1)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: Recover the Air Strike Codes (3/3) (kill and loot)" While="HasQuest(0xE00065051B12D9B8) and not IsTaskValueGreaterThan(0xE00065051B12D9B8, 2, 1, 2)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and loot) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)">
+			<Grind GrindRef="[DAILY] Targeted Misfire: step 2 done (next: Disable the First Rakata Device) (kill and lo" While="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 2)" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 3 done (next: Disable the Second Rakata Device) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 3)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="3" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="153.849,14.05,-173.102" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 4 done (next: Disable the Third Rakata Device) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 4)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="150.201,14.042,-168.207" />
+		</If>
+		<!-- [DAILY] Targeted Misfire: step 5 done (next: Plant the Targeting Beacon) -->
+		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 5)">
+			<UseObject ObjectName="Rakata Device" QuestId="0xE00065051B12D9B8" BranchId="1" StepId="5" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="2" XYZ="146.55,14.05,-173.098" />
 		</If>
 		<!-- [DAILY] Targeted Misfire: step 6 done (next: Open the Facility Roof) (not sure: you targeted Rakata War Droid and held Targeting Beacon - the game gave no signal for the use) -->
 		<If Condition="HasQuest(0xE00065051B12D9B8) and not IsBranchStepComplete(0xE00065051B12D9B8, 1, 6)">
