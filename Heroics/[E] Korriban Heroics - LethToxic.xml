@@ -42,7 +42,7 @@
 		<If Condition="(Core.Player.AreaId == 0x4000001CCBDD9A50) and ((HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27)))">
 			<MoveTo QuestId="1" Name="Where you used Heroic Transport" XYZ="478.148,69.892,460.528" />
 			<UseItem ItemName="Heroic Transport" Condition="Core.Player.AreaId == 0x4000001CCBDD9A50" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Where you used it" XYZ="478.148,69.892,460.528" /></Hotspots></UseItem>
-			<WaitTimer QuestId="1" WaitTime="10" />
+			<WaitTimer QuestId="1" WaitTime="5" />
 		</If>
 		<!-- Heroic Transport from the Korriban hub (after a restart there) -->
 		<If Condition="(Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.Z &lt; 30) and ((HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27)))">
@@ -50,7 +50,7 @@
 				<MoveTo QuestId="1" Name="Heroic Transport spot" XYZ="15.723678,0.60693026,11.4295635" />
 			</If>
 			<UseItem ItemName="Heroic Transport" Condition="Me.Position.Z &lt; 30" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Heroic Transport spot" XYZ="15.723678,0.60693026,11.4295635" /></Hotspots></UseItem>
-			<WaitTimer QuestId="1" WaitTime="10" />
+			<WaitTimer QuestId="1" WaitTime="2" />
 		</If>
 		<!-- [HEROIC 2+] The Hate Machine (when the transport landed by the Red Engine) -->
 		<If Condition="HasQuest(0xE00076C68816ECE8) and (not IsQuestComplete(0xE00076C68816ECE8)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &gt; 8) and (Me.Position.Z &gt; 30)">
@@ -66,6 +66,7 @@
 			</If>
 			<!-- [HEROIC 2+] The Hate Machine: Retrieve the Tablet -->
 			<If Condition="HasQuest(0xE00076C68816ECE8) and not IsBranchStepComplete(0xE00076C68816ECE8, 1, 4)">
+				<MoveTo QuestId="1" Name="Where you stood for The Red Engine" QuickTravel="False" XYZ="24.29,0.05,40.083" />
 				<UseObject ObjectName="Ancient Tablet" QuestId="0xE00076C68816ECE8" BranchId="1" StepId="4" UseRange="20" IgnoreLOS="True" WaitTime="3000" BlacklistDuration="5" Radius="30" XYZ="24.776,0.132,40.35" />
 			</If>
 		</If>
@@ -77,7 +78,7 @@
 		<!-- Heroic Transport from the Red Engine to Lord Sundar (The Hate Machine done) -->
 		<If Condition="(not (HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8))) and HasQuest(0xE000727454048D27) and (not IsQuestComplete(0xE000727454048D27)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &gt; 8) and (Me.Position.Z &gt; 30)">
 			<UseItem ItemName="Heroic Transport" Condition="Me.Position.X &gt; 8" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Where you used it" XYZ="23.906,0.05,39.98" /></Hotspots></UseItem>
-			<WaitTimer QuestId="1" WaitTime="10" />
+			<WaitTimer QuestId="1" WaitTime="2" />
 		</If>
 		<!-- [HEROIC 2+] Armed and Dangerous: Defeat and Search Lord Sundar -->
 		<If Condition="HasQuest(0xE000727454048D27) and (not IsBranchStepComplete(0xE000727454048D27, 1, 2)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &lt; 8) and (Me.Position.Z &gt; 30)">
@@ -90,17 +91,19 @@
 		</If>
 		<!-- Heroic Transport from Lord Sundar to the Red Engine (Armed and Dangerous done) -->
 		<If Condition="(not (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27))) and HasQuest(0xE00076C68816ECE8) and (not IsQuestComplete(0xE00076C68816ECE8)) and (Core.Player.AreaId == 0x4000000106296B6D) and (Me.Position.X &lt; 8) and (Me.Position.Z &gt; 30)">
-			<UseItem ItemName="Heroic Transport" Condition="Me.Position.X &lt; 8" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Lord Sundar" XYZ="-4.79,-3.16,59.401" /></Hotspots></UseItem>
-			<WaitTimer QuestId="1" WaitTime="10" />
+			<UseItem ItemName="Heroic Transport" Condition="Me.Position.X &lt; 8" WaitTime="3000" Range="2000"><Hotspots><Hotspot Name="Where the transport lands" XYZ="4.509,-2.931,56.077" /></Hotspots></UseItem>
+			<WaitTimer QuestId="1" WaitTime="2" />
 		</If>
 
 		<!-- Grab any rewards still waiting -->
-		<WaitTimer QuestId="1" WaitTime="5" />
+		<If Condition="not ((HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27)))">
+			<WaitTimer QuestId="1" WaitTime="5" />
+		</If>
 		<CompleteQuest QuestId="0xE00076C68816ECE8" />
 		<CompleteQuest QuestId="0xE000727454048D27" />
 		<!-- Not finished? Go round again (done steps get skipped) -->
 		<If Condition="(HasQuest(0xE00076C68816ECE8) and not IsQuestComplete(0xE00076C68816ECE8)) or (HasQuest(0xE000727454048D27) and not IsQuestComplete(0xE000727454048D27))">
-			<WaitTimer QuestId="1" WaitTime="3" />
+			<WaitTimer QuestId="1" WaitTime="1" />
 			<LoadProfile Path="[E] Korriban Heroics - LethToxic.xml" />
 		</If>
 
